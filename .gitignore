@@ -72,3 +72,16 @@ Plugins/**/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+Content/Cat_Stray/*
+Content/__ExternalActors__/*
+Content/__ExternalObjects__/*
+Content/Animations_Warrior/*
+Content/BoxingAttacks/*
+Content/DreamscapeSeries/*
+Content/EchoContent/*
+Content/Saber_Warrior_Pack/*
+Content/BlinkAndDashVFX/*
+Content/Characters/*
+Content/PyroVFX/*
+Content/QuadrapedCreatures/*
