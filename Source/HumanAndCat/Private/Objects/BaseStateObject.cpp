@@ -7,6 +7,7 @@
 #include "HumanAndCat/Public/Components/BaseStateManagerComponent.h"
 #include "HumanAndCat/Public/Components/BaseAbilityManagerComponent.h"
 #include "GameFramework/Character.h"
+#include "Interfaces/Interface_GameplayTagControl.h"
 
 UBaseStateObject::UBaseStateObject()
 {
@@ -30,7 +31,10 @@ void UBaseStateObject::StartState_Implementation()
 	StateManager->SetCurrentActivateState(this);
 
 	// 현재 상태를 캐릭터 클래스에게 알려줘야한다.
-	// TODO
+	if(IInterface_GameplayTagControl* GameplayTagControl = Cast<IInterface_GameplayTagControl>(PerformingActor))
+	{
+		GameplayTagControl->AddGameplayTag(StateGameplayTag);
+	}
 
 	// 블루프린트에서 추가 기능 넣을 수 있음
 }
@@ -49,6 +53,10 @@ void UBaseStateObject::EndState_Implementation()
 		StateManager->SetCurrentActivateState(nullptr);
 
 		// 현재 플레이어에게서 해당 상태의 태그를 삭제 시켜주자
+		if(IInterface_GameplayTagControl* GameplayTagControl = Cast<IInterface_GameplayTagControl>(PerformingActor))
+		{
+			GameplayTagControl->RemoveGameplayTag(StateGameplayTag);
+		}
 	}
 	
 }
@@ -88,6 +96,7 @@ bool UBaseStateObject::GetIsStateCurrentlyActive()
 bool UBaseStateObject::CanPerformState_Implementation()
 {
 	// 블루프린트에서 재정의
+	
 	return true;
 }
 
@@ -99,11 +108,19 @@ bool UBaseStateObject::CheckAbilityExecute_Implementation(const TArray<TSubclass
 	for(const TSubclassOf<UBaseAbilityObject> AbilityObject : AbilityObjects)
 	{
 		// 어빌리티매니저에서 해당 어빌리티가 사용가능한지 확인하고 틀리면 컨티뉴
-
+		if(!AbilityManagerComponent->GetCanPerformAbilityOfClass(AbilityObject))
+		{
+			continue;
+		}
 
 		// 사용가능하면 해당 어빌리티를 어빌리티매니저로부터 받아오고 유효한지 체크한 후에 현재 어빌리티로 등록한다.
-
-		return true;
+		UBaseAbilityObject* AbilityInstance = nullptr;
+		AbilityManagerComponent->GetAbilityOfClass(AbilityObject, AbilityInstance);
+		if(IsValid(AbilityInstance))
+		{
+			return true;
+		}
+		
 	}
-	return true;
+	return false;
 }

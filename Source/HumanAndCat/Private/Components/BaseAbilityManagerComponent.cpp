@@ -42,6 +42,7 @@ void UBaseAbilityManagerComponent::TickComponent(float DeltaTime, ELevelTick Tic
 
 void UBaseAbilityManagerComponent::InitializeAbilityManager_Implementation()
 {
+	
 }
 
 void UBaseAbilityManagerComponent::PerformAbilityOfClass(TSubclassOf<UBaseAbilityObject> AbilityObj)

@@ -96,6 +96,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ability Var")
 	bool bHasCooldown;
 
+	
 	UPROPERTY(editAnywhere, BlueprintReadWrite, Category="Ability Var")
 	float CooldownTime;
 
