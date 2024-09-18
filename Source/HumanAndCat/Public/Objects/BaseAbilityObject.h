@@ -7,6 +7,7 @@
 #include "GameplayTagContainer.h"
 #include "BaseAbilityObject.generated.h"
 
+class UBaseStateManagerComponent;
 class UBaseAbilityManagerComponent;
 class UAnimMontage;
 
@@ -68,6 +69,9 @@ public:
 	void GetPerformingActor(AActor*& Actor);
 
 	UFUNCTION(BlueprintCallable, Category="Ability|Get")
+	TArray<UAnimMontage*> GetAnimMontages(TSubclassOf<UBaseAbilityObject> SearchAbility);
+
+	UFUNCTION(BlueprintCallable, Category="Ability|Get")
 	UAnimMontage* GetCurrentAbilityMontage();
 
 	UFUNCTION(BlueprintCallable, Category="Ability|Get")
@@ -103,11 +107,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ability Var")
 	UBaseAbilityManagerComponent* AbilityManager;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ability Var")
+	UBaseStateManagerComponent* StateManager;
+	
 	UPROPERTY()
 	AActor* PerformingActor;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ability Var")
-	bool bAbilityOnCoolDown;
+	bool bAbilityOnCoolDown = true;
 
 	FString CooldownResetFuncName = FString(TEXT("CooldownReset"));	
 };

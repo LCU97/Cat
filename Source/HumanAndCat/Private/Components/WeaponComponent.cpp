@@ -3,6 +3,15 @@
 
 #include "HumanAndCat/Public/Components/WeaponComponent.h"
 
+#include "GeometryTypes.h"
+#include "Components/BaseAbilityManagerComponent.h"
+#include "Components/BaseStateManagerComponent.h"
+#include "GameFramework/Character.h"
+#include "Objects/BaseStateObject.h"
+#include "Weapons/BaseWeapon.h"
+#include "Weapons/FistWeapon.h"
+#include "HumanAndCat/Public/Utilities/HumanAndCatTags.h"
+
 
 // Sets default values for this component's properties
 UWeaponComponent::UWeaponComponent()
@@ -21,7 +30,9 @@ void UWeaponComponent::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	
+	AActor* Own = GetOwner();
+	OwnerCharacter = Cast<ACharacter>(Own);
+	if(!OwnerCharacter) return;
 }
 
 
@@ -32,5 +43,138 @@ void UWeaponComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+}
+
+void UWeaponComponent::InitWeaponComponent()
+{
+	if (IsValid(CurrentWeapon))
+	{
+		return;	
+	}
+	CurrentWeaponTag = FGameplayTag();
+	CurrentWeaponType = nullptr;
+	CurrentWeaponName = EWeaponName::None;
+	
+	if(!BasicWeapon) return;;
+	
+	AFistWeapon* BasicFistWeapon = GetWorld()->SpawnActor<AFistWeapon>(BasicWeapon);
+
+	if(BasicFistWeapon)
+	{
+		BasicFistWeapon->SetWeaponManager(this);
+
+		RegisterStateAndAbility(BasicFistWeapon);
+		
+		BasicWeaponInstanced = BasicFistWeapon;
+	}
+}
+
+void UWeaponComponent::UpdateStates()
+{
+	UBaseStateManagerComponent* StateManagerComponent = OwnerCharacter->GetController()->GetComponentByClass<UBaseStateManagerComponent>();
+	if(StateManagerComponent)
+	{
+		StateManagerComponent->ClearStatesComponent();
+		for(int32 i = 0; i < CurrentWeaponType->States.Num(); i++)
+		{
+			UBaseStateObject* LocalState = nullptr;
+			StateManagerComponent->ConstructStateOfClass(CurrentWeaponType->States[i],LocalState);
+		}
+
+		UBaseStateObject* LocalIdleState = StateManagerComponent->GetStateOfGameplayTag(StateTags::State_Idle);
+		if(LocalIdleState)
+		{
+			StateManagerComponent->ChangeStateOfClass(LocalIdleState->GetClass());
+		}
+	}
+}
+
+void UWeaponComponent::UpdateAbilities()
+{
+	UBaseAbilityManagerComponent* AbilityManagerComponent = OwnerCharacter->GetComponentByClass<UBaseAbilityManagerComponent>();
+	if(AbilityManagerComponent)
+	{
+		AbilityManagerComponent->ClearAbilityManager();
+		for(int32 i = 0; i<CurrentWeaponType->Abilities.Num(); i++)
+		{
+			FAbilityList LocalAbilityList = CurrentWeaponType->Abilities[i];
+			UBaseAbilityObject* LocalAbilityObject;
+			AbilityManagerComponent->ContructAbilityOfClass(LocalAbilityList.AbilityObject, LocalAbilityObject);
+		}
+	}
+}
+
+void UWeaponComponent::RegisterStateAndAbility(ABaseWeapon* CheckingWeaponType)
+{
+	if(!CheckingWeaponType) return;
+
+	if(WeaponTypes.IsEmpty()) return;
+
+	for(auto WeaponType : WeaponTypes)
+	{
+		if(WeaponType.Key == CheckingWeaponType->WeaponTag)
+		{
+			CurrentWeapon = CheckingWeaponType;
+			CurrentWeaponTag = CheckingWeaponType->WeaponTag;
+			CurrentWeaponType = WeaponType.Value;
+			CurrentWeaponName = CurrentWeaponType->WeaponName;
+
+			// 처음에는 장착 안한 상태
+			UnEquip();
+
+			// 상태 업데이트 및 Idle 상태로 시작
+			UpdateStates();
+
+			UpdateAbilities();
+
+			// 애니메이션에게 무기가 바뀌었음을 알려주기
+			if(OnWeaponNameChanged.IsBound())
+			{
+				OnWeaponNameChanged.Broadcast(CurrentWeaponName);
+			}
+
+			return;
+		}
+	}
+}
+
+void UWeaponComponent::UnregisterStateAndAility()
+{
+	// 기본 무기로 바꾸기
+	if(CurrentWeapon->GetClass() == BasicWeapon)
+	{
+		return;
+	}
+	
+	CurrentWeapon->Destroy(); 
+	RegisterStateAndAbility(BasicWeaponInstanced);	
+}
+
+void UWeaponComponent::Equip()
+{
+	FName EquipSocket = CurrentWeapon->GetEquipSocket();
+
+	if(!EquipSocket.IsNone())
+	{
+		USkeletalMeshComponent* CharacterMesh = GetOwner()->FindComponentByClass<USkeletalMeshComponent>();
+		if (CharacterMesh)
+		{
+			CurrentWeapon->AttachToComponent(CharacterMesh, FAttachmentTransformRules::SnapToTargetIncludingScale, EquipSocket);
+		}
+	}
+}
+
+void UWeaponComponent::UnEquip()
+{
+	FName UnEquipSocket = CurrentWeapon->GetUnEquipSocket();
+
+	if(!UnEquipSocket.IsNone())
+	{
+		USkeletalMeshComponent* CharacterMesh = GetOwner()->FindComponentByClass<USkeletalMeshComponent>();
+		if (CharacterMesh)
+		{
+			CurrentWeapon->AttachToComponent(CharacterMesh, FAttachmentTransformRules::SnapToTargetIncludingScale, UnEquipSocket);
+		}
+	}
 }
 

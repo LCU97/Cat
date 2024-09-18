@@ -69,11 +69,13 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 				{
 					if(CurrentActivateState)
 					{
+						SetPreActivateState(CurrentActivateState);
 						CurrentActivateState->EndState();
 					}
 
-					LocalState->StartState();
 					CurrentActivateState = LocalState;
+
+					CurrentActivateState->StartState();
 					return true;
 				}
 			}
@@ -81,11 +83,13 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 			{
 				if(CurrentActivateState)
 				{
+					SetPreActivateState(CurrentActivateState);
 					CurrentActivateState->EndState();
 				}
 
-				LocalState->EndState();
 				CurrentActivateState = LocalState;
+
+				CurrentActivateState->StartState();
 				return true;
 			}
 			return false;
@@ -99,6 +103,7 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 				{
 					if(CurrentActivateState)
 					{
+						SetPreActivateState(CurrentActivateState);
 						CurrentActivateState->EndState();
 					}
 					CurrentActivateState = LocalState;
@@ -111,6 +116,7 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 			{
 				if(CurrentActivateState)
 				{
+					SetPreActivateState(CurrentActivateState);
 					CurrentActivateState->EndState();
 				}
 				CurrentActivateState = LocalState;

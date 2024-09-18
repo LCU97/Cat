@@ -9,7 +9,7 @@
 
 class UBaseStateObject;
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class HUMANANDCAT_API UBaseStateManagerComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -38,7 +38,7 @@ public:
 	bool TryChangeStateOfTag(FGameplayTag StateGameplayTag, bool Condition = true);
 
 	UFUNCTION(BlueprintCallable)
-	bool TryChangeStateOfClass(TSubclassOf<UBaseStateObject> State, bool Condition);
+	bool TryChangeStateOfClass(TSubclassOf<UBaseStateObject> State, bool Condition = true);
 	
 	UFUNCTION(BlueprintCallable)
 	bool TryChangeStatesOfClass(TArray<TSubclassOf<UBaseStateObject>> States, bool Condition);
@@ -64,6 +64,12 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void ClearStatesComponent();
+
+	UFUNCTION(BlueprintCallable)
+	void SetPreActivateState(UBaseStateObject* State) { PreActivateState = State; }
+
+	UFUNCTION(BlueprintCallable,BlueprintPure)
+	UBaseStateObject* GetPreActivateState() { return PreActivateState; }
 	
 public:
 	// 현재 캐릭터 상황에 따른 활성화되어있는 상태를 담는 배열
@@ -75,5 +81,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UBaseStateObject* CurrentActivateState;
-	
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UBaseStateObject* PreActivateState;
 };

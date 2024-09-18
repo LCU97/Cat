@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "BaseWeapon.h"
+
 #include "FistWeapon.generated.h"
+
+class UWeaponComponent;
 
 UCLASS()
 class HUMANANDCAT_API AFistWeapon : public ABaseWeapon
@@ -22,4 +25,15 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	
+
+
+public:
+	
+
+	
+
+
+	// 속성 관련
 };

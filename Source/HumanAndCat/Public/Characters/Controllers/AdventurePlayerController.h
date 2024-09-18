@@ -13,7 +13,8 @@ UCLASS()
 class HUMANANDCAT_API AAdventurePlayerController : public ABasePlayerController
 {
 	GENERATED_BODY()
-	AAdventurePlayerController(const FObjectInitializer FObjectInitializer);
+	public:
+	AAdventurePlayerController(const FObjectInitializer& FObjectInitializer);
 	
 public:
 	virtual void PostInitializeComponents() override;

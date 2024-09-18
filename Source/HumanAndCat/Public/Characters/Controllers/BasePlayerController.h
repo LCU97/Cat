@@ -14,11 +14,13 @@ UCLASS()
 class HUMANANDCAT_API ABasePlayerController : public APlayerController
 {
 	GENERATED_BODY()
+public:	
 	ABasePlayerController();
 public:
 	virtual void PostInitializeComponents() override;
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
+
 
 public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Input")

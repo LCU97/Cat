@@ -4,7 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameplayTagContainer.h"
+#include "Utilities/HumanAndCatTags.h"
 #include "BaseWeapon.generated.h"
+
+class UWeaponComponent;
 
 UCLASS()
 class HUMANANDCAT_API ABaseWeapon : public AActor
@@ -22,4 +26,29 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+public:
+	// Get Set
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Get")
+	FName GetEquipSocket(){return EquipSocket;}
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Get")
+	FName GetUnEquipSocket(){return UnEquipSocket;}
+	
+	UFUNCTION(BlueprintCallable)
+	void SetWeaponManager(UWeaponComponent* WeaponComp) { WeaponManager = WeaponComp;}
+
+public:
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	FGameplayTag WeaponTag;;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UWeaponComponent* WeaponManager;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	FName EquipSocket;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	FName UnEquipSocket;
 };

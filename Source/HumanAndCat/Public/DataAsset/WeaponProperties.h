@@ -11,12 +11,25 @@ class UBaseStateObject;
 class UBaseAbilityObject;
 class UInputAction;
 
-USTRUCT(BlueprintType)
+USTRUCT(BlueprintType,Blueprintable)
 struct FAbilityList
 {
 	GENERATED_BODY()
-	UBaseAbilityObject* AbilityObject;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	TSubclassOf<UBaseAbilityObject> AbilityObject;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	TArray<UAnimMontage*> AbilitiesMontage;
+};
+
+UENUM(BlueprintType)
+enum class EWeaponName : uint8
+{
+	None UMETA(DisplayName = "None"),
+	Fist UMETA(DisplayName = "Fist"),
+	Sword UMETA(DisplayName = "Sword"),
+	Staff UMETA(DisplayName = "Staff")
 };
 
 /**
@@ -36,4 +49,7 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inputs")
 	TMap<UInputAction*, FGameplayTag> Inputs;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
+	EWeaponName WeaponName;
 };

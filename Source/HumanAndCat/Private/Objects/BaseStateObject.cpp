@@ -3,6 +3,8 @@
 
 #include "HumanAndCat/Public/Objects/BaseStateObject.h"
 
+#include "BlueprintGameplayTagLibrary.h"
+#include "GameplayTagAssetInterface.h"
 #include "HumanAndCat/Public/Objects/BaseAbilityObject.h"
 #include "HumanAndCat/Public/Components/BaseStateManagerComponent.h"
 #include "HumanAndCat/Public/Components/BaseAbilityManagerComponent.h"
@@ -15,11 +17,22 @@ UBaseStateObject::UBaseStateObject()
 
 void UBaseStateObject::ConstructState_Implementation()
 {
-	if(const ACharacter* OwnerCharacter = Cast<ACharacter>(PerformingActor))
+	if(const ACharacter* Owner = Cast<ACharacter>(PerformingActor))
 	{
-		const AController* Controller = OwnerCharacter->GetController();
+		const AController* Controller = Owner->GetController();
 		StateManager = Controller->GetComponentByClass<UBaseStateManagerComponent>();
 	}
+
+	GetPerformingActor(PerformingActor);
+	if (!PerformingActor) return;
+
+	ACharacter* PerformingCharacter = Cast<ACharacter>(PerformingActor);
+	if (!PerformingCharacter) return;
+
+	OwnerCharacter = PerformingCharacter;
+
+	AbilityManager = Cast<UBaseAbilityManagerComponent>(
+		OwnerCharacter->GetComponentByClass(UBaseAbilityManagerComponent::StaticClass()));
 }
 
 void UBaseStateObject::StartState_Implementation()
@@ -96,6 +109,16 @@ bool UBaseStateObject::GetIsStateCurrentlyActive()
 bool UBaseStateObject::CanPerformState_Implementation()
 {
 	// 블루프린트에서 재정의
+	IGameplayTagAssetInterface* CastGameplayTagAssetInterface = Cast<IGameplayTagAssetInterface>(PerformingActor);
+	if (!CastGameplayTagAssetInterface) return false;
+
+	FGameplayTagContainer PerformTagContainer;
+	CastGameplayTagAssetInterface->GetOwnedGameplayTags(PerformTagContainer);
+	
+	if (UBlueprintGameplayTagLibrary::HasAnyTags(PerformTagContainer, BlockedState,true))
+	{		
+		return false;
+	}
 	
 	return true;
 }
@@ -118,6 +141,7 @@ bool UBaseStateObject::CheckAbilityExecute_Implementation(const TArray<TSubclass
 		AbilityManagerComponent->GetAbilityOfClass(AbilityObject, AbilityInstance);
 		if(IsValid(AbilityInstance))
 		{
+			CurrentAbility = AbilityObject;
 			return true;
 		}
 		

@@ -35,7 +35,7 @@ public:
 	void TickState(float Delta);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "State|Events")
-	bool RestartState(bool Checking);
+	bool RestartState(bool Checking = true);
 
 	// 상태가 종료되면 불려질 함수
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "State|Events")
@@ -43,7 +43,7 @@ public:
 
 public:
 	// 현재 능력 반환
-	UFUNCTION(BlueprintPure, Category= "State|Ability|Get")
+	UFUNCTION(BlueprintPure,BlueprintCallable, Category= "State|Ability|Get")
 	TSubclassOf<UBaseAbilityObject> GetAbilityObject();
 
 	// 새 능력 선택
@@ -61,11 +61,14 @@ public:
 	void SetStateManager(UBaseStateManagerComponent* NewStateManager) { StateManager = NewStateManager;}
 
 	UFUNCTION(BlueprintCallable)
-	void SetRegisterPerformActor(AActor* PerformActor) { PerformActor = PerformActor; }
+	void SetRegisterPerformActor(AActor* PerformActor) { PerformingActor = PerformActor; }
 	
-	UFUNCTION(BlueprintPure)
+	UFUNCTION(BlueprintPure, BlueprintCallable)
 	void GetPerformingActor(AActor*& CurrentPerformActor) const { CurrentPerformActor = PerformingActor;}
 
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	TSubclassOf<UBaseAbilityObject> GetCurrentAbility(){return CurrentAbility;}
+	
 	UFUNCTION(BlueprintPure)
 	bool GetIsStateCurrentlyActive();
 
@@ -81,6 +84,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "State|Component")
 	UBaseStateManagerComponent* StateManager;
 
+	UPROPERTY(BlueprintReadWrite, Category= "State|Component")
+	UBaseAbilityManagerComponent* AbilityManager;
+
 	// 실제 사용되어질 능력
 	UPROPERTY(BlueprintReadWrite, Category = "State|Ability")
 	TSubclassOf<UBaseAbilityObject> CurrentAbility;
@@ -92,6 +98,12 @@ public:
 	public:
 	UPROPERTY()
 	AActor* PerformingActor;
+
+	UPROPERTY(BlueprintReadWrite, Category= "State|Normal")
+	ACharacter* OwnerCharacter;
+
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category= "State|Normal")
+	FGameplayTagContainer BlockedState;
 
 	
 };

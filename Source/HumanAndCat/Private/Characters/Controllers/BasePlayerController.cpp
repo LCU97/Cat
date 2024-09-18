@@ -3,6 +3,7 @@
 
 #include "Characters/Controllers/BasePlayerController.h"
 
+#include "EnhancedInputSubsystems.h"
 #include "Components/BaseStateManagerComponent.h"
 
 ABasePlayerController::ABasePlayerController()
@@ -15,9 +16,9 @@ ABasePlayerController::ABasePlayerController()
 void ABasePlayerController::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-	if(APawn* Pawn = GetPawn())
+	if(APawn* PlayerPawn = GetPawn())
 	{
-		StateManager->InitializeStateManagerComponent(Pawn);
+		StateManager->InitializeStateManagerComponent(PlayerPawn);
 	}
 }
 
@@ -31,3 +32,4 @@ void ABasePlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
+

@@ -47,7 +47,7 @@ void UBaseAbilityManagerComponent::InitializeAbilityManager_Implementation()
 
 void UBaseAbilityManagerComponent::PerformAbilityOfClass(TSubclassOf<UBaseAbilityObject> AbilityObj)
 {
-	TryPerformAbilityOfClass(AbilityObj);
+	TryPerformAbilityOfClass(AbilityObj, false);
 }
 
 bool UBaseAbilityManagerComponent::TryPerformAbilityOfClass(TSubclassOf<UBaseAbilityObject> AbilityObj, bool Condition)

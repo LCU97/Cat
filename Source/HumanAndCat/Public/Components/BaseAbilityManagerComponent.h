@@ -10,7 +10,7 @@
 
 class UBaseAbilityObject;
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class HUMANANDCAT_API UBaseAbilityManagerComponent : public UActorComponent
 {
 	GENERATED_BODY()

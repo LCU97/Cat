@@ -6,7 +6,7 @@
 #include "EnhancedInputComponent.h"
 
 
-AAdventurePlayerController::AAdventurePlayerController(const FObjectInitializer FObjectInitializer):
+AAdventurePlayerController::AAdventurePlayerController(const FObjectInitializer& FObjectInitializer):
 	Super()
 {
 	
@@ -33,7 +33,11 @@ void AAdventurePlayerController::OnPossess(APawn* InPawn)
 	Super::OnPossess(InPawn);
 	if(UEnhancedInputLocalPlayerSubsystem* InputsubSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
-		InputsubSystem->AddMappingContext(MappingContext, 0);			
+		if(MappingContext)
+		{
+			InputsubSystem->AddMappingContext(MappingContext, 0);			
+			
+		}
 	}
 }
 
@@ -42,6 +46,10 @@ void AAdventurePlayerController::OnUnPossess()
 	Super::OnUnPossess();
 	if(UEnhancedInputLocalPlayerSubsystem* InputsubSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
-		InputsubSystem->RemoveMappingContext(MappingContext);		
+		if(MappingContext)
+		{
+			InputsubSystem->RemoveMappingContext(MappingContext);		
+			
+		}
 	}
 }
