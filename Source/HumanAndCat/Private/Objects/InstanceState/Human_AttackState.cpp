@@ -6,6 +6,7 @@
 #include "Components/BaseAbilityManagerComponent.h"
 #include "Components/BaseStateManagerComponent.h"
 #include "Objects/InstanceAbility/Human_NormalAttackAbility.h"
+#include "Objects/InstanceAbility/Human_SpecialAttackAbility.h"
 #include "Utilities/HumanAndCatTags.h"
 
 UHuman_AttackState::UHuman_AttackState()
@@ -23,11 +24,29 @@ UHuman_AttackState::UHuman_AttackState()
 
 bool UHuman_AttackState::CanPerformState_Implementation()
 {
-	if(StateManager->GetPreActivateState()->StateGameplayTag == StateTags::State_AttackCharge)
+	/*if(StateManager->GetPreActivateState()->StateGameplayTag == StateTags::State_AttackCharge)
 	{
 		// 차징 어택 어빌리티를 실행합니다.
-		
-		
+		TSubclassOf<UBaseAbilityObject> SpecialAttackAbility = UHuman_SpecialAttackAbility::StaticClass();
+		AttackAbilities.AddUnique(SpecialAttackAbility);
+	}
+	else
+	{
+		// 노말 어빌리티를 실행합니다.
+		TSubclassOf<UBaseAbilityObject> NormalAttackAbility = UHuman_NormalAttackAbility::StaticClass();
+		AttackAbilities.AddUnique(NormalAttackAbility);
+	}*/
+
+	if(StateManager->bIsSpecialAttack)
+	{
+		// 차징 어택 어빌리티를 실행합니다.
+		TSubclassOf<UBaseAbilityObject> SpecialAttackAbility = UHuman_SpecialAttackAbility::StaticClass();
+		if(!AttackAbilities.IsEmpty())
+		{
+			AttackAbilities.Empty();
+		}
+		AttackAbilities.AddUnique(SpecialAttackAbility);
+		StateManager->bIsSpecialAttack = false;
 	}
 	else
 	{

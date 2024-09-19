@@ -3,6 +3,7 @@
 
 #include "Inputs/InputCommand/AttackStateCommand.h"
 
+#include "Components/BaseStateManagerComponent.h"
 #include "GameFramework/Character.h"
 #include "Inputs/InputBuffer/InputBufferingObject.h"
 #include "Objects/BaseAbilityObject.h"
@@ -45,6 +46,10 @@ void UAttackStateCommand::ProcessInput(const FInputPayLoad& InputPayLoad, UBaseS
 	{
 		HandleDodge(CurrentState, CurrentAbilityTag, CurrentAbility);
 	}
+	else if(InputTag == InputTags::Input_SpecialAttack)
+	{
+		HandleSpecialAttack(CurrentState, CurrentAbilityTag, CurrentAbility);
+	}
 }
 
 void UAttackStateCommand::HandleAttack(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,
@@ -73,7 +78,7 @@ void UAttackStateCommand::HandleMovement(UBaseStateObject* CurrentState, const F
 		return;
 
 	if(AbilityTag == AbilityTags::Ability_Attack_NormalAttack ||
-		AbilityTag == AbilityTags::Ability_Attack_ChargingAttack)
+		AbilityTag == AbilityTags::Ability_Attack_SpecialAttack)
 	{
 		PerformingCharacter->StopAnimMontage();
 		CurrentAbility->EndAbility();
@@ -86,4 +91,32 @@ void UAttackStateCommand::HandleDodge(UBaseStateObject* CurrentState, const FGam
 {
 	// 회피 핸들 추가 
 	
+}
+
+void UAttackStateCommand::HandleSpecialAttack(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,
+	UBaseAbilityObject* CurrentAbility)
+{
+	if(AbilityTag == AbilityTags::Ability_Attack_NormalAttack)
+	{
+		UBaseStateObject* LocalCharge = CurrentState->StateManager->GetStateOfGameplayTag(StateTags::State_AttackCharge);
+		if(LocalCharge)
+		{
+			CurrentState->StateManager->TryChangeStateOfClass(LocalCharge->GetClass());
+		}
+	}
+	else
+	{
+		UBaseStateObject* LocalIdle = CurrentState->StateManager->GetStateOfGameplayTag(StateTags::State_Idle);
+		if(LocalIdle)
+		{
+			if(!CurrentState->StateManager->TryChangeStateOfClass(LocalIdle->GetClass()))
+			{
+				UBaseStateObject* LocalRun = CurrentState->StateManager->GetStateOfGameplayTag(StateTags::State_Run);
+				if(LocalRun)
+				{
+					CurrentState->StateManager->TryChangeStateOfClass(LocalRun->GetClass());
+				}
+			}
+		}
+	}
 }

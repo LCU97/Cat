@@ -39,8 +39,19 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Combat")
 	bool bInCombat = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Combat")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Target")
 	AActor* TargetActor = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Target")
+	TArray<AActor*> FocusingTargets;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Target")
+	float TargetingRadius = 1500.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Target")
+	UClass* TargetClass = nullptr;
+
+	
 
 	UPROPERTY(BlueprintAssignable)
 	FOnInCombatChanged OnInCombatChanged;

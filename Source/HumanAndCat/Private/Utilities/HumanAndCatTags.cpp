@@ -22,8 +22,9 @@ namespace AbilityTags
 {
 		UE_DEFINE_GAMEPLAY_TAG(Ability, TEXT("Ability"));
 		UE_DEFINE_GAMEPLAY_TAG(Ability_Attack_NormalAttack, TEXT("Ability.Attack.NormalAttack"));
-		UE_DEFINE_GAMEPLAY_TAG(Ability_Attack_ChargingAttack, TEXT("Ability.Attack.ChargingAttack"));
+		UE_DEFINE_GAMEPLAY_TAG(Ability_Attack_SpecialAttack, TEXT("Ability.Attack.SpecialAttack"));
 		UE_DEFINE_GAMEPLAY_TAG(Ability_Dodge, TEXT("Ability.Dodge"));
+		UE_DEFINE_GAMEPLAY_TAG(Ability_AttackCharge, TEXT("Ability.AttackCharge"))
 		UE_DEFINE_GAMEPLAY_TAG(Ability_Equip, TEXT("Ability.Equip"));
 		UE_DEFINE_GAMEPLAY_TAG(Ability_UnEquip, TEXT("Ability.UnEquip"));
 		UE_DEFINE_GAMEPLAY_TAG(Ability_Death, TEXT("Ability.Death"));

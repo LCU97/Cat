@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Animation/AnimInstance.h"
+#include "HumanAnimInstance.h"
 #include "HumanStaffAnimInstance.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class HUMANANDCAT_API UHumanStaffAnimInstance : public UAnimInstance
+class HUMANANDCAT_API UHumanStaffAnimInstance : public UHumanAnimInstance
 {
 	GENERATED_BODY()
 };

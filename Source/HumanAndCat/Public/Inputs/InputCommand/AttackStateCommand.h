@@ -25,5 +25,6 @@ public:
 	void HandleAttack(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag, UBaseAbilityObject* CurrentAbility);
 	void HandleMovement(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,UBaseAbilityObject* CurrentAbility);
 	void HandleDodge(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,UBaseAbilityObject* CurrentAbility);
+	void HandleSpecialAttack(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,UBaseAbilityObject* CurrentAbility);
 	
 };

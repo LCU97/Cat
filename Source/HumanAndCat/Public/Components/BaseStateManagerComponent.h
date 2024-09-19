@@ -84,4 +84,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UBaseStateObject* PreActivateState;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsSpecialAttack = false;
 };
