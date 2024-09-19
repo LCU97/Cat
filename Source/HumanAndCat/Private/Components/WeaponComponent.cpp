@@ -4,6 +4,7 @@
 #include "HumanAndCat/Public/Components/WeaponComponent.h"
 
 #include "GeometryTypes.h"
+#include "Characters/Animation/HumanAnimInstance.h"
 #include "Components/BaseAbilityManagerComponent.h"
 #include "Components/BaseStateManagerComponent.h"
 #include "GameFramework/Character.h"
@@ -57,7 +58,7 @@ void UWeaponComponent::InitWeaponComponent()
 	
 	if(!BasicWeapon) return;;
 	
-	AFistWeapon* BasicFistWeapon = GetWorld()->SpawnActor<AFistWeapon>(BasicWeapon);
+	ABaseWeapon* BasicFistWeapon = GetWorld()->SpawnActor<ABaseWeapon>(BasicWeapon);
 
 	if(BasicFistWeapon)
 	{
@@ -128,9 +129,29 @@ void UWeaponComponent::RegisterStateAndAbility(ABaseWeapon* CheckingWeaponType)
 			UpdateAbilities();
 
 			// 애니메이션에게 무기가 바뀌었음을 알려주기
-			if(OnWeaponNameChanged.IsBound())
+			//if(OnWeaponNameChanged.IsBound())
+			//{
+			//	OnWeaponNameChanged.Broadcast(CurrentWeaponName);
+			//}
+
+
+			// 임시 방편
+			AActor* ActorOwner = GetOwner();
+			if(ActorOwner)
 			{
-				OnWeaponNameChanged.Broadcast(CurrentWeaponName);
+				ACharacter* CharacterOwner = Cast<ACharacter>(ActorOwner);
+				if(CharacterOwner)
+				{
+					UAnimInstance* OwnerAnim = CharacterOwner->GetMesh()->GetAnimInstance();
+					if(OwnerAnim)
+					{
+						UHumanAnimInstance* HumanAnimInstance = Cast<UHumanAnimInstance>(OwnerAnim);
+						if(HumanAnimInstance)
+						{
+							HumanAnimInstance->OnNewWeaponNameChanged.Broadcast(CurrentWeaponName);
+						}
+					}
+				}
 			}
 
 			return;

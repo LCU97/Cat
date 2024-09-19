@@ -17,6 +17,7 @@ void UHumanAnimInstance::NativeInitializeAnimation()
 	
 	PlayerCharacter = Cast<ACharacter>(PPawn);
 
+	OnNewWeaponNameChanged.AddDynamic(this, &ThisClass::SetWeaponName);
 }
 
 void UHumanAnimInstance::NativeUpdateAnimation(float DeltaSeconds)

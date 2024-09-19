@@ -10,6 +10,7 @@
 /**
  * 
  */
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnNewWeaponNameChanged, EWeaponName, NewWeaponName);
 UCLASS()
 class HUMANANDCAT_API UHumanAnimInstance : public UAnimInstance
 {
@@ -51,4 +52,6 @@ public:
 
 	UPROPERTY(editAnywhere, BlueprintReadWrite, Category = Animation)
 	class ACharacter* PlayerCharacter;
+
+	FOnNewWeaponNameChanged OnNewWeaponNameChanged;
 };
