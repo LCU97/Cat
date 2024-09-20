@@ -46,9 +46,9 @@ void UAttackStateCommand::ProcessInput(const FInputPayLoad& InputPayLoad, UBaseS
 	{
 		HandleDodge(CurrentState, CurrentAbilityTag, CurrentAbility);
 	}
-	else if(InputTag == InputTags::Input_SpecialAttack)
+	else if(InputTag == InputTags::Input_AttackCharging)
 	{
-		HandleSpecialAttack(CurrentState, CurrentAbilityTag, CurrentAbility);
+		HandleAttackCharging(CurrentState, CurrentAbilityTag, CurrentAbility);
 	}
 }
 
@@ -93,7 +93,7 @@ void UAttackStateCommand::HandleDodge(UBaseStateObject* CurrentState, const FGam
 	
 }
 
-void UAttackStateCommand::HandleSpecialAttack(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,
+void UAttackStateCommand::HandleAttackCharging(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,
 	UBaseAbilityObject* CurrentAbility)
 {
 	if(AbilityTag == AbilityTags::Ability_Attack_NormalAttack)
@@ -101,7 +101,19 @@ void UAttackStateCommand::HandleSpecialAttack(UBaseStateObject* CurrentState, co
 		UBaseStateObject* LocalCharge = CurrentState->StateManager->GetStateOfGameplayTag(StateTags::State_AttackCharge);
 		if(LocalCharge)
 		{
-			CurrentState->StateManager->TryChangeStateOfClass(LocalCharge->GetClass());
+			CurrentAbility->CancelAbility();
+			AActor* PActor;
+			CurrentAbility->GetPerformingActor(PActor);
+			if(PActor)
+			{
+				ACharacter* PCharacter = Cast<ACharacter>(PActor);
+				if(PCharacter)
+				{
+					PCharacter->StopAnimMontage();
+				}
+			}
+			CurrentState->StateManager->ChangeStateOfClass(LocalCharge->GetClass());
+			
 		}
 	}
 	else

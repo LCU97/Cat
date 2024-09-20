@@ -17,8 +17,6 @@ namespace StateTags
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(State_Hit)
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(State_Die)
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(State_Riding)
-	
-	
 }
 
 namespace AbilityTags
@@ -32,7 +30,6 @@ namespace AbilityTags
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_UnEquip)
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_Death) 
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_Hit) 
-	
 }
 
 namespace InputTags
@@ -40,11 +37,10 @@ namespace InputTags
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_MoveForWard)
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_MoveRight)
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_NorMalAttack)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_AttackCharging)
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_SpecialAttack)
-	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Dodge)
-	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Dodge)	
 }
-
 namespace WeaponTags
 {
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Weapon_Fist)

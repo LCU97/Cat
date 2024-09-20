@@ -36,7 +36,7 @@ bool UHuman_AttackState::CanPerformState_Implementation()
 		TSubclassOf<UBaseAbilityObject> NormalAttackAbility = UHuman_NormalAttackAbility::StaticClass();
 		AttackAbilities.AddUnique(NormalAttackAbility);
 	}*/
-
+	
 	if(StateManager->bIsSpecialAttack)
 	{
 		// 차징 어택 어빌리티를 실행합니다.
@@ -50,6 +50,10 @@ bool UHuman_AttackState::CanPerformState_Implementation()
 	}
 	else
 	{
+		if(!AttackAbilities.IsEmpty())
+		{
+			AttackAbilities.Empty();
+		}
 		// 노말 어빌리티를 실행합니다.
 		TSubclassOf<UBaseAbilityObject> NormalAttackAbility = UHuman_NormalAttackAbility::StaticClass();
 		AttackAbilities.AddUnique(NormalAttackAbility);

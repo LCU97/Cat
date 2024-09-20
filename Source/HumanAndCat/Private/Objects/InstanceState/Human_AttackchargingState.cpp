@@ -16,11 +16,14 @@ UHuman_AttackchargingState::UHuman_AttackchargingState()
 	BlockedState.AddTag(StateTags::State_Jump);
 	BlockedState.AddTag(StateTags::State_UnEquip);
 	BlockedState.AddTag(StateTags::State_Equip);
+	BlockedState.AddTag(StateTags::State_Attack);
 }
 
 void UHuman_AttackchargingState::StartState_Implementation()
 {
 	Super::StartState_Implementation();
+	TSubclassOf<UBaseAbilityObject> ChargingAbility = UHuman_AttackChargingAbility::StaticClass();
+	CurrentAbility = ChargingAbility;
 	AbilityManager->PerformAbilityOfClass(CurrentAbility);
 	StateManager->bIsSpecialAttack = true;
 }

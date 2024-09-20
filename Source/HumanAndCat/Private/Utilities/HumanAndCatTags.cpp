@@ -37,6 +37,7 @@ namespace InputTags
 	UE_DEFINE_GAMEPLAY_TAG(Input_MoveForWard, TEXT("Input.MoveForWard"));
 	UE_DEFINE_GAMEPLAY_TAG(Input_MoveRight, TEXT("Input.MoveRight"));
 	UE_DEFINE_GAMEPLAY_TAG(Input_NorMalAttack, TEXT("Input.NorMalAttack"));
+	UE_DEFINE_GAMEPLAY_TAG(Input_AttackCharging, TEXT("Input.AttackCharging"));	
 	UE_DEFINE_GAMEPLAY_TAG(Input_SpecialAttack, TEXT("Input.SpecialAttack"));
 	UE_DEFINE_GAMEPLAY_TAG(Input_Dodge, TEXT("Input.Dodge"));
 }

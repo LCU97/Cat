@@ -5,26 +5,25 @@
 #include "CoreMinimal.h"
 #include "BaseCommand.h"
 #include "GameplayTagContainer.h"
-#include "AttackStateCommand.generated.h"
+#include "AttackChargingCommand.generated.h"
 
-class UBaseAbilityObject;
 class UBaseStateObject;
+class UBaseAbilityObject;
 /**
  * 
  */
 UCLASS()
-class HUMANANDCAT_API UAttackStateCommand : public UBaseCommand
+class HUMANANDCAT_API UAttackChargingCommand : public UBaseCommand
 {
 	GENERATED_BODY()
+
 public:
-	UAttackStateCommand();
+	UAttackChargingCommand();
 
 	virtual void ActionExecute_Implementation(const FInputPayLoad& InputPayLoad) override;
 
 	void ProcessInput(const FInputPayLoad& InputPayLoad, UBaseStateObject* CurrentState, UBaseAbilityObject* CurrentAbility);
-	void HandleAttack(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag, UBaseAbilityObject* CurrentAbility);
 	void HandleMovement(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,UBaseAbilityObject* CurrentAbility);
 	void HandleDodge(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,UBaseAbilityObject* CurrentAbility);
-	void HandleAttackCharging(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,UBaseAbilityObject* CurrentAbility);
-	
+	void HandleSpecialAttack(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,UBaseAbilityObject* CurrentAbility);
 };
