@@ -217,6 +217,8 @@ DerivedDataCache/*
 # Contents
 Content/*
 !Content/BluePrint/
+!Content/TigerModel/
+!Content/Cat_Stray/
 
 # Don't ignore icon and splash images for mobile app
 !Build/IOS/Resources/
