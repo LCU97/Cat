@@ -214,6 +214,10 @@ Plugins/*/Intermediate/*
 DerivedDataCache/*
 
 ### UnrealEngine Patch ###
+# Contents
+Content/
+!Content/BluePrint/
+
 # Don't ignore icon and splash images for mobile app
 !Build/IOS/Resources/
 Build/IOS/Resources/*
