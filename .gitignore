@@ -219,6 +219,7 @@ Content/*
 !Content/BluePrint/
 !Content/TigerModel/
 !Content/Cat_Stray/
+!Content/LCH/
 
 # Don't ignore icon and splash images for mobile app
 !Build/IOS/Resources/
