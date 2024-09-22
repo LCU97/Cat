@@ -14,7 +14,6 @@ ACatAIController::ACatAIController()
 		CatAiCharacter->GetCharacterMovement()->bOrientRotationToMovement = true;
 		CatAiCharacter->GetCharacterMovement()->MaxAcceleration = 800.f;
 		CatAiCharacter->GetCharacterMovement()->BrakingDecelerationWalking = 350.f;
-		CatAiCharacter->GetCharacterMovement()
 	}
 }
 
@@ -22,16 +21,14 @@ void ACatAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
-
-
-	PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-	GetWorldTimerManager().SetTimer(TimerHandle, this, &ACatAIController::FollowPlayer, 0.5f, true);
+	//PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+	//GetWorldTimerManager().SetTimer(TimerHandle, this, &ACatAIController::FollowPlayer, 0.5f, true);
 }
 
 void ACatAIController::FollowPlayer()
 {
 	if (PlayerPawn)
 	{
-		MoveToActor(PlayerPawn, AcceptanceRadius);
+		//MoveToActor(PlayerPawn, AcceptanceRadius);
 	}
 }
