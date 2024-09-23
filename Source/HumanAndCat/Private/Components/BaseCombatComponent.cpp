@@ -3,6 +3,10 @@
 
 #include "Components/BaseCombatComponent.h"
 
+#include "Cameras/BaseCameraComponent.h"
+#include "Components/CameraManagerComponent.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 
@@ -117,17 +121,53 @@ void UBaseCombatComponent::SelectTarget()
 
 float UBaseCombatComponent::CalculateAngleFromCamera(AActor* Actor)
 {
-	return 0.f;
+	FRotator DeltaRot;
+
+	if(TargetActor && OwnerCamera)
+	{
+		AActor* PActor =  GetOwner();
+		UCameraManagerComponent* GameCamera = PActor->GetComponentByClass<UCameraManagerComponent>();
+		if(GameCamera)
+		{
+			
+			FRotator RequireRot  = UKismetMathLibrary::FindLookAtRotation(GameCamera->InGameCamera->GetComponentLocation(), TargetActor->GetActorLocation());
+
+			ACharacter* PCharacter = Cast<ACharacter>(PActor);
+			DeltaRot = UKismetMathLibrary::NormalizedDeltaRotator(RequireRot, PCharacter->GetControlRotation());
+		}
+	}
+	
+	return UKismetMathLibrary::Abs(UKismetMathLibrary::Abs(DeltaRot.Yaw) + UKismetMathLibrary::Abs(DeltaRot.Pitch));
 }
 
 void UBaseCombatComponent::DisableLockOn()
 {
-	
+	AActor* PActor =  GetOwner();
+	UCameraManagerComponent* GameCamera = PActor->GetComponentByClass<UCameraManagerComponent>();
+
+	if(!GameCamera) return;
+	GameCamera->SetIsTarget(false);
+
+	ACharacter* PCharacter = Cast<ACharacter>(PActor);
+	if(PCharacter)
+	{
+		PCharacter->GetCharacterMovement()->bOrientRotationToMovement = true;
+	}
 }
 
 void UBaseCombatComponent::LockOnTarget()
 {
-	
+	AActor* PActor =  GetOwner();
+	UCameraManagerComponent* GameCamera = PActor->GetComponentByClass<UCameraManagerComponent>();
+
+	if(!GameCamera) return;
+	GameCamera->SetIsTarget(true);
+
+	ACharacter* PCharacter = Cast<ACharacter>(PActor);
+	if(PCharacter)
+	{
+		PCharacter->GetCharacterMovement()->bOrientRotationToMovement = false;
+	}
 }
 
 bool UBaseCombatComponent::CanBeTargeted(AActor* Target)

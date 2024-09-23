@@ -25,7 +25,20 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 
+public:
+// 카메라 시점 타겟팅
+	UFUNCTION(BlueprintCallable)
+	void  InGameLockOn();
 
+	UFUNCTION(BlueprintCallable)
+	void InGameLockDown();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	bool GetIsTarget() {return bIsTarget;}
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	void SetIsTarget(bool TargetOnBool) {bIsTarget = TargetOnBool;}
+	//타겟팅 end
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera|InGameCamera")
@@ -36,4 +49,10 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
 	UBaseCameraComponent* CurrentCamera;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	class UBaseCombatComponent* CombatComponent;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	bool bIsTarget = false;
 };
