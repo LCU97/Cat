@@ -4,8 +4,9 @@
 #include "Characters/AdventurePlayer.h"
 
 #include "Camera/CameraActor.h"
-#include "Camera/CameraComponent.h"
+#include "Cameras/BaseCameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Utilities/HumanAndCatTags.h"
 
 
 // Sets default values
@@ -17,9 +18,13 @@ AAdventurePlayer::AAdventurePlayer()
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
 	SpringArm->SetupAttachment(GetRootComponent());
 
-	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-	Camera->SetupAttachment(SpringArm);
+	InGameCamera = CreateDefaultSubobject<UBaseCameraComponent>(TEXT("InGameCamera"));
+	InGameCamera->SetupAttachment(SpringArm);
+	InGameCamera->CameraTag = CameraTags::Camera_InGame;
 	
+	UltimateCamera = CreateDefaultSubobject<UBaseCameraComponent>(TEXT("UltiCamera"));
+	UltimateCamera->SetupAttachment(GetRootComponent());
+	UltimateCamera->CameraTag = CameraTags::Camera_Ultimate;
 }
 
 // Called when the game starts or when spawned

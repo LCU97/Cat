@@ -16,7 +16,7 @@ UHuman_RunState::UHuman_RunState()
 void UHuman_RunState::TickState_Implementation(float Delta)
 {
 	Super::TickState_Implementation(Delta);
-
+	RotateToTarget(0.f);
 	UBaseStateObject* LocalFallState = StateManager->GetStateOfGameplayTag(StateTags::State_Falling);
 	if (!StateManager->TryChangeStateOfClass(LocalFallState->GetClass()))
 	{

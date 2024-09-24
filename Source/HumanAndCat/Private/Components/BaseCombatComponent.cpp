@@ -7,6 +7,7 @@
 #include "Components/CameraManagerComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 
@@ -152,6 +153,14 @@ void UBaseCombatComponent::DisableLockOn()
 	if(PCharacter)
 	{
 		PCharacter->GetCharacterMovement()->bOrientRotationToMovement = true;
+		TargetActor = nullptr;
+		PCharacter->GetCharacterMovement()->MaxWalkSpeed = 450.f;
+		OnInFocusing.Broadcast(false);
+		USpringArmComponent* Arm = PCharacter->GetComponentByClass<USpringArmComponent>();
+		if(Arm)
+		{
+			Arm->bInheritPitch = true;
+		}
 	}
 }
 
@@ -167,6 +176,13 @@ void UBaseCombatComponent::LockOnTarget()
 	if(PCharacter)
 	{
 		PCharacter->GetCharacterMovement()->bOrientRotationToMovement = false;
+		PCharacter->GetCharacterMovement()->MaxWalkSpeed = 300.f;
+		OnInFocusing.Broadcast(true);
+		USpringArmComponent* Arm = PCharacter->GetComponentByClass<USpringArmComponent>();
+		if(Arm)
+		{
+			Arm->bInheritPitch = false;
+		}
 	}
 }
 

@@ -74,6 +74,10 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "State")
 	bool CanPerformState();
+
+	// TargetObject
+	UFUNCTION(BlueprintCallable)
+	void RotateToTarget(float Alpha);
 	
 public:
 	// 해당 상태의 태그

@@ -33,6 +33,9 @@ public:
 	class USpringArmComponent* SpringArm;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	class UCameraComponent* Camera;
+	class UBaseCameraComponent* InGameCamera;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UBaseCameraComponent* UltimateCamera;
 
 };

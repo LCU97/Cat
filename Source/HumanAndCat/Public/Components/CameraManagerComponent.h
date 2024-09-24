@@ -7,6 +7,8 @@
 #include "CameraManagerComponent.generated.h"
 
 
+class UBaseCameraComponent;
+
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class HUMANANDCAT_API UCameraManagerComponent : public UActorComponent
 {
@@ -25,6 +27,8 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 
+	UFUNCTION(BlueprintCallable)
+	void InitCameraManager(UBaseCameraComponent* InGame, UBaseCameraComponent* Ultimate);
 public:
 // 카메라 시점 타겟팅
 	UFUNCTION(BlueprintCallable)
@@ -36,13 +40,13 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool GetIsTarget() {return bIsTarget;}
 
-	UFUNCTION(BlueprintCallable, BlueprintPure)
+	UFUNCTION(BlueprintCallable)
 	void SetIsTarget(bool TargetOnBool) {bIsTarget = TargetOnBool;}
 	//타겟팅 end
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera|InGameCamera")
-	class UBaseCameraComponent* InGameCamera;
+	UBaseCameraComponent* InGameCamera;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite,Category = "Camera|UltimateCamera")
 	UBaseCameraComponent* UltimateCamera;

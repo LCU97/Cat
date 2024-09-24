@@ -19,5 +19,6 @@ public:
 
 
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Camera)
 	FGameplayTag CameraTag;
 };

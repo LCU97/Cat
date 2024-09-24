@@ -49,6 +49,13 @@ void UCameraManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType
 	}
 }
 
+void UCameraManagerComponent::InitCameraManager(UBaseCameraComponent* InGame, UBaseCameraComponent* Ultimate)
+{
+	InGameCamera = InGame;
+	UltimateCamera = Ultimate;
+	CurrentCamera = InGameCamera;
+}
+
 void UCameraManagerComponent::InGameLockOn()
 {
 	if(CurrentCamera->CameraTag != CameraTags::Camera_InGame) return;
@@ -82,8 +89,8 @@ void UCameraManagerComponent::InGameLockOn()
 
 	float Pit = UKismetMathLibrary::Clamp(CalRot.Pitch, -15.f, 30.f);
 
-	FRotator FinalRot = FRotator(PRot.Roll, Pit, CalRot.Yaw);
-	
+	FRotator FinalRot = FRotator(Pit, CalRot.Yaw, PRot.Roll);
+								// Pit, CalRot.Yaw, PRot.Roll
 	PCon->SetControlRotation(FinalRot);
 }
 

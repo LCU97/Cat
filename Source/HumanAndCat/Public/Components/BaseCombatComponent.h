@@ -8,6 +8,7 @@
 
 class UCameraComponent;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInCombatChanged, bool, CombatBool);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInFocusing, bool, FocusBool);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class HUMANANDCAT_API UBaseCombatComponent : public UActorComponent
@@ -32,7 +33,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void InitCombatComponent(UCameraComponent* CameraComponent);
 	
-	UFUNCTION(Blueprintable)
+	UFUNCTION(BlueprintCallable)
 	void SearchTargetActor();
 
 	UFUNCTION(BlueprintCallable)
@@ -91,5 +92,8 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FOnInCombatChanged OnInCombatChanged;
 
+	
+	UPROPERTY(BlueprintAssignable)
+	FOnInFocusing OnInFocusing;
 
 };

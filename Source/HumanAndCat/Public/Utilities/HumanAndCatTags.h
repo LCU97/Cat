@@ -52,6 +52,6 @@ namespace WeaponTags
 namespace CameraTags
 {
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Camera_InGame)
-	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Weapon_Ultimate)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Camera_Ultimate)
 		
 }

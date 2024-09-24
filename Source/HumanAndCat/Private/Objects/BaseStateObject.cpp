@@ -5,11 +5,13 @@
 
 #include "BlueprintGameplayTagLibrary.h"
 #include "GameplayTagAssetInterface.h"
+#include "Components/BaseCombatComponent.h"
 #include "HumanAndCat/Public/Objects/BaseAbilityObject.h"
 #include "HumanAndCat/Public/Components/BaseStateManagerComponent.h"
 #include "HumanAndCat/Public/Components/BaseAbilityManagerComponent.h"
 #include "GameFramework/Character.h"
 #include "Interfaces/Interface_GameplayTagControl.h"
+#include "Kismet/KismetMathLibrary.h"
 
 UBaseStateObject::UBaseStateObject()
 {
@@ -104,6 +106,28 @@ bool UBaseStateObject::GetIsStateCurrentlyActive()
 	if(!StateManager) return false;
 	
 	return StateManager->GetCurrentActivateState() == this;
+}
+
+void UBaseStateObject::RotateToTarget(float Alpha)
+{
+	UBaseCombatComponent* CombatManager = StateManager->PerformingActor->GetComponentByClass<UBaseCombatComponent>();
+	if(!CombatManager) return;
+
+	const AActor* TargetActor = CombatManager->TargetActor;
+
+	if(!IsValid(TargetActor)) return;
+
+	FVector OwnerLocation = OwnerCharacter->GetActorLocation();
+	FVector TargetLocation = TargetActor->GetActorLocation();
+
+	FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(OwnerLocation, TargetLocation);
+	FRotator OwnerRotation = OwnerCharacter->GetActorRotation();
+
+	FRotator Rot = UKismetMathLibrary::RLerp(OwnerRotation, LookAtRotation, Alpha, true);
+
+	FRotator FinalRot = FRotator(OwnerRotation.Pitch, OwnerRotation.Yaw, Rot.Roll);
+	
+	OwnerCharacter->SetActorRotation(FinalRot, ETeleportType::TeleportPhysics);
 }
 
 bool UBaseStateObject::CanPerformState_Implementation()
