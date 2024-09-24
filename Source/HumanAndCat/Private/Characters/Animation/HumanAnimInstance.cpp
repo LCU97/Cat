@@ -7,6 +7,7 @@
 #include "Components/WeaponComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 
 void UHumanAnimInstance::NativeInitializeAnimation()
 {
@@ -29,8 +30,12 @@ void UHumanAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	FVector2D Vel2D;
 	Vel2D.X = PPawn->GetVelocity().X;
 	Vel2D.Y = PPawn->GetVelocity().Y;
+
 	
 	RunSpeed = Vel2D.Length();
+
+	FVector Vec = PPawn->GetVelocity();
+	
 
 	ACharacter* PCharacter = Cast<ACharacter>(PPawn);
 
@@ -58,4 +63,15 @@ void UHumanAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 			bIsCombatComponentBound = true;
 		}
 	}
+
+	if(PlayerCharacter && !bIsTargetingBound)
+	{
+		UBaseCombatComponent* CombatComponent = PlayerCharacter->GetComponentByClass<UBaseCombatComponent>();
+		if(CombatComponent)
+		{
+			CombatComponent->OnInFocusing.AddDynamic(this, &ThisClass::SetFocusing);
+			bIsTargetingBound = true;
+		}
+	}
+	
 }

@@ -30,19 +30,28 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetInCombat(bool CombatBool) {bInCombat = CombatBool; }
+
+	UFUNCTION(BlueprintCallable)
+	void SetFocusing(bool FocusBool) { bFocusing = FocusBool; }
 	
 public:
 	UPROPERTY(editAnywhere, BlueprintReadWrite, Category = Animation)
 	bool bIsFalling;
 	
-	UPROPERTY(editAnywhere, BlueprintReadWrite, Category = Animation)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
 	bool bIsWeaponComponentBound;
 	
-	UPROPERTY(editAnywhere, BlueprintReadWrite, Category = Animation)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
 	bool bIsCombatComponentBound;
 	
-	UPROPERTY(editAnywhere, BlueprintReadWrite, Category = Animation)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
+	bool bIsTargetingBound;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
 	bool bInCombat;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
+	bool bFocusing;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
 	EWeaponName WeaponName;
@@ -50,7 +59,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
 	float RunSpeed;
 
-	UPROPERTY(editAnywhere, BlueprintReadWrite, Category = Animation)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
+	float Direction;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
 	class ACharacter* PlayerCharacter;
 
 	FOnNewWeaponNameChanged OnNewWeaponNameChanged;

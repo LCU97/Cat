@@ -30,7 +30,7 @@ void UHuman_JumpState::StartState_Implementation()
 void UHuman_JumpState::TickState_Implementation(float TickTime)
 {
 	Super::TickState_Implementation(TickTime);
-
+	RotateToTarget(0.f);
 	UBaseStateObject* LocalFallState = StateManager->GetStateOfGameplayTag(StateTags::State_Falling);
 	StateManager->TryChangeStateOfClass(LocalFallState->GetClass());
 }

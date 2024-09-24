@@ -49,3 +49,11 @@ namespace WeaponTags
 	UE_DEFINE_GAMEPLAY_TAG(Weapon_Staff, TEXT("Weapon.Staff"));
 		
 }
+
+
+namespace CameraTags
+{
+	UE_DEFINE_GAMEPLAY_TAG(Camera_InGame, TEXT("Camera.InGame"))
+	UE_DEFINE_GAMEPLAY_TAG(Camera_Ultimate, TEXT("Camera.Ultimate"))
+		
+}
