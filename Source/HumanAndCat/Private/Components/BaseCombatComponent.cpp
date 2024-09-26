@@ -7,6 +7,7 @@
 #include "Components/CameraManagerComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/GameModeBase.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
@@ -130,7 +131,6 @@ float UBaseCombatComponent::CalculateAngleFromCamera(AActor* Actor)
 		UCameraManagerComponent* GameCamera = PActor->GetComponentByClass<UCameraManagerComponent>();
 		if(GameCamera)
 		{
-			
 			FRotator RequireRot  = UKismetMathLibrary::FindLookAtRotation(GameCamera->InGameCamera->GetComponentLocation(), TargetActor->GetActorLocation());
 
 			ACharacter* PCharacter = Cast<ACharacter>(PActor);
@@ -160,9 +160,17 @@ void UBaseCombatComponent::DisableLockOn()
 		if(Arm)
 		{
 			Arm->bInheritPitch = true;
+			AGameModeBase* Mode = GetWorld()->GetAuthGameMode();
+			if(Mode)
+			{
+				Arm->AttachToComponent(PCharacter->GetRootComponent(), FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+				Arm->SetRelativeLocation(FVector(0, 0, 60.f));
+			}
+			Arm->bEnableCameraLag = true;
 		}
 	}
 }
+
 
 void UBaseCombatComponent::LockOnTarget()
 {
@@ -173,17 +181,25 @@ void UBaseCombatComponent::LockOnTarget()
 	GameCamera->SetIsTarget(true);
 
 	ACharacter* PCharacter = Cast<ACharacter>(PActor);
-	if(PCharacter)
+	if(!PCharacter) return;
+	PCharacter->GetCharacterMovement()->bOrientRotationToMovement = false;
+	PCharacter->GetCharacterMovement()->MaxWalkSpeed = 300.f;
+	OnInFocusing.Broadcast(true);
+	USpringArmComponent* Arm = PCharacter->GetComponentByClass<USpringArmComponent>();
+	if(Arm)
 	{
-		PCharacter->GetCharacterMovement()->bOrientRotationToMovement = false;
-		PCharacter->GetCharacterMovement()->MaxWalkSpeed = 300.f;
-		OnInFocusing.Broadcast(true);
-		USpringArmComponent* Arm = PCharacter->GetComponentByClass<USpringArmComponent>();
-		if(Arm)
+		Arm->bInheritPitch = false;
+		AGameModeBase* Mode = GetWorld()->GetAuthGameMode();
+		if(Mode)
 		{
-			Arm->bInheritPitch = false;
+			Arm->AttachToComponent(Mode->GetRootComponent(), FAttachmentTransformRules::KeepWorldTransform);
+			//FVector Location = PCharacter->GetActorLocation();
+			//Location.Z += 60.f;
+			//Arm->SetWorldLocation(Location);
 		}
+		Arm->bEnableCameraLag = false;
 	}
+
 }
 
 bool UBaseCombatComponent::CanBeTargeted(AActor* Target)

@@ -121,10 +121,12 @@ void UBaseStateObject::RotateToTarget(float Alpha)
 	FVector TargetLocation = TargetActor->GetActorLocation();
 
 	FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(OwnerLocation, TargetLocation);
-	FRotator OwnerRotation = OwnerCharacter->GetActorRotation();
+	
+	FRotator OwnerRotation = OwnerCharacter->GetControlRotation();
 
 	FRotator Rot = UKismetMathLibrary::RLerp(OwnerRotation, LookAtRotation, Alpha, true);
 
+	//FRotator FinalRot = FRotator(OwnerRotation.Pitch, OwnerRotation.Yaw, OwnerRotation.Roll);
 	FRotator FinalRot = FRotator(OwnerRotation.Pitch, OwnerRotation.Yaw, Rot.Roll);
 	
 	OwnerCharacter->SetActorRotation(FinalRot, ETeleportType::TeleportPhysics);

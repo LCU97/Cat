@@ -6,6 +6,7 @@
 #include "Cameras/BaseCameraComponent.h"
 #include "Components/BaseCombatComponent.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Utilities/HumanAndCatTags.h"
 
@@ -28,6 +29,7 @@ void UCameraManagerComponent::BeginPlay()
 
 	// ...
 	CombatComponent = GetOwner()->GetComponentByClass<UBaseCombatComponent>();
+	ArmComponent = GetOwner()->GetComponentByClass<USpringArmComponent>();
 }
 
 
@@ -38,7 +40,11 @@ void UCameraManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
-
+	//UE_LOG(LogTemp, Warning, TEXT("%f %f %f"), CurrentCamera->GetComponentLocation().X, CurrentCamera->GetComponentLocation().Y, CurrentCamera->GetComponentLocation().Z);
+	ACharacter* PCharacter = Cast<ACharacter>(GetOwner());
+	if(!PCharacter) return;
+	
+	
 	if(bIsTarget)
 	{
 		InGameLockOn();
@@ -47,6 +53,7 @@ void UCameraManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType
 	{
 		InGameLockDown();
 	}
+
 }
 
 void UCameraManagerComponent::InitCameraManager(UBaseCameraComponent* InGame, UBaseCameraComponent* Ultimate)
@@ -54,6 +61,23 @@ void UCameraManagerComponent::InitCameraManager(UBaseCameraComponent* InGame, UB
 	InGameCamera = InGame;
 	UltimateCamera = Ultimate;
 	CurrentCamera = InGameCamera;
+}
+
+void UCameraManagerComponent::FwdBakMoveCheck()
+{
+	FVector ActorLocation = FVector(GetOwner()->GetActorLocation().X, GetOwner()->GetActorLocation().Y, GetOwner()->GetActorLocation().Z + 60.f);
+	
+	float Dis = FVector::Dist(ActorLocation, CurrentCamera->GetComponentLocation());
+	
+	
+	if(Dis >= 350.f || Dis <= 250.f)
+	{
+		if(FwdBakMoveStart <= 0.f)
+		{
+			bFwdBakLerping = true;
+			FwdBakMoveStart = GetWorld()->GetTimeSeconds();
+		}
+	}
 }
 
 void UCameraManagerComponent::InGameLockOn()
@@ -64,7 +88,7 @@ void UCameraManagerComponent::InGameLockOn()
 	
 	FVector TargetLocation = CombatComponent->TargetActor->GetActorLocation();
 	
-	FRotator Rot = UKismetMathLibrary::FindLookAtRotation(CurrentCamera->GetComponentLocation(), TargetLocation);
+	FRotator Rot = UKismetMathLibrary::FindLookAtRotation(GetOwner()->GetActorLocation(), TargetLocation);
 	
 	float Dis = FVector::Distance( TargetLocation,GetOwner()->GetActorLocation());
 
@@ -92,6 +116,18 @@ void UCameraManagerComponent::InGameLockOn()
 	FRotator FinalRot = FRotator(Pit, CalRot.Yaw, PRot.Roll);
 								// Pit, CalRot.Yaw, PRot.Roll
 	PCon->SetControlRotation(FinalRot);
+
+
+	// 타겟팅 시작 후 뷰 스페이스와 관련된 카메라 무빙
+	TargetingCameraMoving(PCharacter);
+
+	// 앞뒤 관련 카메라 무빙 여부 체킹
+	//FwdBakMoveCheck();
+	//
+	//// 타겟팅 시작하면서 카메롸 캐릭터 거리에 따른 카메라 무빙
+	////FwdBakLerp(StartLerpCharacterPos, ArmComponent);
+	//FVector ActorLocation = FVector(GetOwner()->GetActorLocation().X, GetOwner()->GetActorLocation().Y, GetOwner()->GetActorLocation().Z + 60.f);
+	//FwdBakLerp(ActorLocation, ArmComponent);
 }
 
 void UCameraManagerComponent::InGameLockDown()
@@ -99,7 +135,122 @@ void UCameraManagerComponent::InGameLockDown()
 	if(CurrentCamera->CameraTag != CameraTags::Camera_InGame) return;
 	if(!CombatComponent) return;
 	if(!CombatComponent->TargetActor) return;
+}
+
+void UCameraManagerComponent::FwdBakLerp(FVector ActorLocation, USpringArmComponent* Arm)
+{
+	if(FwdBakMoveStart < 0 ) return;
+	if(bLerping) return;
+	
+	float Ratio = GetWorld()->GetTimeSeconds() - FwdBakMoveStart;
+
+	if(Ratio <= 1.f)
+	{
+		float Alpha = Ratio/1.f;
+		
+		float EaseAlpha = FMath::InterpEaseOut(0.0f, 1.0f, Alpha, 1.0f);
+		float Delta = GetWorld()->GetDeltaSeconds();
+		
+		//FVector NewLocation = FMath::VInterpTo(Arm->GetComponentLocation(), ActorLocation, Delta * 3.f, EaseAlpha);
+		FVector NewLocation = FMath::Lerp(Arm->GetComponentLocation(), ActorLocation, Alpha);
+		Arm->SetWorldLocation(NewLocation);
+	}
+	else
+	{
+		bFwdBakLerping = true;
+		FwdBakMoveStart = -1.f;
+	}
+}
+
+void UCameraManagerComponent::TargetingCameraMoving(ACharacter* PCharacter)
+{
+	if(!PCharacter) return;
+	APlayerController* PCon = Cast<APlayerController>(PCharacter->GetController());
+	if(!PCon) return;
+	
+	FVector2D ScreenSize;
+	int32 x;
+	int32 y;
+	PCon->GetViewportSize(x,y);
+
+	ScreenSize.X = (float)x;
+	ScreenSize.Y = (float)y;
+
+	// 스크린 좌표를 이용한 카메라 움직임
+	FVector ActorLocation = FVector(PCharacter->GetActorLocation().X, PCharacter->GetActorLocation().Y, PCharacter->GetActorLocation().Z + 60.f);
+	
+	FVector2D ScreenPosition;
+	
+	FVector2D ScreenCenter(ScreenSize.X/2.f, ScreenSize.Y/2.f);
+	
+	bool bIsOnScreen = PCon->ProjectWorldLocationToScreen(ActorLocation, ScreenPosition);
+
+	float HalfWidth = 300.f;
+	float HalfHeight = 50.f;
 
 	
+	//PCon->DeprojectScreenPositionToWorld()
+	if(bIsOnScreen)
+	{
+		
+		
+		
+		bIsInBox =
+			((ScreenPosition.X >= ScreenCenter.X - HalfWidth && ScreenPosition.X <= ScreenCenter.X + HalfWidth) &&
+			(ScreenPosition.Y >= ScreenCenter.Y - HalfHeight && ScreenPosition.Y <= ScreenCenter.Y + HalfHeight));
+		
+		// 스크린 좌표의 특정 영역 안에 들어왔어요.
+		if(bIsInBox)
+		{			
+			//USpringArmComponent* Arm = PCharacter->GetComponentByClass<USpringArmComponent>();
+			//Arm->SetRelativeLocation(FVector(0.f, 0.f, 60.f));
+		}
+		// 영역 밖입니다. 
+		else
+		{
+			bFwdBakLerping = false;
+			bLerping = true;
+			if(!SetInitTime)
+			{
+				SetInitTime = true;
+				FTimerHandle TimerHandle;
+				GetWorld()->GetTimerManager().SetTimer(TimerHandle, this,&ThisClass::InitCameraMovingLerp, 1.f,false, 1.f);
+			}
+		}
+	}
+	
+	USpringArmComponent* Arm = PCharacter->GetComponentByClass<USpringArmComponent>();
+	if(bLerping)
+	{
+		if(bFwdBakLerping) return;
+		if(Arm)
+		{
+			FVector CurrentLocation = Arm->GetComponentLocation();
+			
+			//float Distance = FVector2D::Distance(ScreenPosition, ScreenCenter);
+			//UE_LOG(LogTemp, Display, TEXT("Distance : %f"), Distance);
+			//float Alpha = FMath::Clamp(Distance / 350.0f, 0.0f, 1.0f);
+			//Alpha = FMath::Pow(Alpha, 2);
+
+			float Distance = FVector::Dist(CurrentLocation, ActorLocation);
+			UE_LOG(LogTemp, Display, TEXT("Distance : %f"), Distance);
+			
+			float Alpha = FMath::Clamp(Distance / 140.0f, 0.0f, 1.0f);
+			
+			// NewLocation 계산
+			float Delta = GetWorld()->GetDeltaSeconds();
+			FVector NewLocation = FMath::VInterpTo(CurrentLocation, ActorLocation, Delta * 3.f, Alpha);
+//
+			Arm->SetWorldLocation(NewLocation);
+		}
+	}
+
+	
+}
+
+void UCameraManagerComponent::InitCameraMovingLerp()
+{
+	bLerping = false;
+	SetInitTime = false;
 }
 

@@ -24,4 +24,12 @@ public:
 	virtual void OnPossess(APawn* InPawn) override;
 	virtual void OnUnPossess() override;
 
+public:
+	UFUNCTION(BlueprintCallable)
+	void SetFwdBak(float Value) { FwdBak = Value; };
+
+public:
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float FwdBak;
+
 };

@@ -5,6 +5,7 @@
 
 #include "Camera/CameraActor.h"
 #include "Cameras/BaseCameraComponent.h"
+#include "Components/BoxComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Utilities/HumanAndCatTags.h"
 
@@ -12,7 +13,8 @@
 // Sets default values
 AAdventurePlayer::AAdventurePlayer()
 {
-	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn th
+	// is off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));

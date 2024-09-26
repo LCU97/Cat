@@ -38,4 +38,5 @@ public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UBaseCameraComponent* UltimateCamera;
 
+
 };

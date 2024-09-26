@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "CameraManagerComponent.generated.h"
 
 
@@ -29,6 +30,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void InitCameraManager(UBaseCameraComponent* InGame, UBaseCameraComponent* Ultimate);
+	void FwdBakMoveCheck();
+
 public:
 // 카메라 시점 타겟팅
 	UFUNCTION(BlueprintCallable)
@@ -36,12 +39,20 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void InGameLockDown();
+	
+	void FwdBakLerp(FVector ActorLocation, USpringArmComponent* Arm);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool GetIsTarget() {return bIsTarget;}
 
 	UFUNCTION(BlueprintCallable)
 	void SetIsTarget(bool TargetOnBool) {bIsTarget = TargetOnBool;}
+
+	UFUNCTION(BlueprintCallable)
+	void TargetingCameraMoving(ACharacter* PCharacter);
+
+	UFUNCTION(BlueprintCallable)
+	void InitCameraMovingLerp();
 	//타겟팅 end
 
 public:
@@ -55,8 +66,36 @@ public:
 	UBaseCameraComponent* CurrentCamera;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	bool bIsInBox =true;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 	class UBaseCombatComponent* CombatComponent;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	class USpringArmComponent* ArmComponent;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 	bool bIsTarget = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	bool bLerping = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	bool SetInitTime =false;
+		
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	float FwdBakTimeDuration = 1.f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	float FwdBakCurrentTime = 0.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	float FwdBakMoveStart = -1.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	bool bFwdBakLerping = false;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,Category = "Combat")
+	class UCurveFloat* FwdBakTimeCurve;
+	
 };

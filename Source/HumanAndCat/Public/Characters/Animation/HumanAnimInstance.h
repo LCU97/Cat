@@ -47,6 +47,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
 	bool bIsTargetingBound;
 	
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
 	bool bInCombat;
 	

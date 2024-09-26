@@ -3,11 +3,11 @@
 
 #include "Characters/Animation/HumanAnimInstance.h"
 
+#include "Characters/Controllers/AdventurePlayerController.h"
 #include "Components/BaseCombatComponent.h"
 #include "Components/WeaponComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Kismet/KismetMathLibrary.h"
 
 void UHumanAnimInstance::NativeInitializeAnimation()
 {
@@ -30,13 +30,40 @@ void UHumanAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	FVector2D Vel2D;
 	Vel2D.X = PPawn->GetVelocity().X;
 	Vel2D.Y = PPawn->GetVelocity().Y;
-
+	AController* PCon = PPawn->GetController();
+	if(!PCon) return;
 	
-	RunSpeed = Vel2D.Length();
+	AAdventurePlayerController* AdCon = Cast<AAdventurePlayerController> (PCon);
+	float FB;
+    
+	if(AdCon)
+	{
+		FB = AdCon->FwdBak;
+	}
+
+	if(bFocusing)
+	{
+		if(FB>0)
+		{
+			RunSpeed = Vel2D.Length();
+		}
+		else if (FB<0)
+		{
+			RunSpeed = -Vel2D.Length();
+		}
+		else
+		{
+			RunSpeed = Vel2D.Length();
+		}
+	}
+	else
+	{
+		RunSpeed = Vel2D.Length();
+	}
+	
 
 	FVector Vec = PPawn->GetVelocity();
 	
-
 	ACharacter* PCharacter = Cast<ACharacter>(PPawn);
 
 	if(PCharacter)
