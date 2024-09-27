@@ -54,6 +54,10 @@ void UCameraManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType
 		InGameLockDown();
 	}
 
+	if(UltiLerpDuration > 0.0f && CurrentCamera == UltimateCamera)
+	{
+		UltiMovingLerp();
+	}
 }
 
 void UCameraManagerComponent::InitCameraManager(UBaseCameraComponent* InGame, UBaseCameraComponent* Ultimate)
@@ -61,24 +65,99 @@ void UCameraManagerComponent::InitCameraManager(UBaseCameraComponent* InGame, UB
 	InGameCamera = InGame;
 	UltimateCamera = Ultimate;
 	CurrentCamera = InGameCamera;
+	
+	ACharacter* PCharacter = Cast<ACharacter>(GetOwner());
+	if(!PCharacter) return;	
+	AController* PController = PCharacter->GetController();
+	if(!PController) return;
+	APlayerController* PlayerCon = Cast<APlayerController>(PController);
+	if(!PlayerCon) return;
+	
+	PCon = PlayerCon;
+		
 }
 
-void UCameraManagerComponent::FwdBakMoveCheck()
+void UCameraManagerComponent::ChangeUltiCamera(float Duration)
 {
-	FVector ActorLocation = FVector(GetOwner()->GetActorLocation().X, GetOwner()->GetActorLocation().Y, GetOwner()->GetActorLocation().Z + 60.f);
-	
-	float Dis = FVector::Dist(ActorLocation, CurrentCamera->GetComponentLocation());
-	
-	
-	if(Dis >= 350.f || Dis <= 250.f)
+	if(InGameCamera && UltimateCamera)
 	{
-		if(FwdBakMoveStart <= 0.f)
-		{
-			bFwdBakLerping = true;
-			FwdBakMoveStart = GetWorld()->GetTimeSeconds();
-		}
+		InGameCamera->SetActive(false);
+		UltimateCamera->SetActive(true);
+		CurrentCamera = UltimateCamera;
+		UltiLerpDuration = Duration;
+		UltiMovintStartTime = GetWorld()->GetTimeSeconds();
 	}
 }
+
+void UCameraManagerComponent::ChangeInGameCamera()
+{
+	if(InGameCamera && UltimateCamera)
+	{
+		InGameCamera->SetActive(true);
+		UltimateCamera->SetActive(false);
+		CurrentCamera = InGameCamera;
+		UltiLerpDuration = -1;
+	}
+}
+
+void UCameraManagerComponent::UltiMovingLerp()
+{
+	FVector OwnerLocation = GetOwner()->GetActorLocation();
+	FVector OwnerForWardVec = GetOwner()->GetActorForwardVector();
+	FVector OwnerRightVec = GetOwner()->GetActorRightVector();
+	
+	FVector Pos1 = FVector((OwnerLocation - OwnerForWardVec * 300.f).X, (OwnerLocation - OwnerForWardVec * 300.f).Y, (OwnerLocation - OwnerForWardVec * 300.f).Z + 60.f);
+	FVector Pos2 =	OwnerLocation - OwnerRightVec * 200.f;
+	FVector Pos3 = FVector((OwnerLocation + OwnerForWardVec * 300.f).X, (OwnerLocation + OwnerForWardVec * 300.f).Y, (OwnerLocation + OwnerForWardVec * 300.f).Z + 60.f);
+	FVector Pos4 = FVector((OwnerLocation + OwnerForWardVec*100.f + OwnerRightVec * 100.f).X,
+							(OwnerLocation + OwnerForWardVec*100.f + OwnerRightVec * 100.f).Y, (OwnerLocation + OwnerForWardVec*100.f + OwnerRightVec * 100.f).Z + 100.f);
+
+	float Ratio = GetWorld()->GetTimeSeconds() - UltiMovintStartTime;
+
+	if(Ratio>= UltiLerpDuration)
+	{
+		UltiLerpDuration = -1.f;
+	}
+	
+	float Alpha = Ratio/UltiLerpDuration;
+
+	float FinalAlpha = FMath::Pow(Alpha, 3.f);
+	FinalAlpha = FMath::Clamp(FinalAlpha, 0.f, 1.f);
+		
+	FVector NewLocation = CalNewPositionUltiCamera(Pos1,Pos2, Pos3, Pos4, FinalAlpha);
+
+	UltimateCamera->SetWorldLocation(NewLocation);
+}
+
+
+FVector UCameraManagerComponent::CalNewPositionUltiCamera(FVector P0, FVector P1, FVector P2, FVector P3, float t)
+{
+	float u = 1 - t;
+
+	FVector point = u*u*u * P0; // (1-t)^3 * P0
+	point += 3 * u*u * t * P1; // 3 * (1-t)^2 * t * P1
+	point += 3 * u * t*t * P2; // 3 * (1-t) * t^2 * P2
+	point += t*t*t * P3;        // t^3 * P3
+
+	return point;
+}
+
+//void UCameraManagerComponent::FwdBakMoveCheck()
+//{
+//	FVector ActorLocation = FVector(GetOwner()->GetActorLocation().X, GetOwner()->GetActorLocation().Y, GetOwner()->GetActorLocation().Z + 60.f);
+//	
+//	float Dis = FVector::Dist(ActorLocation, CurrentCamera->GetComponentLocation());
+//	
+//	
+//	if(Dis >= 350.f || Dis <= 250.f)
+//	{
+//		if(FwdBakMoveStart <= 0.f)
+//		{
+//			bFwdBakLerping = true;
+//			FwdBakMoveStart = GetWorld()->GetTimeSeconds();
+//		}
+//	}
+//}
 
 void UCameraManagerComponent::InGameLockOn()
 {
@@ -105,8 +184,8 @@ void UCameraManagerComponent::InGameLockOn()
 	ACharacter* PCharacter = Cast<ACharacter>(GetOwner());
 	if(!PCharacter) return;
 	
-	AController* PCon = PCharacter->GetController();
-	if(!PCon) return;
+	//AController* PCon = PCharacter->GetController();
+	//if(!PCon) return;
 	
 	FRotator PRot = PCon->GetControlRotation();
 	FRotator CalRot = UKismetMathLibrary::RLerp(Rot,PRot , Alpha, true);
@@ -137,36 +216,36 @@ void UCameraManagerComponent::InGameLockDown()
 	if(!CombatComponent->TargetActor) return;
 }
 
-void UCameraManagerComponent::FwdBakLerp(FVector ActorLocation, USpringArmComponent* Arm)
-{
-	if(FwdBakMoveStart < 0 ) return;
-	if(bLerping) return;
-	
-	float Ratio = GetWorld()->GetTimeSeconds() - FwdBakMoveStart;
+//oid UCameraManagerComponent::FwdBakLerp(FVector ActorLocation, USpringArmComponent* Arm)
+//
+//	if(FwdBakMoveStart < 0 ) return;
+//	if(bLerping) return;
+//	
+//	float Ratio = GetWorld()->GetTimeSeconds() - FwdBakMoveStart;
 
-	if(Ratio <= 1.f)
-	{
-		float Alpha = Ratio/1.f;
-		
-		float EaseAlpha = FMath::InterpEaseOut(0.0f, 1.0f, Alpha, 1.0f);
-		float Delta = GetWorld()->GetDeltaSeconds();
-		
-		//FVector NewLocation = FMath::VInterpTo(Arm->GetComponentLocation(), ActorLocation, Delta * 3.f, EaseAlpha);
-		FVector NewLocation = FMath::Lerp(Arm->GetComponentLocation(), ActorLocation, Alpha);
-		Arm->SetWorldLocation(NewLocation);
-	}
-	else
-	{
-		bFwdBakLerping = true;
-		FwdBakMoveStart = -1.f;
-	}
-}
+//	if(Ratio <= 1.f)
+//	{
+//		float Alpha = Ratio/1.f;
+//		
+//		float EaseAlpha = FMath::InterpEaseOut(0.0f, 1.0f, Alpha, 1.0f);
+//		float Delta = GetWorld()->GetDeltaSeconds();
+//		
+//		//FVector NewLocation = FMath::VInterpTo(Arm->GetComponentLocation(), ActorLocation, Delta * 3.f, EaseAlpha);
+//		FVector NewLocation = FMath::Lerp(Arm->GetComponentLocation(), ActorLocation, Alpha);
+//		Arm->SetWorldLocation(NewLocation);
+//	}
+//	else
+//	{
+//		bFwdBakLerping = true;
+//		FwdBakMoveStart = -1.f;
+//	}
+//
 
 void UCameraManagerComponent::TargetingCameraMoving(ACharacter* PCharacter)
 {
 	if(!PCharacter) return;
-	APlayerController* PCon = Cast<APlayerController>(PCharacter->GetController());
-	if(!PCon) return;
+	//APlayerController* PCon = Cast<APlayerController>(PCharacter->GetController());
+	//if(!PCon) return;
 	
 	FVector2D ScreenSize;
 	int32 x;
@@ -208,7 +287,7 @@ void UCameraManagerComponent::TargetingCameraMoving(ACharacter* PCharacter)
 		// 영역 밖입니다. 
 		else
 		{
-			bFwdBakLerping = false;
+			//bFwdBakLerping = false;
 			bLerping = true;
 			if(!SetInitTime)
 			{
@@ -222,7 +301,7 @@ void UCameraManagerComponent::TargetingCameraMoving(ACharacter* PCharacter)
 	USpringArmComponent* Arm = PCharacter->GetComponentByClass<USpringArmComponent>();
 	if(bLerping)
 	{
-		if(bFwdBakLerping) return;
+		//if(bFwdBakLerping) return;
 		if(Arm)
 		{
 			FVector CurrentLocation = Arm->GetComponentLocation();

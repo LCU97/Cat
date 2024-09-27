@@ -24,6 +24,15 @@ public:
 	virtual void OnPossess(APawn* InPawn) override;
 	virtual void OnUnPossess() override;
 
+	UFUNCTION(BlueprintCallable)
+	void TogglePawnChange();
+	
+	UFUNCTION(BlueprintCallable)
+	void PossessCatPlayer();
+
+	UFUNCTION(BlueprintCallable)
+	void PossessHumanPlayer();
+	
 public:
 	UFUNCTION(BlueprintCallable)
 	void SetFwdBak(float Value) { FwdBak = Value; };
@@ -32,4 +41,15 @@ public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	float FwdBak;
 
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	TSubclassOf<APawn> CatPlayerClass;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	TSubclassOf<APawn> HumanPlayerClass;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	APawn* CatPlayerPawn;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	APawn* HumanPlayerPawn;
 };

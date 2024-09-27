@@ -30,9 +30,26 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void InitCameraManager(UBaseCameraComponent* InGame, UBaseCameraComponent* Ultimate);
-	void FwdBakMoveCheck();
+	//void FwdBakMoveCheck();
 
 public:
+	UFUNCTION(BlueprintCallable)
+	void ChangeUltiCamera(float Duration);
+
+	UFUNCTION(BlueprintCallable)
+	void ChangeInGameCamera();
+	
+	// 궁극기 카메라 관련 기능
+	UFUNCTION()
+	void UltiMovingLerp();
+
+	// 베지어 곡선을 이용한 위치 값 계산 함수
+	UFUNCTION()
+	FVector CalNewPositionUltiCamera(FVector P0, FVector P1, FVector P2, FVector P3, float t);
+	
+
+	// 궁극기 카메라 관련 기능 end
+	
 // 카메라 시점 타겟팅
 	UFUNCTION(BlueprintCallable)
 	void  InGameLockOn();
@@ -40,7 +57,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void InGameLockDown();
 	
-	void FwdBakLerp(FVector ActorLocation, USpringArmComponent* Arm);
+	//void FwdBakLerp(FVector ActorLocation, USpringArmComponent* Arm);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool GetIsTarget() {return bIsTarget;}
@@ -83,19 +100,29 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 	bool SetInitTime =false;
 		
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
-	float FwdBakTimeDuration = 1.f;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
-	float FwdBakCurrentTime = 0.f;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	//float FwdBakTimeDuration = 1.f;
+	//
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	//float FwdBakCurrentTime = 0.f;
+//
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	//float FwdBakMoveStart = -1.f;
+//
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	//bool bFwdBakLerping = false;
+	//
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite,Category = "Combat")
+	//class UCurveFloat* FwdBakTimeCurve;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
-	float FwdBakMoveStart = -1.f;
+	// 궁극기 카메라 관련
+	UPROPERTY()
+	float UltiLerpDuration= -1;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
-	bool bFwdBakLerping = false;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite,Category = "Combat")
-	class UCurveFloat* FwdBakTimeCurve;
-	
+	UPROPERTY()
+	float UltiMovintStartTime;
+	// 궁극기 카메라 관련 End
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	APlayerController* PCon;
 };

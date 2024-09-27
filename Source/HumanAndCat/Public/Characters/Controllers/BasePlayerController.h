@@ -16,6 +16,7 @@ class HUMANANDCAT_API ABasePlayerController : public APlayerController
 	GENERATED_BODY()
 public:	
 	ABasePlayerController();
+	
 public:
 	virtual void PostInitializeComponents() override;
 	virtual void BeginPlay() override;
@@ -25,6 +26,9 @@ public:
 public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Input")
 	class UInputMappingContext* MappingContext = nullptr;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Input")
+	UInputMappingContext* CatMappingContext;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="StateComponent")
 	UBaseStateManagerComponent* StateManager;
