@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Interfaces/Interface_IndividualStatteFunc.h"
 #include "Objects/BaseStateObject.h"
 #include "Human_AttackState.generated.h"
 
@@ -10,7 +11,7 @@
  * 
  */
 UCLASS(Blueprintable, BlueprintType, meta=(DisplayName="State : Attack"))
-class HUMANANDCAT_API UHuman_AttackState : public UBaseStateObject
+class HUMANANDCAT_API UHuman_AttackState : public UBaseStateObject, public IInterface_IndividualStatteFunc
 {
 	GENERATED_BODY()
 	
@@ -24,8 +25,10 @@ public:
 
 	virtual void StartState_Implementation() override;
 	
-
 	virtual void EndState_Implementation() override;
+
+	// IInterface_IndividualStatteFunc
+	virtual void SetWantAbilityTag(FGameplayTag Tag) override;
 
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)

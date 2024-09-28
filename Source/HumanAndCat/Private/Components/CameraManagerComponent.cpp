@@ -102,9 +102,16 @@ void UCameraManagerComponent::ChangeInGameCamera()
 
 void UCameraManagerComponent::UltiMovingLerp()
 {
-	FVector OwnerLocation = GetOwner()->GetActorLocation();
-	FVector OwnerForWardVec = GetOwner()->GetActorForwardVector();
-	FVector OwnerRightVec = GetOwner()->GetActorRightVector();
+	ACharacter* PCharacter = Cast<ACharacter>(GetOwner());
+	
+	FVector OwnerLocation = PCharacter->GetMesh()->GetComponentLocation();
+	//FVector OwnerLocation = GetOwner()->GetActorLocation();
+		
+	FVector OwnerForWardVec = PCharacter->GetMesh()->GetForwardVector();
+	//FVector OwnerForWardVec = GetOwner()->GetActorForwardVector();
+	
+	FVector OwnerRightVec = PCharacter->GetMesh()->GetRightVector();
+	//FVector OwnerRightVec = GetOwner()->GetActorRightVector();
 	
 	FVector Pos1 = FVector((OwnerLocation - OwnerForWardVec * 300.f).X, (OwnerLocation - OwnerForWardVec * 300.f).Y, (OwnerLocation - OwnerForWardVec * 300.f).Z + 60.f);
 	FVector Pos2 =	OwnerLocation - OwnerRightVec * 200.f;
@@ -123,9 +130,14 @@ void UCameraManagerComponent::UltiMovingLerp()
 
 	float FinalAlpha = FMath::Pow(Alpha, 3.f);
 	FinalAlpha = FMath::Clamp(FinalAlpha, 0.f, 1.f);
-		
+
 	FVector NewLocation = CalNewPositionUltiCamera(Pos1,Pos2, Pos3, Pos4, FinalAlpha);
 
+	FVector Dir = ( UltimateCamera->GetComponentLocation() - OwnerLocation).GetSafeNormal();
+	
+	FRotator NewRotator = FRotationMatrix::MakeFromX(Dir).Rotator();
+
+	UltimateCamera->SetWorldRotation(NewRotator);
 	UltimateCamera->SetWorldLocation(NewLocation);
 }
 
@@ -312,8 +324,6 @@ void UCameraManagerComponent::TargetingCameraMoving(ACharacter* PCharacter)
 			//Alpha = FMath::Pow(Alpha, 2);
 
 			float Distance = FVector::Dist(CurrentLocation, ActorLocation);
-			UE_LOG(LogTemp, Display, TEXT("Distance : %f"), Distance);
-			
 			float Alpha = FMath::Clamp(Distance / 140.0f, 0.0f, 1.0f);
 			
 			// NewLocation 계산

@@ -35,10 +35,10 @@ public:
 	void ChangeStateOfClass(TSubclassOf<UBaseStateObject> State);
 
 	UFUNCTION(BlueprintCallable)
-	bool TryChangeStateOfTag(FGameplayTag StateGameplayTag, bool Condition = true);
+	bool TryChangeStateOfTag(FGameplayTag StateGameplayTag, bool Condition = true, FGameplayTag AbilityTag = FGameplayTag());
 
 	UFUNCTION(BlueprintCallable)
-	bool TryChangeStateOfClass(TSubclassOf<UBaseStateObject> State, bool Condition = true);
+	bool TryChangeStateOfClass(TSubclassOf<UBaseStateObject> State, bool Condition = true, FGameplayTag AbilityTag = FGameplayTag());
 	
 	UFUNCTION(BlueprintCallable)
 	bool TryChangeStatesOfClass(TArray<TSubclassOf<UBaseStateObject>> States, bool Condition);

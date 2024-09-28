@@ -7,6 +7,7 @@
 #include "Components/BaseStateManagerComponent.h"
 #include "Objects/InstanceAbility/Human_NormalAttackAbility.h"
 #include "Objects/InstanceAbility/Human_SpecialAttackAbility.h"
+#include "Objects/InstanceAbility/Human_UltimateAttackAbility.h"
 #include "Utilities/HumanAndCatTags.h"
 
 UHuman_AttackState::UHuman_AttackState()
@@ -36,8 +37,39 @@ bool UHuman_AttackState::CanPerformState_Implementation()
 		TSubclassOf<UBaseAbilityObject> NormalAttackAbility = UHuman_NormalAttackAbility::StaticClass();
 		AttackAbilities.AddUnique(NormalAttackAbility);
 	}*/
+	if(WantToAbility == AbilityTags::Ability_Attack_NormalAttack)
+	{
+		if(!AttackAbilities.IsEmpty())
+		{
+			AttackAbilities.Empty();
+		}
+		// 노말 어빌리티를 실행합니다.
+		TSubclassOf<UBaseAbilityObject> NormalAttackAbility = UHuman_NormalAttackAbility::StaticClass();
+		AttackAbilities.AddUnique(NormalAttackAbility);		
+	}
+	else if(WantToAbility == AbilityTags::Ability_Attack_SpecialAttack)
+	{
+		TSubclassOf<UBaseAbilityObject> SpecialAttackAbility = UHuman_SpecialAttackAbility::StaticClass();
+		if(!AttackAbilities.IsEmpty())
+		{
+			AttackAbilities.Empty();
+		}
+		AttackAbilities.AddUnique(SpecialAttackAbility);
+		StateManager->bIsSpecialAttack = false;
+	}
+	else if(WantToAbility == AbilityTags::Ability_Attack_UltimateAttack)
+	{
+		TSubclassOf<UBaseAbilityObject> UltimateAttackAbility = UHuman_UltimateAttackAbility::StaticClass();
+		if(!AttackAbilities.IsEmpty())
+		{
+			AttackAbilities.Empty();
+		}
+		AttackAbilities.AddUnique(UltimateAttackAbility);
+		StateManager->bIsSpecialAttack = false;
+	}
+
 	
-	if(StateManager->bIsSpecialAttack)
+	/*if(StateManager->bIsSpecialAttack)
 	{
 		// 차징 어택 어빌리티를 실행합니다.
 		TSubclassOf<UBaseAbilityObject> SpecialAttackAbility = UHuman_SpecialAttackAbility::StaticClass();
@@ -57,7 +89,8 @@ bool UHuman_AttackState::CanPerformState_Implementation()
 		// 노말 어빌리티를 실행합니다.
 		TSubclassOf<UBaseAbilityObject> NormalAttackAbility = UHuman_NormalAttackAbility::StaticClass();
 		AttackAbilities.AddUnique(NormalAttackAbility);
-	}
+	}*/
+	
 	return Super::CanPerformState_Implementation() && CheckAbilityExecute(AttackAbilities);
 }
 
@@ -74,8 +107,11 @@ void UHuman_AttackState::StartState_Implementation()
 }
 
 void UHuman_AttackState::EndState_Implementation()
-{
+{	
 	Super::EndState_Implementation();
+	
+	WantToAbility = FGameplayTag();
+	
 	UBaseStateObject* LocalIdle = StateManager->GetStateOfGameplayTag(StateTags::State_Idle);
 	if(LocalIdle)
 	{
@@ -85,4 +121,9 @@ void UHuman_AttackState::EndState_Implementation()
 			StateManager->TryChangeStateOfClass(LocalRun->GetClass());
 		}
 	}
+}
+
+void UHuman_AttackState::SetWantAbilityTag(FGameplayTag Tag)
+{
+	WantToAbility = Tag;
 }

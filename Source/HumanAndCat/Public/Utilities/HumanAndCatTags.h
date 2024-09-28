@@ -25,6 +25,7 @@ namespace AbilityTags
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_Attack_NormalAttack)
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_AttackCharge)
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_Attack_SpecialAttack)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_Attack_UltimateAttack)
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_Dodge)
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_Equip)
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_UnEquip)
@@ -39,6 +40,7 @@ namespace InputTags
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_NorMalAttack)
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_AttackCharging)
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_SpecialAttack)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_UltimateAttack)
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_Dodge)	
 }
 namespace WeaponTags

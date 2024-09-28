@@ -84,6 +84,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "State|Property")
 	FGameplayTag StateGameplayTag;
 
+	UPROPERTY(BlueprintReadWrite)
+	FGameplayTag WantToAbility;
+
 	// 해당 상태를 관리하는 상태 매니저
 	UPROPERTY(BlueprintReadWrite, Category = "State|Component")
 	UBaseStateManagerComponent* StateManager;

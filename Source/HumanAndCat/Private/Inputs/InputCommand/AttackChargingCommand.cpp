@@ -6,6 +6,7 @@
 #include "Components/BaseStateManagerComponent.h"
 #include "GameFramework/Character.h"
 #include "Inputs/InputBuffer/InputBufferingObject.h"
+#include "Interfaces/Interface_IndividualStatteFunc.h"
 #include "Objects/BaseAbilityObject.h"
 #include "Objects/BaseStateObject.h"
 #include "Utilities/HumanAndCatTags.h"
@@ -81,7 +82,7 @@ void UAttackChargingCommand::HandleSpecialAttack(UBaseStateObject* CurrentState,
 		UBaseStateObject* LocalAttack = CurrentState->StateManager->GetStateOfGameplayTag(StateTags::State_Attack);
 		if(LocalAttack)
 		{
-			if(!CurrentState->StateManager->TryChangeStateOfClass(LocalAttack->GetClass()))
+			if(!CurrentState->StateManager->TryChangeStateOfClass(LocalAttack->GetClass(), true, AbilityTags::Ability_Attack_SpecialAttack))
 			{
 				UBaseStateObject* LocalIdle = CurrentState->StateManager->GetStateOfGameplayTag(StateTags::State_Idle);
 				if(LocalIdle)

@@ -5,6 +5,7 @@
 
 #include "InterchangeTranslatorBase.h"
 #include "HumanAndCat/Public/Objects/BaseStateObject.h"
+#include "Interfaces/Interface_IndividualStatteFunc.h"
 
 // Sets default values for this component's properties
 UBaseStateManagerComponent::UBaseStateManagerComponent()
@@ -45,16 +46,16 @@ void UBaseStateManagerComponent::ChangeStateOfClass(TSubclassOf<UBaseStateObject
 	TryChangeStateOfClass(State, false);
 }
 
-bool UBaseStateManagerComponent::TryChangeStateOfTag(FGameplayTag StateGameplayTag, bool Condition)
+bool UBaseStateManagerComponent::TryChangeStateOfTag(FGameplayTag StateGameplayTag, bool Condition, FGameplayTag AbilityTag)
 {
 	if(UBaseStateObject* ChangeState = GetStateOfGameplayTag(StateGameplayTag))
 	{
-		return TryChangeStateOfClass(ChangeState->GetClass(), Condition);
+		return TryChangeStateOfClass(ChangeState->GetClass(), Condition, AbilityTag);
 	}
 	return false;
 }
 
-bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObject> State, bool Condition)
+bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObject> State, bool Condition, FGameplayTag AbilityTag)
 {
 	if(State)
 	{
@@ -63,6 +64,14 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 
 		if(LocalState)
 		{
+			if(LocalState->Implements<UInterface_IndividualStatteFunc>())
+			{
+				IInterface_IndividualStatteFunc* IndividualStatteFunc = Cast<IInterface_IndividualStatteFunc>(LocalState);
+				if(IndividualStatteFunc)
+				{
+					IndividualStatteFunc->SetWantAbilityTag(AbilityTag);
+				}
+			}
 			if(Condition)
 			{
 				if(LocalState->CanPerformState())
@@ -73,8 +82,9 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 						CurrentActivateState->EndState();
 					}
 
+					
 					CurrentActivateState = LocalState;
-
+					
 					CurrentActivateState->StartState();
 					return true;
 				}
@@ -86,7 +96,6 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 					SetPreActivateState(CurrentActivateState);
 					CurrentActivateState->EndState();
 				}
-
 				CurrentActivateState = LocalState;
 
 				CurrentActivateState->StartState();
@@ -97,6 +106,14 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 		else
 		{
 			ConstructStateOfClass(State, LocalState);
+			if(LocalState->Implements<UInterface_IndividualStatteFunc>())
+			{
+				IInterface_IndividualStatteFunc* IndividualStatteFunc = Cast<IInterface_IndividualStatteFunc>(LocalState);
+				if(IndividualStatteFunc)
+				{
+					IndividualStatteFunc->SetWantAbilityTag(AbilityTag);
+				}
+			}
 			if(Condition)
 			{
 				if(LocalState->CanPerformState())
@@ -106,6 +123,7 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 						SetPreActivateState(CurrentActivateState);
 						CurrentActivateState->EndState();
 					}
+
 					CurrentActivateState = LocalState;
 
 					CurrentActivateState->StartState();

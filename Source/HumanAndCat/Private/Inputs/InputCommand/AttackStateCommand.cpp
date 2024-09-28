@@ -6,6 +6,7 @@
 #include "Components/BaseStateManagerComponent.h"
 #include "GameFramework/Character.h"
 #include "Inputs/InputBuffer/InputBufferingObject.h"
+#include "Interfaces/Interface_IndividualStatteFunc.h"
 #include "Objects/BaseAbilityObject.h"
 #include "Objects/BaseStateObject.h"
 #include "Utilities/HumanAndCatTags.h"
@@ -112,8 +113,15 @@ void UAttackStateCommand::HandleAttackCharging(UBaseStateObject* CurrentState, c
 					PCharacter->StopAnimMontage();
 				}
 			}
+			if(CurrentState->Implements<UInterface_IndividualStatteFunc>())
+			{
+				IInterface_IndividualStatteFunc* IndividualStatteFunc = Cast<IInterface_IndividualStatteFunc>(CurrentState);
+				if(IndividualStatteFunc)
+				{
+					IndividualStatteFunc->SetWantAbilityTag(FGameplayTag());
+				}
+			}
 			CurrentState->StateManager->ChangeStateOfClass(LocalCharge->GetClass());
-			
 		}
 	}
 	else

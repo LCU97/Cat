@@ -61,17 +61,15 @@ void UBaseAbilityObject::CancelAbility_Implementation()
 
 void UBaseAbilityObject::ApplyAbilityCoolDown()
 {
-	if(CooldownTime > 0 )
-	{
-		bAbilityOnCoolDown = true;
-		UKismetSystemLibrary::K2_SetTimer(this, FString(TEXT("CoolDownReset")), CooldownTime, false);
+	bAbilityOnCoolDown = false;
+	FTimerHandle TimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::CoolDownReset, CooldownTime, false);
 
-	}
 }
 
 void UBaseAbilityObject::CoolDownReset()
 {
-	bAbilityOnCoolDown = false;
+	bAbilityOnCoolDown = true;
 }
 
 float UBaseAbilityObject::PlayAbilityMontage(UAnimMontage* MontageAbility, float InplayRate,

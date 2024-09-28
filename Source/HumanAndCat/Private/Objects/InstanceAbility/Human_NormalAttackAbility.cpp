@@ -5,6 +5,7 @@
 
 #include "Components/BaseCombatComponent.h"
 #include "Components/BaseStateManagerComponent.h"
+#include "Objects/BaseStateObject.h"
 #include "Utilities/HumanAndCatTags.h"
 
 UHuman_NormalAttackAbility::UHuman_NormalAttackAbility()
@@ -41,7 +42,7 @@ void UHuman_NormalAttackAbility::EndAbility_Implementation()
 {
 	Super::EndAbility_Implementation();
 	AttackComboIndex = 0;
-
+	StateManager->CurrentActivateState->WantToAbility = FGameplayTag();
 	if(!StateManager->TryChangeStateOfTag(StateTags::State_Idle))
 	{
 		StateManager->TryChangeStateOfTag(StateTags::State_Run);

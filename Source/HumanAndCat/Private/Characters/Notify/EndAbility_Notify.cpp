@@ -20,6 +20,7 @@ void UEndAbility_Notify::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceB
 		{
 			AbilityManagerComponent->GetCurrentAbility()->EndAbility();
 		}
+
 	}
 	
 }

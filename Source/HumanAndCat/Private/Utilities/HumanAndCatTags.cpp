@@ -23,6 +23,7 @@ namespace AbilityTags
 		UE_DEFINE_GAMEPLAY_TAG(Ability, TEXT("Ability"));
 		UE_DEFINE_GAMEPLAY_TAG(Ability_Attack_NormalAttack, TEXT("Ability.Attack.NormalAttack"));
 		UE_DEFINE_GAMEPLAY_TAG(Ability_Attack_SpecialAttack, TEXT("Ability.Attack.SpecialAttack"));
+		UE_DEFINE_GAMEPLAY_TAG(Ability_Attack_UltimateAttack, TEXT("Ability.Attack.UltimateAttack"));
 		UE_DEFINE_GAMEPLAY_TAG(Ability_Dodge, TEXT("Ability.Dodge"));
 		UE_DEFINE_GAMEPLAY_TAG(Ability_AttackCharge, TEXT("Ability.AttackCharge"))
 		UE_DEFINE_GAMEPLAY_TAG(Ability_Equip, TEXT("Ability.Equip"));
@@ -39,6 +40,7 @@ namespace InputTags
 	UE_DEFINE_GAMEPLAY_TAG(Input_NorMalAttack, TEXT("Input.NorMalAttack"));
 	UE_DEFINE_GAMEPLAY_TAG(Input_AttackCharging, TEXT("Input.AttackCharging"));	
 	UE_DEFINE_GAMEPLAY_TAG(Input_SpecialAttack, TEXT("Input.SpecialAttack"));
+	UE_DEFINE_GAMEPLAY_TAG(Input_UltimateAttack, TEXT("Input.UltimateAttack"));
 	UE_DEFINE_GAMEPLAY_TAG(Input_Dodge, TEXT("Input.Dodge"));
 }
 

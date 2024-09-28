@@ -34,7 +34,7 @@ void UHumanAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	if(!PCon) return;
 	
 	AAdventurePlayerController* AdCon = Cast<AAdventurePlayerController> (PCon);
-	float FB;
+	float FB = 0.f;
     
 	if(AdCon)
 	{
