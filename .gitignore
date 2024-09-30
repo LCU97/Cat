@@ -222,6 +222,7 @@ Content/*
 !Content/Cat_Stray/
 !Content/LCH/
 !Content/LCU/
+!Content/SJS/
 
 # Don't ignore icon and splash images for mobile app
 !Build/IOS/Resources/
