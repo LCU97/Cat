@@ -4,7 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "InputActionValue.h"
 #include "CatPlayer.generated.h"
+
+
+class UInputMappingContext;
+class UInputAction;
 
 UCLASS()
 class HUMANANDCAT_API ACatPlayer : public ACharacter
@@ -33,4 +38,27 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UCameraComponent* Camera;
+
+public:
+
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category ="Input")
+	UInputAction* CatMoveIA;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputAction* CatLookUpIA;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputAction* CatTurnIA;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputAction* CatJumpIA;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	UInputAction* CatTargetArmLength;
+
+	void CatMove(const FInputActionValue& Value);
+	void CatLookUp(const FInputActionValue& Value);
+	void CatTurn(const FInputActionValue& Value);
+	void CatInputJump(const FInputActionValue& Value);
+	void CatInputArm(const FInputActionValue& Value);
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Control Option")
+	bool isInvertLookUp = false;
+
 };
