@@ -57,6 +57,10 @@ void UCameraManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType
 	if(UltiLerpDuration > 0.0f && CurrentCamera == UltimateCamera)
 	{
 		UltiMovingLerp();
+		FVector Loc = PCharacter->GetMesh()->GetComponentLocation();
+		Loc.Z += 80.f;
+		FRotator Rot = UKismetMathLibrary::FindLookAtRotation(UltimateCamera->GetComponentLocation(),Loc );
+		UltimateCamera->SetWorldRotation(Rot);
 	}
 }
 
@@ -105,6 +109,7 @@ void UCameraManagerComponent::UltiMovingLerp()
 	ACharacter* PCharacter = Cast<ACharacter>(GetOwner());
 	
 	FVector OwnerLocation = PCharacter->GetMesh()->GetComponentLocation();
+	OwnerLocation.Z += 100.f;
 	//FVector OwnerLocation = GetOwner()->GetActorLocation();
 		
 	FVector OwnerForWardVec = PCharacter->GetMesh()->GetForwardVector();
@@ -113,7 +118,8 @@ void UCameraManagerComponent::UltiMovingLerp()
 	FVector OwnerRightVec = PCharacter->GetMesh()->GetRightVector();
 	//FVector OwnerRightVec = GetOwner()->GetActorRightVector();
 	
-	FVector Pos1 = FVector((OwnerLocation - OwnerForWardVec * 300.f).X, (OwnerLocation - OwnerForWardVec * 300.f).Y, (OwnerLocation - OwnerForWardVec * 300.f).Z + 60.f);
+	//FVector Pos1 = FVector((OwnerLocation - OwnerForWardVec * 300.f).X, (OwnerLocation - OwnerForWardVec * 300.f).Y, (OwnerLocation - OwnerForWardVec * 300.f).Z + 60.f);
+	FVector Pos1 = (InGameCamera->GetComponentLocation());
 	FVector Pos2 =	OwnerLocation - OwnerRightVec * 200.f;
 	FVector Pos3 = FVector((OwnerLocation + OwnerForWardVec * 300.f).X, (OwnerLocation + OwnerForWardVec * 300.f).Y, (OwnerLocation + OwnerForWardVec * 300.f).Z + 60.f);
 	FVector Pos4 = FVector((OwnerLocation + OwnerForWardVec*100.f + OwnerRightVec * 100.f).X,
@@ -128,16 +134,11 @@ void UCameraManagerComponent::UltiMovingLerp()
 	
 	float Alpha = Ratio/UltiLerpDuration;
 
-	float FinalAlpha = FMath::Pow(Alpha, 3.f);
+	float FinalAlpha = FMath::Pow(Alpha, 0.4f);
 	FinalAlpha = FMath::Clamp(FinalAlpha, 0.f, 1.f);
 
 	FVector NewLocation = CalNewPositionUltiCamera(Pos1,Pos2, Pos3, Pos4, FinalAlpha);
 
-	FVector Dir = ( UltimateCamera->GetComponentLocation() - OwnerLocation).GetSafeNormal();
-	
-	FRotator NewRotator = FRotationMatrix::MakeFromX(Dir).Rotator();
-
-	UltimateCamera->SetWorldRotation(NewRotator);
 	UltimateCamera->SetWorldLocation(NewLocation);
 }
 
