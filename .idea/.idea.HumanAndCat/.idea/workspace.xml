@@ -11,18 +11,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33d8500d-1c93-4f90-be68-fe8210d74008" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/ABP_Human_Main.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/ABP_Human_Main.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Montages/Sword_NormalAttack1_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Montages/Sword_NormalAttack1_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanController.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/LCUMaps/TESTMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/LCUMaps/TESTMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HumanAndCat.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/HumanAndCat.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/CameraManagerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/CameraManagerComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Objects/InstanceState/Human_JumpState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Objects/InstanceState/Human_JumpState.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="33d8500d-1c93-4f90-be68-fe8210d74008" name="변경" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,9 +27,6 @@
     <setting file="file://$PROJECT_DIR$/../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.38.33130/include/atomic" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Plugins/Experimental/Mover/Source/Mover/Public/PhysicsMover/PhysicsMovementUtils.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Developer/BSPUtils/Public/BSPOps.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Developer/FunctionalTesting/Private/AutomationBlueprintFunctionLibrary.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Developer/FunctionalTesting/Private/FunctionalTest.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Developer/Windows/LiveCoding/Private/LiveCodingModule.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Editor/AnimGraph/Private/AnimStateTransitionNode.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Editor/AssetDefinition/Private/AssetDefinitionRegistry.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Editor/LandscapeEditor/Private/LandscapeEdModeSplineTools.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -50,13 +36,8 @@
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Programs/AutomationTool/Android/AndroidPlatform.Automation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Programs/AutomationTool/AutomationUtils/CommandUtils.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Programs/AutomationTool/Gauntlet/ThirdParty/Magick.NET/Magick.NET.Core/lib/netstandard20/Magick.NET.Core.xml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Programs/AutomationTool/LowLevelTests/RunLowLevelTests.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Programs/AutomationTool/Turnkey/LocalCache.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Programs/Shared/EpicGames.Core/CityHash.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Programs/UnrealBuildTool/Platform/Android/AndroidAARHandler.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Programs/UnrealBuildTool/System/TargetMakefile.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Runtime/Core/Public/GenericPlatform/GenericPlatformMemory.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Runtime/Core/Public/Math/TransformCalculus2D.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Runtime/Core/Public/Math/Vector.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Runtime/Core/Public/UObject/ScriptDelegates.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Runtime/CoreUObject/Public/Templates/SubclassOf.h" root0="FORCE_HIGHLIGHTING" />
@@ -78,9 +59,9 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;C++ 프로젝트.HumanAndCat.executor&quot;: &quot;Run&quot;,
+    &quot;C++ 프로젝트.HumanAndCat.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;LCU.ver.0.4&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -555,8 +536,7 @@
       <workItem from="1727420491402" duration="6824000" />
       <workItem from="1727427481831" duration="302000" />
       <workItem from="1727487393451" duration="16417000" />
-      <workItem from="1727653270791" duration="787000" />
-      <workItem from="1727654098782" duration="14088000" />
+      <workItem from="1727686392077" duration="8000" />
     </task>
     <servers />
   </component>
