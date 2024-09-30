@@ -25,6 +25,7 @@ void UHuman_JumpState::StartState_Implementation()
 {
 	Super::StartState_Implementation();
 	OwnerCharacter->Jump();
+	OwnerCharacter->MakeNoise(1.0f, OwnerCharacter, OwnerCharacter->GetActorLocation());
 }
 
 void UHuman_JumpState::TickState_Implementation(float TickTime)
