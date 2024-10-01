@@ -3,29 +3,29 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
+#include "Characters/BaseEnemy.h"
 #include "BlackEnemyCharacter.generated.h"
 
 
-USTRUCT(BlueprintType)
-struct FBlackEnemy
-{
-	GENERATED_BODY()
-
-	 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Stats")
-	 float Hp;
-
-	 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Stats")
-	 float AttackPower;
-
-	 FBlackEnemy()
-		 :Hp(500)
-		 , AttackPower(50)
-	 {}
-};
+//USTRUCT(BlueprintType)
+//struct FBlackEnemy
+//{
+//	GENERATED_BODY()
+//
+//	 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Stats")
+//	 float Hp;
+//
+//	 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Stats")
+//	 float AttackPower;
+//
+//	 FBlackEnemy()
+//		 :Hp(500)
+//		 , AttackPower(50)
+//	 {}
+//};
 
 UCLASS()
-class HUMANANDCAT_API ABlackEnemyCharacter : public ACharacter
+class HUMANANDCAT_API ABlackEnemyCharacter : public ABaseEnemy
 {
 	GENERATED_BODY()
 

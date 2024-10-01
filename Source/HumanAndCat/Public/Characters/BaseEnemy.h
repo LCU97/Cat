@@ -47,4 +47,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bEnableHit = true;
+
+
+public:
+
+	void MonsterAttackTrace(FName MonsterSoket, float _EndPoint,float Size);
 };
