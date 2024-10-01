@@ -51,4 +51,7 @@ public:
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	FName UnEquipSocket;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float TraceLength;
 };

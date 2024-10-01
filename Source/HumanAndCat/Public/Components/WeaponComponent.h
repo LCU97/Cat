@@ -99,6 +99,9 @@ public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	ACharacter* OwnerCharacter;
 
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float CurrentWeaponLength;
+
 	// 무기 바뀐거 애님인스턴스에게 알려주기
 	UPROPERTY(BlueprintAssignable)
 	FOnWeaponNameChanged OnWeaponNameChanged;

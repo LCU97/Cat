@@ -23,7 +23,7 @@ void AAdventurePlayerController::PostInitializeComponents()
 void AAdventurePlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	CatPlayerPawn = Cast<APawn>(UGameplayStatics::GetActorOfClass(GetWorld(), CatPlayerClass));
 	HumanPlayerPawn = Cast<APawn>(UGameplayStatics::GetActorOfClass(GetWorld(), HumanPlayerClass));
 }
@@ -96,16 +96,16 @@ void AAdventurePlayerController::TogglePawnChange()
 	}
 }
 
-void AAdventurePlayerController::PossessCatPlayer()
+void AAdventurePlayerController::PossessCatPlayer_Implementation()
 {
 	if(CatPlayerClass && HumanPlayerClass)
 	{
 		UnPossess();
 		Possess(CatPlayerPawn);
-	}	
+	}
 }
 
-void AAdventurePlayerController::PossessHumanPlayer()
+void AAdventurePlayerController::PossessHumanPlayer_Implementation()
 {
 	if(CatPlayerClass && HumanPlayerClass)
 	{

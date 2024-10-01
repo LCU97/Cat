@@ -27,10 +27,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void TogglePawnChange();
 	
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintNativeEvent ,BlueprintCallable)
 	void PossessCatPlayer();
-
-	UFUNCTION(BlueprintCallable)
+	
+	UFUNCTION(BlueprintNativeEvent ,BlueprintCallable)
 	void PossessHumanPlayer();
 	
 public:
@@ -52,4 +52,8 @@ public:
 	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	APawn* HumanPlayerPawn;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	APawn* AICat;
+	
 };

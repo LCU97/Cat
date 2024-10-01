@@ -119,6 +119,7 @@ void UWeaponComponent::RegisterStateAndAbility(ABaseWeapon* CheckingWeaponType)
 			CurrentWeaponTag = CheckingWeaponType->WeaponTag;
 			CurrentWeaponType = WeaponType.Value;
 			CurrentWeaponName = CurrentWeaponType->WeaponName;
+			CurrentWeaponLength = CheckingWeaponType->TraceLength;
 
 			// 처음에는 장착 안한 상태
 			UnEquip();

@@ -12,11 +12,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="33d8500d-1c93-4f90-be68-fe8210d74008" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/BaseEnemy.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/BaseEnemy.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Cats/BP_Cat.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Cats/BP_Cat.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Cats/BP_CatOnTheBack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Cats/BP_CatOnTheBack.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Character/LCH_BP_HumanCharacter_Child.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Character/LCH_BP_HumanCharacter_Child.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Character/LCH_BP_Sword_Child.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Character/LCH_BP_Sword_Child.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCH/LCHMaps/LCH_TESTMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/LCHMaps/LCH_TESTMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/AI/AIC_LCU_NormalMonster.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/AI/AIC_LCU_NormalMonster.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/AI/BT_NormalMonster.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/AI/BT_NormalMonster.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Cat/BP_CatPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Cat/BP_CatPlayer.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanController.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/Controllers/AdventurePlayerController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/Controllers/AdventurePlayerController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/WeaponComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/WeaponComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/AdventurePlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/AdventurePlayer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/Controllers/AdventurePlayerController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/Controllers/AdventurePlayerController.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Components/WeaponComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Components/WeaponComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/BaseWeapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/BaseWeapon.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,9 +77,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "C++ 프로젝트.HumanAndCat.executor": "Debug",
+    "C++ 프로젝트.HumanAndCat.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "LCU.ver.0.5",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -544,6 +556,7 @@
       <workItem from="1727487393451" duration="16417000" />
       <workItem from="1727686392077" duration="8000" />
       <workItem from="1727698625055" duration="283000" />
+      <workItem from="1727743322622" duration="5763000" />
     </task>
     <servers />
   </component>
