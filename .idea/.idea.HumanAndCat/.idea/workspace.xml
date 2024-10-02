@@ -13,14 +13,14 @@
   <component name="ChangeListManager">
     <list default="true" id="33d8500d-1c93-4f90-be68-fe8210d74008" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Cats/BP_Cat.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Cats/BP_Cat.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Character/LCH_BP_Sword_Child.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Character/LCH_BP_Sword_Child.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Tiger/BP_BlackTiger.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Tiger/BP_BlackTiger.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LCH/LCHMaps/LCH_TESTMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/LCHMaps/LCH_TESTMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/AI/BT_NormalMonster.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/AI/BT_NormalMonster.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Cat/BP_CatPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Cat/BP_CatPlayer.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanController.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Objects/BaseStateObject.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Objects/BaseStateObject.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/AI/BP_LCU_NormalMonster.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/AI/BP_LCU_NormalMonster.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Montages/Sword_UltimateAttack_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Montages/Sword_UltimateAttack_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Sword_UltimateAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Sword_UltimateAttack.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/AdventurePlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/AdventurePlayer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/CameraManagerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/CameraManagerComponent.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +74,7 @@
   "keyToString": {
     "C++ 프로젝트.HumanAndCat.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "LCU.ver.0.6",
+    "git-widget-placeholder": "LCU.ver.0.7",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -554,6 +554,8 @@
       <workItem from="1727743322622" duration="5763000" />
       <workItem from="1727757368585" duration="7650000" />
       <workItem from="1727778302050" duration="282000" />
+      <workItem from="1727779042150" duration="771000" />
+      <workItem from="1727830405810" duration="6639000" />
     </task>
     <servers />
   </component>

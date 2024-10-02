@@ -108,36 +108,20 @@ void UCameraManagerComponent::UltiMovingLerp()
 {
 	ACharacter* PCharacter = Cast<ACharacter>(GetOwner());
 	
-	FVector OwnerLocation = PCharacter->GetMesh()->GetComponentLocation();
+	FVector OwnerLocation = PCharacter->GetMesh()->GetSocketLocation(FName("RootMotionSocket"));
+
+	FTransform SocketTransform = PCharacter->GetMesh()->GetSocketTransform(FName("RootMotionSocket"));
+	
+	
+	//FVector OwnerLocation = PCharacter->GetMesh()->GetComponentLocation();
 	OwnerLocation.Z += 100.f;
 	//FVector OwnerLocation = GetOwner()->GetActorLocation();
-		
-	FVector OwnerForWardVec = PCharacter->GetMesh()->GetForwardVector();
-	//FVector OwnerForWardVec = GetOwner()->GetActorForwardVector();
 	
-	FVector OwnerRightVec = PCharacter->GetMesh()->GetRightVector();
-	//FVector OwnerRightVec = GetOwner()->GetActorRightVector();
+	FVector OwnerForWardVec = GetOwner()->GetActorForwardVector();
 	
-	//FVector Pos1 = FVector((OwnerLocation - OwnerForWardVec * 300.f).X, (OwnerLocation - OwnerForWardVec * 300.f).Y, (OwnerLocation - OwnerForWardVec * 300.f).Z + 60.f);
-	FVector Pos1 = (InGameCamera->GetComponentLocation());
-	FVector Pos2 =	OwnerLocation - OwnerRightVec * 200.f;
-	FVector Pos3 = FVector((OwnerLocation + OwnerForWardVec * 300.f).X, (OwnerLocation + OwnerForWardVec * 300.f).Y, (OwnerLocation + OwnerForWardVec * 300.f).Z + 60.f);
-	FVector Pos4 = FVector((OwnerLocation + OwnerForWardVec*100.f + OwnerRightVec * 100.f).X,
-							(OwnerLocation + OwnerForWardVec*100.f + OwnerRightVec * 100.f).Y, (OwnerLocation + OwnerForWardVec*100.f + OwnerRightVec * 100.f).Z + 100.f);
+	FVector OwnerRightVec = SocketTransform.GetRotation().GetRightVector();
 
-	float Ratio = GetWorld()->GetTimeSeconds() - UltiMovintStartTime;
-
-	if(Ratio>= UltiLerpDuration)
-	{
-		UltiLerpDuration = -1.f;
-	}
-	
-	float Alpha = Ratio/UltiLerpDuration;
-
-	float FinalAlpha = FMath::Pow(Alpha, 0.4f);
-	FinalAlpha = FMath::Clamp(FinalAlpha, 0.f, 1.f);
-
-	FVector NewLocation = CalNewPositionUltiCamera(Pos1,Pos2, Pos3, Pos4, FinalAlpha);
+	FVector NewLocation = FVector((OwnerLocation.X - OwnerForWardVec.X * 400.f),(OwnerLocation.Y - OwnerForWardVec.Y * 400.f), OwnerLocation.Z);
 
 	UltimateCamera->SetWorldLocation(NewLocation);
 }
@@ -205,7 +189,8 @@ void UCameraManagerComponent::InGameLockOn()
 
 	float Pit = UKismetMathLibrary::Clamp(CalRot.Pitch, -15.f, 30.f);
 
-	FRotator FinalRot = FRotator(Pit, CalRot.Yaw, PRot.Roll);
+	//FRotator FinalRot = FRotator(Pit, CalRot.Yaw, PRot.Roll);
+	FRotator FinalRot = FRotator(PRot.Pitch, CalRot.Yaw, PRot.Roll);
 								// Pit, CalRot.Yaw, PRot.Roll
 	PCon->SetControlRotation(FinalRot);
 
