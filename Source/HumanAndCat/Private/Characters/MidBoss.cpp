@@ -23,7 +23,7 @@ AMidBoss::AMidBoss()
 	fsm = CreateDefaultSubobject<UMidBossFSM>(TEXT("FSM"));
 
 	ConstructorHelpers::FClassFinder<UAnimInstance> tempClass(TEXT(
-		"/Script/Engine.AnimBlueprint'/Game/Blueprint/ABP_MidBoss.ABP_MidBoss_C'"));
+		"/Script/Engine.AnimBlueprint'/Game/JEP/Blueprints/ABP_MidBoss.ABP_MidBoss'"));
 	if (tempClass.Succeeded())
 	{
 		GetMesh()->SetAnimInstanceClass(tempClass.Class);
