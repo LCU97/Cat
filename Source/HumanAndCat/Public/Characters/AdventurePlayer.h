@@ -6,7 +6,6 @@
 #include "HumanAndCat/Public/Characters/PlayerCharacter.h"
 #include "AdventurePlayer.generated.h"
 
-
 UCLASS()
 class HUMANANDCAT_API AAdventurePlayer : public APlayerCharacter
 {
@@ -27,8 +26,6 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
-
 public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	class USpringArmComponent* SpringArm;
@@ -39,5 +36,17 @@ public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UBaseCameraComponent* UltimateCamera;
 
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")
+	int64 CurrentMoney = 9999;
 
+	UFUNCTION(BlueprintCallable)
+	void UpdateMoney(int64 inputVal);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
+	class UInventoryActorComponent* DefaultInventory;
+
+	void PerformInteractionTrace();
+	
+	AActor* CachedInteractActor;
 };
