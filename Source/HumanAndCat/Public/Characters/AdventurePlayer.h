@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "HumanAndCat/Public/Characters/PlayerCharacter.h"
+#include "InputActionValue.h"
 #include "AdventurePlayer.generated.h"
 
 UCLASS()
@@ -26,6 +27,11 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(EditAnywhere, Category = Input)
+	class UInputAction* IAInteractItemShop;
+	
+	void PlayerInteractItemShop(const FInputActionValue& Value);
+	
 public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	class USpringArmComponent* SpringArm;

@@ -3,6 +3,7 @@
 
 #include "Characters/AdventurePlayer.h"
 
+#include "EnhancedInputComponent.h"
 #include "Camera/CameraActor.h"
 #include "Cameras/BaseCameraComponent.h"
 #include "Components/BoxComponent.h"
@@ -10,6 +11,8 @@
 #include "Utilities/HumanAndCatTags.h"
 #include "Actor/NPC.h"
 #include "Components/InventoryActorComponent.h"
+
+
 
 // Sets default values
 AAdventurePlayer::AAdventurePlayer()
@@ -53,6 +56,25 @@ void AAdventurePlayer::Tick(float DeltaTime)
 void AAdventurePlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	if (UEnhancedInputComponent* EnhancedInputComponent=
+		CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+
+		EnhancedInputComponent->BindAction(IAInteractItemShop, ETriggerEvent::Started, this, &AAdventurePlayer::PlayerInteractItemShop);
+	}
+}
+
+void AAdventurePlayer::PlayerInteractItemShop(const FInputActionValue& Value)
+{
+	if (CachedInteractActor)
+	{
+		IInteractableInterface* InteractActor = Cast<IInteractableInterface>(CachedInteractActor);
+		if (InteractActor)
+		{
+			InteractActor->Interact();
+		}
+	}
 }
 
 void AAdventurePlayer::UpdateMoney(int64 inputVal)
