@@ -2,6 +2,7 @@
 
 
 #include "Characters/BaseEnemy.h"
+#include "Kismet/GameplayStatics.h"
 
 
 // Sets default values
@@ -35,7 +36,7 @@ void ABaseEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-void ABaseEnemy::MonsterAttackTrace(FName MonsterSoket, float _EndPoint, float Size)
+void ABaseEnemy::MonsterAttackTrace(FName MonsterSoket, float _EndPoint, float Size,float EnemyA)
 {
 	FVector _StartLocation = GetMesh()->GetSocketLocation(MonsterSoket);
 
@@ -65,6 +66,9 @@ void ABaseEnemy::MonsterAttackTrace(FName MonsterSoket, float _EndPoint, float S
 			{
 				DrawDebugLine(GetWorld(), _StartLocation, _EndLocation, FColor::Red, false, 2, 0, Size);
 				bHasAttackedPlayer = true;
+
+				TSubclassOf<UDamageType> DamageTyper = UDamageType::StaticClass();
+				UGameplayStatics::ApplyDamage(_HitOut.GetActor(), EnemyA, GetController(), this, DamageTyper);
 
 				GetWorldTimerManager().SetTimer(TimerHandle_ResetAttack, this, &ABaseEnemy::ResetAttack, 2.f, false);
 

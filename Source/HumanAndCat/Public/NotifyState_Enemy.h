@@ -35,4 +35,7 @@ public:
 	UPROPERTY()
 	ABaseEnemy* EnemyCharacter;
 
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = "MonsterATK")
+	float EnemyATK;
+
 };

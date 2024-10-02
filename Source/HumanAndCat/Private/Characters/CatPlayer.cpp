@@ -53,7 +53,7 @@ void ACatPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 
 		EnhancedInputComponent->BindAction(CatTurnIA, ETriggerEvent::Triggered, this, &ACatPlayer::CatTurn);
 
-		EnhancedInputComponent->BindAction(CatJumpIA, ETriggerEvent::Triggered, this, &ACatPlayer::CatInputJump);
+		EnhancedInputComponent->BindAction(CatJumpIA, ETriggerEvent::Started, this, &ACatPlayer::CatInputJump);
 
 		EnhancedInputComponent->BindAction(CatTargetArmLength, ETriggerEvent::Triggered, this, &ACatPlayer::CatInputArm);
 	}

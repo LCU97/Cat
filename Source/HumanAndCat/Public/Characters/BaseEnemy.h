@@ -49,7 +49,7 @@ public:
 
 public:
 
-	void MonsterAttackTrace(FName MonsterSoket, float _EndPoint,float Size);
+	void MonsterAttackTrace(FName MonsterSoket, float _EndPoint,float Size,float EnemyA);
 
 	void ResetAttack();
 

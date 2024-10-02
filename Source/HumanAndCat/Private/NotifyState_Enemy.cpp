@@ -13,7 +13,7 @@ void UNotifyState_Enemy::NotifyTick(USkeletalMeshComponent* MeshComp, UAnimSeque
 
 	if (EnemyCharacter)
 	{
-		EnemyCharacter->MonsterAttackTrace(StartSoketName, _EndPoint, _Size);
+		EnemyCharacter->MonsterAttackTrace(StartSoketName, _EndPoint, _Size, EnemyATK);
 	}
 }
 

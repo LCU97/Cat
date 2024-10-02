@@ -6,6 +6,7 @@
 #include "HumanAndCat/Public/Characters/PlayerCharacter.h"
 #include "AdventurePlayer.generated.h"
 
+
 UCLASS()
 class HUMANANDCAT_API AAdventurePlayer : public APlayerCharacter
 {
