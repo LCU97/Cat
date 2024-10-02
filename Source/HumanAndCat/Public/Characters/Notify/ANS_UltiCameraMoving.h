@@ -24,4 +24,5 @@ public:
 	void StartCameraMovement(USkeletalMeshComponent* MeshComp, float Duration);
 
 	void EndCameraMovement(USkeletalMeshComponent* MeshComp);
+
 };

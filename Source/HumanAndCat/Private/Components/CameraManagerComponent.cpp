@@ -99,6 +99,7 @@ void UCameraManagerComponent::ChangeInGameCamera()
 	{
 		InGameCamera->SetActive(true);
 		UltimateCamera->SetActive(false);
+		PCon->SetViewTargetWithBlend(GetOwner(), 1.f, EViewTargetBlendFunction::VTBlend_Cubic);
 		CurrentCamera = InGameCamera;
 		UltiLerpDuration = -1;
 	}
