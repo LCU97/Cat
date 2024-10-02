@@ -31,4 +31,8 @@ public:
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = "MonsterLineTrace")
 	float _Size;
+
+	UPROPERTY()
+	ABaseEnemy* EnemyCharacter;
+
 };

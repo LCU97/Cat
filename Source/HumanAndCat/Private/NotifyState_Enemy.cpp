@@ -5,11 +5,11 @@
 
 void UNotifyState_Enemy::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float TotalDuration, const FAnimNotifyEventReference& EventReference)
 {
+	 EnemyCharacter = Cast<ABaseEnemy>(MeshComp->GetOwner());
 }
 
 void UNotifyState_Enemy::NotifyTick(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float FrameDeltaTime, const FAnimNotifyEventReference& EventReference)
 {
-	ABaseEnemy* EnemyCharacter = Cast<ABaseEnemy>(MeshComp->GetOwner());
 
 	if (EnemyCharacter)
 	{

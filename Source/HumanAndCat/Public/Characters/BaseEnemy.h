@@ -45,11 +45,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FEnemyStat EnemyStat;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool bEnableHit = true;
 
 
 public:
 
 	void MonsterAttackTrace(FName MonsterSoket, float _EndPoint,float Size);
+
+	void ResetAttack();
+
+private:
+	bool bHasAttackedPlayer;
+
+	FTimerHandle TimerHandle_ResetAttack;
 };
