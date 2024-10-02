@@ -224,6 +224,7 @@ Content/*
 !Content/LCU/
 !Content/SJS/
 !Content/DreamscapeSeries/
+!Content/JEP/
 
 # Don't ignore icon and splash images for mobile app
 !Build/IOS/Resources/
