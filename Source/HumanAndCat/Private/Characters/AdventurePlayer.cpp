@@ -18,7 +18,7 @@ AAdventurePlayer::AAdventurePlayer()
 	PrimaryActorTick.bCanEverTick = true;
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
-	SpringArm->SetupAttachment(GetRootComponent());
+	SpringArm->SetupAttachment(GetMesh());
 
 	InGameCamera = CreateDefaultSubobject<UBaseCameraComponent>(TEXT("InGameCamera"));
 	InGameCamera->SetupAttachment(SpringArm);
