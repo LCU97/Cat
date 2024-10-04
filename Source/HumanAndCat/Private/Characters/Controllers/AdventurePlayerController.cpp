@@ -23,7 +23,10 @@ void AAdventurePlayerController::PostInitializeComponents()
 void AAdventurePlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+
+	CatPlayerPawn = Cast<APawn>(UGameplayStatics::GetActorOfClass(GetWorld(), CatPlayerClass));
+	HumanPlayerPawn = Cast<APawn>(UGameplayStatics::GetActorOfClass(GetWorld(), HumanPlayerClass));
 }
 
 void AAdventurePlayerController::Tick(float DeltaTime)
@@ -34,6 +37,11 @@ void AAdventurePlayerController::Tick(float DeltaTime)
 void AAdventurePlayerController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
+
+
+
+
+
 	
 	if(UEnhancedInputLocalPlayerSubsystem* InputsubSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
