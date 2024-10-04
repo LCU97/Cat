@@ -24,8 +24,6 @@ void AAdventurePlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	CatPlayerPawn = Cast<APawn>(UGameplayStatics::GetActorOfClass(GetWorld(), CatPlayerClass));
-	HumanPlayerPawn = Cast<APawn>(UGameplayStatics::GetActorOfClass(GetWorld(), HumanPlayerClass));
 }
 
 void AAdventurePlayerController::Tick(float DeltaTime)
@@ -100,8 +98,12 @@ void AAdventurePlayerController::PossessCatPlayer_Implementation()
 {
 	if(CatPlayerClass && HumanPlayerClass)
 	{
-		UnPossess();
-		Possess(CatPlayerPawn);
+		if(CatPlayerPawn)
+		{
+			UnPossess();
+		
+			Possess(CatPlayerPawn);
+		}
 	}
 }
 
@@ -109,7 +111,11 @@ void AAdventurePlayerController::PossessHumanPlayer_Implementation()
 {
 	if(CatPlayerClass && HumanPlayerClass)
 	{
-		UnPossess();
-		Possess(HumanPlayerPawn);
+		if(HumanPlayerPawn)
+		{
+			UnPossess();
+		
+			Possess(HumanPlayerPawn);
+		}
 	}
 }

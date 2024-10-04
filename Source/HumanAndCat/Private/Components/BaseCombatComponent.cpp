@@ -42,7 +42,7 @@ void UBaseCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 
 	// ...
 
-	if(TargetActor)
+	if(IsValid(TargetActor))
 	{
 		FindInRandgeTargets();
 
