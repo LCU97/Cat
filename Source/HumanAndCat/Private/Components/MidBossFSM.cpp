@@ -14,11 +14,7 @@
 
 UMidBossFSM::UMidBossFSM()
 {
-<<<<<<< Updated upstream
-=======
 	PrimaryComponentTick.bCanEverTick = true;
-
->>>>>>> Stashed changes
 }
 
 // Called when the game starts
