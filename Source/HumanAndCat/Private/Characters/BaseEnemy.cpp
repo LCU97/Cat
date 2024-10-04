@@ -49,14 +49,16 @@ void ABaseEnemy::MonsterAttackTrace(FName MonsterSoket, float _EndPoint, float S
 
 	FHitResult _HitOut;
 
+	// 충돌 무시할 액터 설정 (자기 자신 무시)
 	FCollisionQueryParams _TraceParams;
 	_TraceParams.AddIgnoredActor(this);
 
+	// 구체 충돌 모양 생성 (반지름은 Size 사용)
+	FCollisionShape SphereCollisionShape = FCollisionShape::MakeSphere(Size);
 
 
-	
-
-	if (!bHasAttackedPlayer && GetWorld()->LineTraceSingleByChannel(_HitOut, _StartLocation, _EndLocation, ECC_GameTraceChannel2, _TraceParams))
+	// SweepSingleByChannel을 사용하여 구체 기반 충돌 감지
+	if (!bHasAttackedPlayer && GetWorld()->SweepSingleByChannel(_HitOut, _StartLocation, _EndLocation, FQuat::Identity, ECC_GameTraceChannel2, SphereCollisionShape, _TraceParams))
 	{
 		AActor* PlayerActor = GetWorld()->GetFirstPlayerController()->GetPawn();
 
@@ -64,18 +66,25 @@ void ABaseEnemy::MonsterAttackTrace(FName MonsterSoket, float _EndPoint, float S
 		{
 			if (_HitOut.GetActor() == PlayerActor)
 			{
-				DrawDebugLine(GetWorld(), _StartLocation, _EndLocation, FColor::Red, false, 2, 0, Size);
+				// 플레이어를 공격한 상태로 설정
 				bHasAttackedPlayer = true;
 
-				TSubclassOf<UDamageType> DamageTyper = UDamageType::StaticClass();
-				UGameplayStatics::ApplyDamage(_HitOut.GetActor(), EnemyA, GetController(), this, DamageTyper);
+				// 디버그 라인 그리기 (충돌 경로 시각화)
+				//DrawDebugSphere(GetWorld(), _StartLocation, Size, 12, FColor::Green, false, 2.0f); // 시작점
+				//DrawDebugSphere(GetWorld(), _EndLocation, Size, 12, FColor::Red, false, 2.0f);    // 끝점
 
+
+
+				// 데미지 적용
+				TSubclassOf<UDamageType> DamageType = UDamageType::StaticClass();
+				UGameplayStatics::ApplyDamage(_HitOut.GetActor(), EnemyA, GetController(), this, DamageType);
+
+				// 2초 후에 공격 상태 초기화DrawDebugSphere(GetWorld(), _StartLocation, Size, 12, FColor::Green, false, 2.0f); // 시작점
+				DrawDebugSphere(GetWorld(), _EndLocation, Size, 12, FColor::Red, false, 2.0f);    // 끝점
 				GetWorldTimerManager().SetTimer(TimerHandle_ResetAttack, this, &ABaseEnemy::ResetAttack, 2.f, false);
-
 			}
 		}
 	}
-
 }
 
 void ABaseEnemy::ResetAttack()
