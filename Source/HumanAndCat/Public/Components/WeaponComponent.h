@@ -105,4 +105,7 @@ public:
 	// 무기 바뀐거 애님인스턴스에게 알려주기
 	UPROPERTY(BlueprintAssignable)
 	FOnWeaponNameChanged OnWeaponNameChanged;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	bool bEquip;
 };

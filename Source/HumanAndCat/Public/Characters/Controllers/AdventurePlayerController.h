@@ -52,8 +52,5 @@ public:
 	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	APawn* HumanPlayerPawn;
-	
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	APawn* AICat;
-	
+		
 };

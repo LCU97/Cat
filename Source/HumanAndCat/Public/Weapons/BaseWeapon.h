@@ -54,4 +54,7 @@ public:
 	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	float TraceLength;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	bool bAttackable;
 };

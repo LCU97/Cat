@@ -115,14 +115,21 @@ void UWeaponComponent::RegisterStateAndAbility(ABaseWeapon* CheckingWeaponType)
 	{
 		if(WeaponType.Key == CheckingWeaponType->WeaponTag)
 		{
+			if(IsValid(CurrentWeapon))
+			{				
+				CurrentWeaponTag = FGameplayTag();
+				CurrentWeaponType = nullptr;
+				CurrentWeaponName = EWeaponName::None;
+				CurrentWeapon->Destroy();
+				CurrentWeaponLength = 0.f;
+			}
 			CurrentWeapon = CheckingWeaponType;
 			CurrentWeaponTag = CheckingWeaponType->WeaponTag;
 			CurrentWeaponType = WeaponType.Value;
 			CurrentWeaponName = CurrentWeaponType->WeaponName;
 			CurrentWeaponLength = CheckingWeaponType->TraceLength;
 
-			// 처음에는 장착 안한 상태
-			UnEquip();
+			
 
 			// 상태 업데이트 및 Idle 상태로 시작
 			UpdateStates();
@@ -154,7 +161,15 @@ void UWeaponComponent::RegisterStateAndAbility(ABaseWeapon* CheckingWeaponType)
 					}
 				}
 			}
-
+			// 처음에는 장착 안한 상태
+			if(bEquip)
+			{
+				Equip();
+			}
+			else
+			{
+				UnEquip();
+			}
 			return;
 		}
 	}
@@ -167,7 +182,6 @@ void UWeaponComponent::UnregisterStateAndAility()
 	{
 		return;
 	}
-	
 	CurrentWeapon->Destroy(); 
 	RegisterStateAndAbility(BasicWeaponInstanced);	
 }
@@ -182,6 +196,7 @@ void UWeaponComponent::Equip()
 		if (CharacterMesh)
 		{
 			CurrentWeapon->AttachToComponent(CharacterMesh, FAttachmentTransformRules::SnapToTargetIncludingScale, EquipSocket);
+			bEquip = true;
 		}
 	}
 }
@@ -196,6 +211,7 @@ void UWeaponComponent::UnEquip()
 		if (CharacterMesh)
 		{
 			CurrentWeapon->AttachToComponent(CharacterMesh, FAttachmentTransformRules::SnapToTargetIncludingScale, UnEquipSocket);
+			bEquip = false;
 		}
 	}
 }
