@@ -225,6 +225,8 @@ Content/*
 !Content/SJS/
 !Content/DreamscapeSeries/
 !Content/JEP/
+!Content/Niagara/
+!Content/WizardSpellsPack/
 
 # Don't ignore icon and splash images for mobile app
 !Build/IOS/Resources/

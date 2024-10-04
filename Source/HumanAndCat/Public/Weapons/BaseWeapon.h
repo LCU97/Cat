@@ -39,9 +39,15 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetWeaponManager(UWeaponComponent* WeaponComp) { WeaponManager = WeaponComp;}
 
+	UFUNCTION(BlueprintCallable)
+	virtual void Equip();
+
+	UFUNCTION(BlueprintCallable)
+	virtual void UnEquip();
+	
 public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	FGameplayTag WeaponTag;;
+	FGameplayTag WeaponTag;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UWeaponComponent* WeaponManager;

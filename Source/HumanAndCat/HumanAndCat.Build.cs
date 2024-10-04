@@ -9,7 +9,7 @@ public class HumanAndCat : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput",
-			"GameplayTags", "UMG", "Slate", "SlateCore", "GameplayTasks", "NavigationSystem", "AIModule"});
+			"GameplayTags", "UMG", "Slate", "SlateCore", "GameplayTasks", "NavigationSystem", "AIModule", "Niagara"});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

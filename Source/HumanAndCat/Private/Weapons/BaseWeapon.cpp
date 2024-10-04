@@ -25,3 +25,13 @@ void ABaseWeapon::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void ABaseWeapon::Equip()
+{
+	
+}
+
+void ABaseWeapon::UnEquip()
+{
+	
+}
+
