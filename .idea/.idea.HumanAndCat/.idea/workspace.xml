@@ -13,12 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="33d8500d-1c93-4f90-be68-fe8210d74008" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/JEP/Blueprints/ABP_MidBoss.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/JEP/Blueprints/ABP_MidBoss.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/JEP/Blueprints/BP_MidBoss.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/JEP/Blueprints/BP_MidBoss.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/MidBoss.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/MidBoss.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/MidBossFSM.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/MidBossFSM.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/MidBoss.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/MidBoss.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -551,6 +546,7 @@
       <workItem from="1727866670268" duration="1941000" />
       <workItem from="1728026918438" duration="5672000" />
       <workItem from="1728032943568" duration="863000" />
+      <workItem from="1728035122004" duration="45000" />
     </task>
     <servers />
   </component>

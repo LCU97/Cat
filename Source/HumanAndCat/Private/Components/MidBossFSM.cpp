@@ -141,7 +141,7 @@ void UMidBossFSM::AttackState()
 		anim->animState = mState;
 		GetRandomPositionInNavMesh(me->GetActorLocation(), 500, randomPos);
 	}
-}
+} 
 
 void UMidBossFSM::DamageState()
 {
