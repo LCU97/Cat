@@ -9,11 +9,14 @@
 #include <Components/CapsuleComponent.h>
 #include <NavigationSystem.h>
 #include <AIController.h>
+#include <string>
+
 #include "Navigation/PathFollowingComponent.h"
 
 
 UMidBossFSM::UMidBossFSM()
 {
+	PrimaryComponentTick.bCanEverTick = true;
 }
 
 // Called when the game starts
@@ -23,7 +26,8 @@ void UMidBossFSM::BeginPlay()
 
 	auto actor = UGameplayStatics::GetActorOfClass(GetWorld(), AAdventurePlayer::StaticClass());
 	player = Cast<AAdventurePlayer>(actor);
-
+	//GEngine->AddOnScreenDebugMessage(0, 10, FColor::Cyan, player->GetName());
+	//GEngine->AddOnScreenDebugMessage(0, 10, FColor::Cyan, UEnum::GetValueAsString(mState));
 	me = Cast<AMidBoss>(GetOwner());
 	anim = Cast<UMidBossAnim>(me->GetMesh()->GetAnimInstance());
 
@@ -37,7 +41,7 @@ void UMidBossFSM::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	FString logMsg = UEnum::GetValueAsString(mState);
-	GEngine->AddOnScreenDebugMessage(0, 1, FColor::Cyan, logMsg);
+	GEngine->AddOnScreenDebugMessage(0, 10, FColor::Cyan, logMsg);
 	
 	switch(mState)
 	{
@@ -62,6 +66,7 @@ void UMidBossFSM::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 void UMidBossFSM::IdleState()
 {
 	currentTime += GetWorld()->DeltaTimeSeconds;
+	//GEngine->AddOnScreenDebugMessage(0, 10, FColor::Cyan, *FString::Printf(TEXT("%f"), currentTime));
 	if (currentTime > idleDelayTime)	// idle for delay time
 	{
 		mState = EMidBossState::Move;

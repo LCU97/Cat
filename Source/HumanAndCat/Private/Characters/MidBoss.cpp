@@ -12,14 +12,14 @@ AMidBoss::AMidBoss()
 	PrimaryActorTick.bCanEverTick = true;
 
 	ConstructorHelpers::FObjectFinder<USkeletalMesh> tempMesh(TEXT(
-															"/Script/Engine.SkeletalMesh'/Game/MidBoss/Model/vampire_a_lusth.vampire_a_lusth'"));
+															"/Script/Engine.SkeletalMesh'/Game/JEP/Monster/DragonTheSoulEaterSKJEP.DragonTheSoulEaterSKJEP'"));
 	if (tempMesh.Succeeded())
 	{
 		GetMesh()->SetSkeletalMesh(tempMesh.Object);
 		GetMesh()->SetRelativeLocationAndRotation(FVector(0,0,-88), FRotator(0,-90,0));
 		GetMesh()->SetRelativeScale3D(FVector(0.84f));
 	}
-
+	
 	fsm = CreateDefaultSubobject<UMidBossFSM>(TEXT("FSM"));
 
 	ConstructorHelpers::FClassFinder<UAnimInstance> tempClass(TEXT(
