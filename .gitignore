@@ -78,7 +78,6 @@ Content/__ExternalActors__/*
 Content/__ExternalObjects__/*
 Content/Animations_Warrior/*
 Content/BoxingAttacks/*
-Content/EchoContent/*
 Content/Saber_Warrior_Pack/*
 Content/BlinkAndDashVFX/*
 Content/Characters/*
@@ -86,6 +85,7 @@ Content/PyroVFX/*
 Content/QuadrapedCreatures/*
 Content/WaspsPack/*
 Content/FourEvilDragonsHP/*
+Content/EchoContent/*
 
 # Created by https://www.toptal.com/developers/gitignore/api/unrealengine,windows,macos,visualstudio,visualstudiocode,linux
 # Edit at https://www.toptal.com/developers/gitignore?templates=unrealengine,windows,macos,visualstudio,visualstudiocode,linux

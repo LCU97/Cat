@@ -12,38 +12,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="33d8500d-1c93-4f90-be68-fe8210d74008" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/FireBallSkill.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/FireFallingSkill.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/SkillActor.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/Notify/AN_Skill.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Interfaces/Interface_Collision.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Actor/FireBallSkill.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Actor/FireFallingSkill.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Actor/SkillActor.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/Notify/AN_Skill.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Interfaces/Interface_Collision.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/DreamscapeSeries/DreamscapeTower/Maps/DemoMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DreamscapeSeries/DreamscapeTower/Maps/DemoMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Tiger/BP_BlackTiger.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Tiger/BP_BlackTiger.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/ABP_Human_Main.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/ABP_Human_Main.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Staff/MagicAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Staff/MagicAttack.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Staff/MagicAttack_Montage2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Staff/MagicAttack_Montage2.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_Staff.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_Staff.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/LCUMaps/TESTMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/LCUMaps/TESTMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/BlackEnemyCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/BlackEnemyCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/AdventurePlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/AdventurePlayer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/BaseEnemy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/BaseEnemy.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/Controllers/AdventurePlayerController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/Controllers/AdventurePlayerController.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Objects/BaseStateObject.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Objects/BaseStateObject.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Weapons/BaseWeapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Weapons/BaseWeapon.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Weapons/StaffWeapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Weapons/StaffWeapon.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/BlackEnemyCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/BlackEnemyCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/AdventurePlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/AdventurePlayer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/BaseEnemy.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/BaseEnemy.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/MidBoss.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/MidBoss.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/BaseWeapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/BaseWeapon.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/StaffWeapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/StaffWeapon.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HumanAndCat.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/HumanAndCat.uproject" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +69,7 @@
     &quot;C++ Project.HumanAndCat.executor&quot;: &quot;Run&quot;,
     &quot;C++ 프로젝트.HumanAndCat.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;LCU.ver.0.9&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -592,6 +564,9 @@
       <workItem from="1728040458940" duration="3178000" />
       <workItem from="1728098194536" duration="3108000" />
       <workItem from="1728103628336" duration="11685000" />
+      <workItem from="1728129463619" duration="1045000" />
+      <workItem from="1728132080574" duration="169000" />
+      <workItem from="1728132682774" duration="79000" />
     </task>
     <servers />
   </component>
