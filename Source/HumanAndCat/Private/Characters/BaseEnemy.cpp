@@ -36,6 +36,24 @@ void ABaseEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
+float ABaseEnemy::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
+	class AController* EventInstigator, AActor* DamageCauser)
+{
+	EnemyStat.Hp -= DamageAmount;
+	if(EnemyStat.Hp <=0 )
+	{
+		EnemyStat.Hp = 0;
+	}
+	WhenItHit();
+	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+}
+
+
+void ABaseEnemy::WhenItHit_Implementation()
+{
+	
+}
+
 void ABaseEnemy::MonsterAttackTrace(FName MonsterSoket, float _EndPoint, float Size,float EnemyA)
 {
 	FVector _StartLocation = GetMesh()->GetSocketLocation(MonsterSoket);
@@ -49,15 +67,15 @@ void ABaseEnemy::MonsterAttackTrace(FName MonsterSoket, float _EndPoint, float S
 
 	FHitResult _HitOut;
 
-	// Ãæµ¹ ¹«½ÃÇÒ ¾×ÅÍ ¼³Á¤ (ÀÚ±â ÀÚ½Å ¹«½Ã)
+	// ì¶©ëŒ ë¬´ì‹œí•  ì•¡í„° ì„¤ì • (ìê¸° ìì‹  ë¬´ì‹œ)
 	FCollisionQueryParams _TraceParams;
 	_TraceParams.AddIgnoredActor(this);
 
-	// ±¸Ã¼ Ãæµ¹ ¸ğ¾ç »ı¼º (¹İÁö¸§Àº Size »ç¿ë)
+	// êµ¬ì²´ ì¶©ëŒ ëª¨ì–‘ ìƒì„± (ë°˜ì§€ë¦„ì€ Size ì‚¬ìš©)
 	FCollisionShape SphereCollisionShape = FCollisionShape::MakeSphere(Size);
 
 
-	// SweepSingleByChannelÀ» »ç¿ëÇÏ¿© ±¸Ã¼ ±â¹İ Ãæµ¹ °¨Áö
+	// SweepSingleByChannelì„ ì‚¬ìš©í•˜ì—¬ êµ¬ì²´ ê¸°ë°˜ ì¶©ëŒ ê°ì§€
 	if (!bHasAttackedPlayer && GetWorld()->SweepSingleByChannel(_HitOut, _StartLocation, _EndLocation, FQuat::Identity, ECC_GameTraceChannel2, SphereCollisionShape, _TraceParams))
 	{
 		AActor* PlayerActor = GetWorld()->GetFirstPlayerController()->GetPawn();
@@ -66,21 +84,21 @@ void ABaseEnemy::MonsterAttackTrace(FName MonsterSoket, float _EndPoint, float S
 		{
 			if (_HitOut.GetActor() == PlayerActor)
 			{
-				// ÇÃ·¹ÀÌ¾î¸¦ °ø°İÇÑ »óÅÂ·Î ¼³Á¤
+				// í”Œë ˆì´ì–´ë¥¼ ê³µê²©í•œ ìƒíƒœë¡œ ì„¤ì •
 				bHasAttackedPlayer = true;
 
-				// µğ¹ö±× ¶óÀÎ ±×¸®±â (Ãæµ¹ °æ·Î ½Ã°¢È­)
-				//DrawDebugSphere(GetWorld(), _StartLocation, Size, 12, FColor::Green, false, 2.0f); // ½ÃÀÛÁ¡
-				//DrawDebugSphere(GetWorld(), _EndLocation, Size, 12, FColor::Red, false, 2.0f);    // ³¡Á¡
+				// ë””ë²„ê·¸ ë¼ì¸ ê·¸ë¦¬ê¸° (ì¶©ëŒ ê²½ë¡œ ì‹œê°í™”)
+				//DrawDebugSphere(GetWorld(), _StartLocation, Size, 12, FColor::Green, false, 2.0f); // ì‹œì‘ì 
+				//DrawDebugSphere(GetWorld(), _EndLocation, Size, 12, FColor::Red, false, 2.0f);    // ëì 
 
 
 
-				// µ¥¹ÌÁö Àû¿ë
+				// ë°ë¯¸ì§€ ì ìš©
 				TSubclassOf<UDamageType> DamageType = UDamageType::StaticClass();
 				UGameplayStatics::ApplyDamage(_HitOut.GetActor(), EnemyA, GetController(), this, DamageType);
 
-				// 2ÃÊ ÈÄ¿¡ °ø°İ »óÅÂ ÃÊ±âÈ­DrawDebugSphere(GetWorld(), _StartLocation, Size, 12, FColor::Green, false, 2.0f); // ½ÃÀÛÁ¡
-				DrawDebugSphere(GetWorld(), _EndLocation, Size, 12, FColor::Red, false, 2.0f);    // ³¡Á¡
+				// 2ì´ˆ í›„ì— ê³µê²© ìƒíƒœ ì´ˆê¸°í™”DrawDebugSphere(GetWorld(), _StartLocation, Size, 12, FColor::Green, false, 2.0f); // ì‹œì‘ì 
+				DrawDebugSphere(GetWorld(), _EndLocation, Size, 12, FColor::Red, false, 2.0f);    // ëì 
 				GetWorldTimerManager().SetTimer(TimerHandle_ResetAttack, this, &ABaseEnemy::ResetAttack, 2.f, false);
 			}
 		}

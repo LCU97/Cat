@@ -30,7 +30,7 @@ void ABlackEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//AIÄÁÆ®·ê·¯ ÇÒ´ç
+	//AIï¿½ï¿½Æ®ï¿½ê·¯ ï¿½Ò´ï¿½
 	//if (AIControllerClass == nullptr)
 	//{
 	//	AIControllerClass = ABlackEnemyAIController::StaticClass();
@@ -50,5 +50,16 @@ void ABlackEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void ABlackEnemyCharacter::WhenItHit()
+{
+	//EnemyStat.Hp
+}
+
+float ABlackEnemyCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
+	class AController* EventInstigator, AActor* DamageCauser)
+{
+	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 }
 

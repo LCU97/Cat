@@ -127,8 +127,10 @@ void UBaseStateObject::RotateToTarget(float Alpha)
 	FRotator Rot = UKismetMathLibrary::RLerp(OwnerRotation, LookAtRotation, Alpha, true);
 
 	//FRotator FinalRot = FRotator(OwnerRotation.Pitch, OwnerRotation.Yaw, OwnerRotation.Roll);
-	FRotator FinalRot = FRotator(OwnerRotation.Pitch, OwnerRotation.Yaw, OwnerRotation.Roll);
+	//FRotator FinalRot = FRotator(OwnerRotation.Pitch, OwnerRotation.Yaw, OwnerRotation.Roll);
+	FRotator FinalRot = FRotator(0.f, OwnerRotation.Yaw, 0.f);
 	//FRotator FinalRot = FRotator(OwnerRotation.Pitch, OwnerRotation.Yaw, Rot.Roll);
+	
 	OwnerCharacter->SetActorRotation(FinalRot, ETeleportType::TeleportPhysics);
 }
 

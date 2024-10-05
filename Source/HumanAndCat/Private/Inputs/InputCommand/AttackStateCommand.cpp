@@ -3,6 +3,7 @@
 
 #include "Inputs/InputCommand/AttackStateCommand.h"
 
+#include "Components/BaseAbilityManagerComponent.h"
 #include "Components/BaseStateManagerComponent.h"
 #include "GameFramework/Character.h"
 #include "Inputs/InputBuffer/InputBufferingObject.h"
@@ -51,6 +52,10 @@ void UAttackStateCommand::ProcessInput(const FInputPayLoad& InputPayLoad, UBaseS
 	{
 		HandleAttackCharging(CurrentState, CurrentAbilityTag, CurrentAbility);
 	}
+	else if (InputTag == InputTags::Input_UltimateAttack)
+	{
+		HandleUltimateAttack(CurrentState, CurrentAbilityTag, CurrentAbility);
+	}
 }
 
 void UAttackStateCommand::HandleAttack(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,
@@ -67,9 +72,24 @@ void UAttackStateCommand::HandleAttack(UBaseStateObject* CurrentState, const FGa
 	}
 }
 
+void UAttackStateCommand::HandleUltimateAttack(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,
+	UBaseAbilityObject* CurrentAbility)
+{
+	if(AbilityTag == AbilityTags::Ability_Attack_NormalAttack)
+	{
+		CurrentAbility->AbilityManager->CurrentAbility = CurrentAbility->AbilityManager->GetAbilityOfGameplayTag(AbilityTags::Ability_Attack_UltimateAttack);
+		CurrentAbility->StartAbility();
+	}
+	else
+	{
+
+		CurrentState->RestartState();
+	}
+}
+
 
 void UAttackStateCommand::HandleMovement(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,
-	UBaseAbilityObject* CurrentAbility)
+                                         UBaseAbilityObject* CurrentAbility)
 {
 	AActor* PerformingActor;
 	CurrentState->GetPerformingActor(PerformingActor);

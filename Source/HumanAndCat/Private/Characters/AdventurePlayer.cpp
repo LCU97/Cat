@@ -77,6 +77,10 @@ void AAdventurePlayer::PlayerInteractItemShop(const FInputActionValue& Value)
 	}
 }
 
+void AAdventurePlayer::WhenItHit_Implementation()
+{
+}
+
 void AAdventurePlayer::UpdateMoney(int64 inputVal)
 {
 	int64 _result;

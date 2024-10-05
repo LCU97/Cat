@@ -9,6 +9,7 @@
 #include "BaseWeapon.generated.h"
 
 class UWeaponComponent;
+class ASkillActor;
 
 UCLASS()
 class HUMANANDCAT_API ABaseWeapon : public AActor
@@ -39,9 +40,18 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetWeaponManager(UWeaponComponent* WeaponComp) { WeaponManager = WeaponComp;}
 
+	UFUNCTION(BlueprintCallable)
+	virtual void Equip();
+
+	UFUNCTION(BlueprintCallable)
+	virtual void UnEquip();
+
+	UFUNCTION(BlueprintCallable)
+	virtual void SkillAttack(TSubclassOf<ASkillActor> SkillActor);
+	
 public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	FGameplayTag WeaponTag;;
+	FGameplayTag WeaponTag;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UWeaponComponent* WeaponManager;
