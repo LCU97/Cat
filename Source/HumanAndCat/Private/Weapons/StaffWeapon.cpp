@@ -3,6 +3,9 @@
 
 #include "Weapons/StaffWeapon.h"
 #include "NiagaraComponent.h"
+#include "Actor/SkillActor.h"
+#include "GameFramework/Character.h"
+#include "Kismet/GameplayStatics.h"
 
 
 // Sets default values
@@ -16,7 +19,8 @@ AStaffWeapon::AStaffWeapon()
 	UnEquipSocket = FName(TEXT("StaffUnEquipSocket"));
 
 	NiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraComponent"));
-	NiagaraComponent->SetupAttachment(RootComponent); 
+	NiagaraComponent->SetupAttachment(RootComponent);
+	
 }
 
 // Called when the game starts or when spawned
@@ -47,6 +51,34 @@ void AStaffWeapon::UnEquip()
 	if(NiagaraComponent->GetAsset())
 	{
 		NiagaraComponent->SetActive(false);
+	}
+}
+
+void AStaffWeapon::SkillAttack(TSubclassOf<ASkillActor> SkillActor)
+{
+	Super::SkillAttack(SkillActor);
+
+	ACharacter* PCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(),0);
+
+	if(!PCharacter) return;
+	
+	FTransform SpawnTransform;
+
+	FRotator StartRotator = PCharacter->GetControlRotation();
+
+	FRotator SpawnRotator = FRotator(0, StartRotator.Yaw, 0);
+
+	FVector ForwardVec = PCharacter->GetActorForwardVector();
+
+	FVector SpawnLocation = PCharacter->GetActorLocation() + (ForwardVec * 1000.f);
+	SpawnLocation.Z = PCharacter->GetActorLocation().Z;
+
+	SpawnTransform.SetLocation(SpawnLocation);
+	SpawnTransform.SetRotation(SpawnRotator.Quaternion());
+
+	if(SkillActor)
+	{
+		ASkillActor* SpawnedSkill = GetWorld()->SpawnActor<ASkillActor>(SkillActor, SpawnTransform);
 	}
 }
 

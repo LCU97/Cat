@@ -12,20 +12,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="33d8500d-1c93-4f90-be68-fe8210d74008" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Weapons/StaffWeapon.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/StaffWeapon.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/FireBallSkill.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/FireFallingSkill.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/SkillActor.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/Notify/AN_Skill.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Interfaces/Interface_Collision.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Actor/FireBallSkill.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Actor/FireFallingSkill.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Actor/SkillActor.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/Notify/AN_Skill.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Interfaces/Interface_Collision.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/DreamscapeSeries/DreamscapeTower/Maps/DemoMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DreamscapeSeries/DreamscapeTower/Maps/DemoMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/JEP/Data/ItemDataTable.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/JEP/Data/ItemDataTable.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Tiger/BP_BlackTiger.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Tiger/BP_BlackTiger.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/ABP_Human_Main.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/ABP_Human_Main.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Data_Asset/PDA_Fist.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Data_Asset/PDA_Fist.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/HumanAndCat.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/HumanAndCat.Build.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Staff/MagicAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Staff/MagicAttack.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Staff/MagicAttack_Montage2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Staff/MagicAttack_Montage2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_Staff.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_Staff.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/LCUMaps/TESTMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/LCUMaps/TESTMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/BlackEnemyCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/BlackEnemyCharacter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/AdventurePlayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/AdventurePlayer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/BaseEnemy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/BaseEnemy.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Inputs/InputCommand/AttackStateCommand.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Inputs/InputCommand/AttackStateCommand.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/Controllers/AdventurePlayerController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/Controllers/AdventurePlayerController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Objects/BaseStateObject.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Objects/BaseStateObject.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Weapons/BaseWeapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Weapons/BaseWeapon.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Inputs/InputCommand/AttackStateCommand.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Inputs/InputCommand/AttackStateCommand.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Weapons/StaffWeapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Weapons/StaffWeapon.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/BlackEnemyCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/BlackEnemyCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/AdventurePlayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/AdventurePlayer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/BaseEnemy.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/BaseEnemy.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/MidBoss.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/MidBoss.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/BaseWeapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/BaseWeapon.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/StaffWeapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/StaffWeapon.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +80,8 @@
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Programs/AutomationTool/SmartlingLocalization/SmartlingLocalization.Automation.csproj" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Programs/AutomationTool/XLocLocalization/XLocLocalizationProvider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Runtime/Core/Public/UObject/ScriptDelegates.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Classes/Animation/AnimNotifies/AnimNotify.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Classes/Interfaces/Interface_CollisionDataProvider.h" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -570,6 +590,8 @@
       <workItem from="1728038761388" duration="15000" />
       <workItem from="1728039687778" duration="5000" />
       <workItem from="1728040458940" duration="3178000" />
+      <workItem from="1728098194536" duration="3108000" />
+      <workItem from="1728103628336" duration="11685000" />
     </task>
     <servers />
   </component>

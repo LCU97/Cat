@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interfaces/Interface_Collision.h"
 #include "BaseEnemy.generated.h"
 
 
@@ -21,7 +22,7 @@ struct FEnemyStat
 };
 
 UCLASS()
-class HUMANANDCAT_API ABaseEnemy : public ACharacter
+class HUMANANDCAT_API ABaseEnemy : public ACharacter, public IInterface_Collision
 {
 	GENERATED_BODY()
 
@@ -40,12 +41,16 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void WhenItHit() override;
+	virtual void WhenItHit_Implementation();
 public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FEnemyStat EnemyStat;
-
-
+	
 
 public:
 
@@ -54,7 +59,7 @@ public:
 	void ResetAttack();
 
 private:
-	bool bHasAttackedPlayer;
+	bool bHasAttackedPlayer;	
 
 	FTimerHandle TimerHandle_ResetAttack;
 };

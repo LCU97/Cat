@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
+#include "BaseEnemy.h"
 #include "MidBoss.generated.h"
 
 UCLASS()
-class HUMANANDCAT_API AMidBoss : public ACharacter
+class HUMANANDCAT_API AMidBoss : public ABaseEnemy
 {
 	GENERATED_BODY()
 

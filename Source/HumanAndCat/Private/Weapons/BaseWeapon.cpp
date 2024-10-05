@@ -35,3 +35,8 @@ void ABaseWeapon::UnEquip()
 	
 }
 
+void ABaseWeapon::SkillAttack(TSubclassOf<ASkillActor> SkillActor)
+{
+	
+}
+

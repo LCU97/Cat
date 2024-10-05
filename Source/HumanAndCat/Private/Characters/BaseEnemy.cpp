@@ -36,6 +36,24 @@ void ABaseEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
+float ABaseEnemy::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
+	class AController* EventInstigator, AActor* DamageCauser)
+{
+	EnemyStat.Hp -= DamageAmount;
+	if(EnemyStat.Hp <=0 )
+	{
+		EnemyStat.Hp = 0;
+	}
+	WhenItHit();
+	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+}
+
+
+void ABaseEnemy::WhenItHit_Implementation()
+{
+	
+}
+
 void ABaseEnemy::MonsterAttackTrace(FName MonsterSoket, float _EndPoint, float Size,float EnemyA)
 {
 	FVector _StartLocation = GetMesh()->GetSocketLocation(MonsterSoket);

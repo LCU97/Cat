@@ -5,10 +5,11 @@
 #include "CoreMinimal.h"
 #include "HumanAndCat/Public/Characters/PlayerCharacter.h"
 #include "InputActionValue.h"
+#include "Interfaces/Interface_Collision.h"
 #include "AdventurePlayer.generated.h"
 
 UCLASS()
-class HUMANANDCAT_API AAdventurePlayer : public APlayerCharacter
+class HUMANANDCAT_API AAdventurePlayer : public APlayerCharacter, public IInterface_Collision
 {
 	GENERATED_BODY()
 
@@ -31,6 +32,10 @@ public:
 	class UInputAction* IAInteractItemShop;
 	
 	void PlayerInteractItemShop(const FInputActionValue& Value);
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void WhenItHit() override;
+	virtual void WhenItHit_Implementation();
 	
 public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
