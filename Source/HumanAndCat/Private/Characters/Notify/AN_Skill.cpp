@@ -26,6 +26,12 @@ void UAN_Skill::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Anim
 			}
 		case 1:
 			{
+				UWeaponComponent* WeaponComponent = Cast<UWeaponComponent>(MeshComp->GetOwner()->GetComponentByClass(UWeaponComponent::StaticClass()));
+
+				if(WeaponComponent)
+				{
+					WeaponComponent->CurrentWeapon->SkillAttack2(UsedSkill);
+				}
 				break;
 			}
 		default:

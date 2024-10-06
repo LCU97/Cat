@@ -40,3 +40,7 @@ void ABaseWeapon::SkillAttack(TSubclassOf<ASkillActor> SkillActor)
 	
 }
 
+void ABaseWeapon::SkillAttack2(TSubclassOf<ASkillActor> SkillActor)
+{
+}
+

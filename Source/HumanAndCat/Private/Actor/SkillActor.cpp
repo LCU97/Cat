@@ -15,7 +15,6 @@ ASkillActor::ASkillActor()
 	NiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraComponent"));
 	NiagaraComponent->SetupAttachment(RootComponent); // �浹 ������Ʈ�� ����
 
-	InitialLifeSpan = 5.0f;
 
 	
 
@@ -27,7 +26,6 @@ ASkillActor::ASkillActor()
 void ASkillActor::BeginPlay()
 {
 	Super::BeginPlay();
-	GetWorld()->GetTimerManager().SetTimer(AttackTimerHandle, this, &ASkillActor::AttackingContinuous, 1.f, true, 0.5f);
 }
 
 // Called every frame

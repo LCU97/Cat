@@ -28,14 +28,14 @@ public:
 	
 	virtual void OnCapsuleEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) override;
 
+	void LaunchFireball(const FVector& CenterDirection, const FVector& Direction);
 
 public:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components")
 	class USphereComponent* CollisionComponent;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-    USphereComponent* CollisionComponent2;
+	float SphereRadius = 20.f;;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	USphereComponent* CollisionComponent3;
+	FVector StartCollosionLocation;
+	FVector Dir;
 };

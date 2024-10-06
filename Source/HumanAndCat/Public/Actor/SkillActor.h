@@ -32,7 +32,6 @@ public:
 	UFUNCTION()
 	virtual void AttackingContinuous();
 public:
-	// Niagara ��ƼŬ ������Ʈ
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	class UNiagaraComponent* NiagaraComponent;
 

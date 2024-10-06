@@ -48,6 +48,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	virtual void SkillAttack(TSubclassOf<ASkillActor> SkillActor);
+
+	UFUNCTION(BlueprintCallable)
+	virtual void SkillAttack2(TSubclassOf<ASkillActor> SkillActor);
 	
 public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
