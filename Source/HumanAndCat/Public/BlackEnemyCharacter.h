@@ -59,4 +59,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class USkeletalMeshComponent* shuriken;
 
+	FTimerHandle TimerHandle_Destroy;
+
+	void OnDeathMontageFinished();
 };

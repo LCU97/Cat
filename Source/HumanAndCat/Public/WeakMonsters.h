@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
+#include "Characters/BaseEnemy.h"
 #include "WeakMonsters.generated.h"
 
 UCLASS()
-class HUMANANDCAT_API AWeakMonsters : public ACharacter
+class HUMANANDCAT_API AWeakMonsters : public ABaseEnemy
 {
 	GENERATED_BODY()
 
@@ -25,8 +25,6 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-
 
 
 };

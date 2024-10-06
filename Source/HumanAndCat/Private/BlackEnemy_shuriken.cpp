@@ -38,6 +38,7 @@ ABlackEnemy_shuriken::ABlackEnemy_shuriken()
         shuriken->SetSkeletalMesh(MeshAsset.Object);
     }
     shuriken->SetupAttachment(CollisionComponent);
+
 }
 
 // Called when the game starts or when spawned

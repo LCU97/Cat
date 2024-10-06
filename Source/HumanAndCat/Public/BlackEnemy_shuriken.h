@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "NiagaraComponent.h"
 #include "BlackEnemy_shuriken.generated.h"
 
 UCLASS()
@@ -48,4 +49,6 @@ public:
 
 	UPROPERTY()
 	FVector MoveDirection;
+
+
 };

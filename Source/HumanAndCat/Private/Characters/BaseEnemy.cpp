@@ -88,8 +88,9 @@ void ABaseEnemy::MonsterAttackTrace(FName MonsterSoket, float _EndPoint, float S
 				bHasAttackedPlayer = true;
 
 				// 디버그 라인 그리기 (충돌 경로 시각화)
-				//DrawDebugSphere(GetWorld(), _StartLocation, Size, 12, FColor::Green, false, 2.0f); // 시작점
-				//DrawDebugSphere(GetWorld(), _EndLocation, Size, 12, FColor::Red, false, 2.0f);    // 끝점
+				DrawDebugLine(GetWorld(), _StartLocation, _EndLocation, FColor::Red, false, 2.f, 0, 1);
+				DrawDebugSphere(GetWorld(), _StartLocation, Size, 12, FColor::Green, false, 2.0f); // 시작점
+				DrawDebugSphere(GetWorld(), _EndLocation, Size, 12, FColor::Red, false, 2.0f);    // 끝점
 
 
 

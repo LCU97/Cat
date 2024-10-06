@@ -30,7 +30,6 @@ void ABlackEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//AI��Ʈ�귯 �Ҵ�
 	//if (AIControllerClass == nullptr)
 	//{
 	//	AIControllerClass = ABlackEnemyAIController::StaticClass();
@@ -54,7 +53,39 @@ void ABlackEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 void ABlackEnemyCharacter::WhenItHit()
 {
-	//EnemyStat.Hp
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && AnimInstance->Montage_IsPlaying(nullptr)) 
+	{
+		AnimInstance->Montage_Stop(0.2f);
+	}
+
+	static ConstructorHelpers::FObjectFinder<UAnimMontage> HitMontage(TEXT("/Script/Engine.AnimMontage'/Game/SJS/EnemyAnimations/Anim_Dame_2_Montage.Anim_Dame_2_Montage'"));
+
+	if (HitMontage.Succeeded() && AnimInstance)
+	{
+		AnimInstance->Montage_Play(HitMontage.Object); 
+	}
+
+	if (EnemyStat.Hp <= 0)
+	{
+		static ConstructorHelpers::FObjectFinder<UAnimMontage> dieMontage(TEXT("/Script/Engine.AnimMontage'/Game/SJS/EnemyAnimations/Anim_Death_Montage.Anim_Death_Montage'"));
+		if (AnimInstance && AnimInstance->Montage_IsPlaying(nullptr)) 
+		{
+			AnimInstance->Montage_Stop(0.1f);
+		}
+		AnimInstance->Montage_Play(dieMontage.Object);
+
+		// 2초 뒤에 캐릭터를 파괴하는 타이머 설정
+		GetWorld()->GetTimerManager().SetTimer(
+			TimerHandle_Destroy, 
+			this,               
+			&ABlackEnemyCharacter::OnDeathMontageFinished, 
+			1.0f,              
+			false                
+		);
+
+	}
+
 }
 
 float ABlackEnemyCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
@@ -63,3 +94,7 @@ float ABlackEnemyCharacter::TakeDamage(float DamageAmount, struct FDamageEvent c
 	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 }
 
+void ABlackEnemyCharacter::OnDeathMontageFinished()
+{
+	Destroy();
+}
