@@ -62,4 +62,9 @@ public:
 	FTimerHandle TimerHandle_Destroy;
 
 	void OnDeathMontageFinished();
+	void OnHit();
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool HitTime;
 };

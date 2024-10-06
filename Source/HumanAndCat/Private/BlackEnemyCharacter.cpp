@@ -23,6 +23,8 @@ ABlackEnemyCharacter::ABlackEnemyCharacter()
 	shuriken = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("shurikenMesh"));
 	shuriken->SetupAttachment(GetMesh(), FName("shuriken_lSocket"));
 
+    HitTime = false;
+
 }
 
 // Called when the game starts or when spawned
@@ -53,38 +55,56 @@ void ABlackEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 void ABlackEnemyCharacter::WhenItHit()
 {
-	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
-	if (AnimInstance && AnimInstance->Montage_IsPlaying(nullptr)) 
-	{
-		AnimInstance->Montage_Stop(0.2f);
-	}
+    UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+    if (!HitTime)
+    {
+        if (AnimInstance && AnimInstance->Montage_IsPlaying(nullptr))
+        {
+            AnimInstance->Montage_Stop(0.2f);
+        }
 
-	static ConstructorHelpers::FObjectFinder<UAnimMontage> HitMontage(TEXT("/Script/Engine.AnimMontage'/Game/SJS/EnemyAnimations/Anim_Dame_2_Montage.Anim_Dame_2_Montage'"));
+        // 애니메이션 몽타주를 런타임에서 로드
+        UAnimMontage* HitMontage = LoadObject<UAnimMontage>(nullptr, TEXT("/Game/SJS/EnemyAnimations/Anim_Dame_2_Montage.Anim_Dame_2_Montage"));
 
-	if (HitMontage.Succeeded() && AnimInstance)
-	{
-		AnimInstance->Montage_Play(HitMontage.Object); 
-	}
+        if (HitMontage && AnimInstance)
+        {
+            AnimInstance->Montage_Play(HitMontage);
+        }
 
-	if (EnemyStat.Hp <= 0)
-	{
-		static ConstructorHelpers::FObjectFinder<UAnimMontage> dieMontage(TEXT("/Script/Engine.AnimMontage'/Game/SJS/EnemyAnimations/Anim_Death_Montage.Anim_Death_Montage'"));
-		if (AnimInstance && AnimInstance->Montage_IsPlaying(nullptr)) 
-		{
-			AnimInstance->Montage_Stop(0.1f);
-		}
-		AnimInstance->Montage_Play(dieMontage.Object);
+        HitTime = true;
+        GetWorld()->GetTimerManager().SetTimer(
+            TimerHandle_Destroy,
+            this,
+            &ABlackEnemyCharacter::OnHit,
+            1.0f,
+            false
+        );
+    }
 
-		// 2초 뒤에 캐릭터를 파괴하는 타이머 설정
-		GetWorld()->GetTimerManager().SetTimer(
-			TimerHandle_Destroy, 
-			this,               
-			&ABlackEnemyCharacter::OnDeathMontageFinished, 
-			1.0f,              
-			false                
-		);
+    if (EnemyStat.Hp <= 0)
+    {
+        // 죽는 애니메이션 몽타주를 런타임에서 로드
+        UAnimMontage* DieMontage = LoadObject<UAnimMontage>(nullptr, TEXT("/Game/SJS/EnemyAnimations/Anim_Death_Montage.Anim_Death_Montage"));
 
-	}
+        if (AnimInstance && AnimInstance->Montage_IsPlaying(nullptr))
+        {
+            AnimInstance->Montage_Stop(0.1f);
+        }
+
+        if (DieMontage && AnimInstance)
+        {
+            AnimInstance->Montage_Play(DieMontage);
+        }
+
+        // 2초 뒤에 캐릭터를 파괴하는 타이머 설정
+        GetWorld()->GetTimerManager().SetTimer(
+            TimerHandle_Destroy,
+            this,
+            &ABlackEnemyCharacter::OnDeathMontageFinished,
+            1.0f,
+            false
+        );
+    }
 
 }
 
@@ -97,4 +117,9 @@ float ABlackEnemyCharacter::TakeDamage(float DamageAmount, struct FDamageEvent c
 void ABlackEnemyCharacter::OnDeathMontageFinished()
 {
 	Destroy();
+}
+
+void ABlackEnemyCharacter::OnHit()
+{
+    HitTime = true;
 }
