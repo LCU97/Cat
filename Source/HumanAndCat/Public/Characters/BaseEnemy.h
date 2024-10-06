@@ -12,6 +12,9 @@ USTRUCT(BlueprintType,Blueprintable)
 struct FEnemyStat
 {
 	GENERATED_BODY()
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float MaxHp;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Hp;

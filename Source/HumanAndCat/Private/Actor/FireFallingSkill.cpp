@@ -3,6 +3,7 @@
 
 #include "Actor/FireFallingSkill.h"
 
+#include "NiagaraComponent.h"
 #include "Characters/BaseEnemy.h"
 #include "Components/SphereComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -13,13 +14,7 @@ AFireFallingSkill::AFireFallingSkill()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-}
-
-// Called when the game starts or when spawned
-void AFireFallingSkill::BeginPlay()
-{
-	Super::BeginPlay();
-
+	
 	CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionComponent"));
 	CollisionComponent->InitSphereRadius(110.0f); // �ݰ� ����
 	CollisionComponent->SetCollisionProfileName(TEXT("OverlapAll")); // �浹 �������� ����
@@ -27,6 +22,18 @@ void AFireFallingSkill::BeginPlay()
 
 	CollisionComponent->OnComponentBeginOverlap.AddDynamic(this, &ASkillActor::OnCapsuleOverlap);
 	CollisionComponent->OnComponentEndOverlap.AddDynamic(this, &ASkillActor::OnCapsuleEndOverlap);
+
+	InitialLifeSpan = 4.0f;
+
+}
+
+// Called when the game starts or when spawned
+void AFireFallingSkill::BeginPlay()
+{
+	Super::BeginPlay();
+	GetWorld()->GetTimerManager().SetTimer(AttackTimerHandle, this, &ASkillActor::AttackingContinuous, 1.f, true, 0.5f);
+
+	NiagaraComponent->SetWorldLocation(CollisionComponent->GetComponentLocation());
 }
 
 // Called every frame
@@ -43,6 +50,8 @@ void AFireFallingSkill::Tick(float DeltaTime)
 
 void AFireFallingSkill::AttackingContinuous()
 {
+	if(Enemys.IsEmpty())
+		return;
 	for(auto Enemy : Enemys)
 	{
 		if(IsValid(Enemy))

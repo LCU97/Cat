@@ -3,7 +3,9 @@
 
 #include "Weapons/StaffWeapon.h"
 #include "NiagaraComponent.h"
+#include "Actor/FireBallSkill.h"
 #include "Actor/SkillActor.h"
+#include "Components/WeaponComponent.h"
 #include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -80,5 +82,27 @@ void AStaffWeapon::SkillAttack(TSubclassOf<ASkillActor> SkillActor)
 	{
 		ASkillActor* SpawnedSkill = GetWorld()->SpawnActor<ASkillActor>(SkillActor, SpawnTransform);
 	}
+}
+
+void AStaffWeapon::SkillAttack2(TSubclassOf<ASkillActor> SkillActor)
+{
+	Super::SkillAttack2(SkillActor);
+
+	ACharacter* PCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+	if(!PCharacter) return;
+
+	FTransform transform = PCharacter->GetMesh()->GetSocketTransform(FName("FireBall"));
+	FVector Forward = transform.GetRotation().GetForwardVector();
+	
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = this;
+	SpawnParams.Instigator = GetInstigator();
+
+	AFireBallSkill* FireBall = GetWorld()->SpawnActor<AFireBallSkill>(SkillActor, transform.GetLocation(), Forward.Rotation(), SpawnParams);
+	if(FireBall)
+	{
+		FireBall->LaunchFireball(transform.GetLocation(), PCharacter->GetActorForwardVector());
+	}
+		
 }
 

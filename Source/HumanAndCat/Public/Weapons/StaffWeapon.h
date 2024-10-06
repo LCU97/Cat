@@ -29,6 +29,8 @@ public:
 	virtual void UnEquip() override;
 
 	virtual void SkillAttack(TSubclassOf<ASkillActor> SkillActor) override;
+	
+	virtual void SkillAttack2(TSubclassOf<ASkillActor> SkillActor) override;	
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

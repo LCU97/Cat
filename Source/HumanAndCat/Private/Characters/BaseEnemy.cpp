@@ -39,11 +39,11 @@ void ABaseEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 float ABaseEnemy::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
 	class AController* EventInstigator, AActor* DamageCauser)
 {
-	EnemyStat.Hp -= DamageAmount;
+	/*EnemyStat.Hp -= DamageAmount;
 	if(EnemyStat.Hp <=0 )
 	{
 		EnemyStat.Hp = 0;
-	}
+	}*/
 	WhenItHit();
 	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 }
