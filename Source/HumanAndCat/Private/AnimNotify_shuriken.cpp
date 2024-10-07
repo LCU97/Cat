@@ -4,6 +4,8 @@
 #include "AnimNotify_shuriken.h"
 #include "BlackEnemy_shuriken.h" 
 
+
+
 void UAnimNotify_shuriken::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation)
 {
 
@@ -18,7 +20,9 @@ void UAnimNotify_shuriken::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenc
 
     if (World)
     {
-        TSubclassOf<AActor> ShurikenClass = ABlackEnemy_shuriken::StaticClass();
+        //TSubclassOf<AActor> ShurikenClass = ABlackEnemy_shuriken::StaticClass();
+
+       
 
         World->SpawnActor<ABlackEnemy_shuriken>(ShurikenClass, SpawnLocation, SpawnRotation);
     }

@@ -39,6 +39,10 @@ ABlackEnemy_shuriken::ABlackEnemy_shuriken()
     }
     shuriken->SetupAttachment(CollisionComponent);
 
+   
+    NiagaraEffect = CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraEffect"));
+    NiagaraEffect->SetupAttachment(CollisionComponent);
+
 }
 
 // Called when the game starts or when spawned
@@ -96,6 +100,8 @@ void ABlackEnemy_shuriken::OnShurikenOverlap(UPrimitiveComponent* OverlappedComp
     // 플레이어와 충돌했는지 확인
     if (OtherActor && OtherActor == PlayerActor)
     {
+        TSubclassOf<UDamageType> dmage = UDamageType::StaticClass();
+        UGameplayStatics::ApplyDamage(OtherActor, 0.5f, GetInstigatorController(), this, dmage);
         // 표창 파괴
         Destroy();
     }
