@@ -74,6 +74,10 @@ void ABaseEnemy::MonsterAttackTrace(FName MonsterSoket, float _EndPoint, float S
 	// 구체 충돌 모양 생성 (반지름은 Size 사용)
 	FCollisionShape SphereCollisionShape = FCollisionShape::MakeSphere(Size);
 
+	
+    DrawDebugLine(GetWorld(), _StartLocation, _EndLocation, FColor::Red, false, 2.f, 0, 1);
+    DrawDebugSphere(GetWorld(), _StartLocation, Size, 12, FColor::Green, false, 2.0f); // 시작점
+	DrawDebugSphere(GetWorld(), _EndLocation, Size, 12, FColor::Red, false, 2.0f);    // 끝점
 
 	// SweepSingleByChannel을 사용하여 구체 기반 충돌 감지
 	if (!bHasAttackedPlayer && GetWorld()->SweepSingleByChannel(_HitOut, _StartLocation, _EndLocation, FQuat::Identity, ECC_GameTraceChannel2, SphereCollisionShape, _TraceParams))
@@ -88,9 +92,6 @@ void ABaseEnemy::MonsterAttackTrace(FName MonsterSoket, float _EndPoint, float S
 				bHasAttackedPlayer = true;
 
 				// 디버그 라인 그리기 (충돌 경로 시각화)
-				DrawDebugLine(GetWorld(), _StartLocation, _EndLocation, FColor::Red, false, 2.f, 0, 1);
-				DrawDebugSphere(GetWorld(), _StartLocation, Size, 12, FColor::Green, false, 2.0f); // 시작점
-				DrawDebugSphere(GetWorld(), _EndLocation, Size, 12, FColor::Red, false, 2.0f);    // 끝점
 
 
 

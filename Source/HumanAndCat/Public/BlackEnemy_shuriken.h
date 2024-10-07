@@ -33,8 +33,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
     class USphereComponent* CollisionComponent;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class UProjectileMovementComponent* ProjectileMovement;
+	// 나이아가라 컴포넌트 추가
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effects")
+	class UNiagaraComponent* NiagaraEffect;
 
 	UFUNCTION()
 	void DestroyShuriken();

@@ -13,8 +13,11 @@ UCLASS()
 class HUMANANDCAT_API UAnimNotify_shuriken : public UAnimNotify
 {
 	GENERATED_BODY()
-	
+
+
 public:
+	UPROPERTY(EditAnywhere,Category = "shuriken")
+	TSubclassOf<class ABlackEnemy_shuriken> ShurikenClass;
 
 	virtual void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation) override;
 
