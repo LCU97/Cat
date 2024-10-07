@@ -12,8 +12,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="33d8500d-1c93-4f90-be68-fe8210d74008" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/DreamscapeSeries/DreamscapeTower/Maps/DemoMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DreamscapeSeries/DreamscapeTower/Maps/DemoMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/JEP/UI/WB_Dialog.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/JEP/UI/WB_Dialog.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Cats/BP_Cat.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Cats/BP_Cat.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Character/LCH_BP_HumanCharacter_Child.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Character/LCH_BP_HumanCharacter_Child.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanController.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -575,6 +578,7 @@
       <workItem from="1728008075208" duration="7037000" />
       <workItem from="1728038761388" duration="15000" />
       <workItem from="1728044161079" duration="1404000" />
+      <workItem from="1728263091915" duration="762000" />
     </task>
     <servers />
   </component>
