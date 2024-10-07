@@ -61,4 +61,6 @@ public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Control Option")
 	bool isInvertLookUp = false;
 
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Control Option")
+	bool bIsPossess = false;
 };

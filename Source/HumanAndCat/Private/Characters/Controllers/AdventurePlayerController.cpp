@@ -104,7 +104,8 @@ void AAdventurePlayerController::PossessCatPlayer_Implementation()
 		if(CatPlayerPawn)
 		{
 			UnPossess();
-		
+			ACatPlayer* CatPlayer = Cast<ACatPlayer>(CatPlayerPawn);
+			if(CatPlayer) CatPlayer->bIsPossess = true;
 			Possess(CatPlayerPawn);
 		}
 	}
@@ -117,7 +118,8 @@ void AAdventurePlayerController::PossessHumanPlayer_Implementation()
 		if(HumanPlayerPawn)
 		{
 			UnPossess();
-		
+			ACatPlayer* CatPlayer = Cast<ACatPlayer>(CatPlayerPawn);
+			if(CatPlayer) CatPlayer->bIsPossess = false;
 			Possess(HumanPlayerPawn);
 		}
 	}
