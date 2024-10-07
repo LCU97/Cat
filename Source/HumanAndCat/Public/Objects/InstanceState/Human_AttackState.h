@@ -26,6 +26,7 @@ public:
 	virtual void StartState_Implementation() override;
 	
 	virtual void EndState_Implementation() override;
+	
 
 	// IInterface_IndividualStatteFunc
 	virtual void SetWantAbilityTag(FGameplayTag Tag) override;

@@ -12,31 +12,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="33d8500d-1c93-4f90-be68-fe8210d74008" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/EarthquakeSkill.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/SplitEarthSkill.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Actor/EarthquakeSkill.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Actor/SplitEarthSkill.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCH/LCHMaps/LCH_TESTMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/LCHMaps/LCH_TESTMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/JEP/UI/WB_PlayerItem.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/JEP/UI/WB_PlayerItem.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Character/AnimNotifyState_CheckAttackable.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Character/AnimNotifyState_CheckAttackable.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Character/BPI_Attackable.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Character/BPI_Attackable.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Character/LCH_BP_HumanCharacter_Child.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Character/LCH_BP_HumanCharacter_Child.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Character/LCH_BP_Sword_Child.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCH/Blueprints/Character/Character/LCH_BP_Sword_Child.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/AI/BP_LCU_NormalMonster.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/AI/BP_LCU_NormalMonster.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/ABP_Human_Main.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/ABP_Human_Main.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Staff/MagicAttack_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Staff/MagicAttack_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Staff/MagicAttack_Montage2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Staff/MagicAttack_Montage2.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Staff/Skill/BP_Staff_Skill1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Staff/Skill/BP_Staff_Skill1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Boxing/Montage/Fist_NormalAttack1_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Boxing/Montage/Fist_NormalAttack1_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Boxing/Montage/Fist_NormalAttack2_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Boxing/Montage/Fist_NormalAttack2_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Boxing/Montage/Fist_NormalAttack3_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Boxing/Montage/Fist_NormalAttack3_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Boxing/Montage/Fist_SpecialAttack_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Boxing/Montage/Fist_SpecialAttack_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Staff/Skill/BP_Staff_FireFalling.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Staff/Skill/BP_Staff_FireFalling.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Montages/Sword_NormalAttack1_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Montages/Sword_NormalAttack1_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Montages/Sword_NormalAttack2_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Montages/Sword_NormalAttack2_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Montages/Sword_NormalAttack3_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Montages/Sword_NormalAttack3_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Montages/Sword_SpecialAttack_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Montages/Sword_SpecialAttack_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Montages/Sword_UltimateAttack_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Montages/Sword_UltimateAttack_Montage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_Fist.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_Fist.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_Staff.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_Staff.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Echo_SkeletonLCU.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Echo_SkeletonLCU.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Widget/WBP_HealthBar.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Widget/WBP_HealthBar.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/LCU/LCUMaps/TESTMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/LCUMaps/TESTMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HumanAndCat.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/HumanAndCat.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/FireBallSkill.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/FireBallSkill.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/FireFallingSkill.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/FireFallingSkill.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/SkillActor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/SkillActor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/WizardSpellsPack/Effects/NS_Ground_spike_attack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/WizardSpellsPack/Effects/NS_Ground_spike_attack.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/BaseEnemy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/BaseEnemy.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/Notify/AN_Skill.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/Notify/AN_Skill.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Weapons/BaseWeapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Weapons/BaseWeapon.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Weapons/StaffWeapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Weapons/StaffWeapon.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Actor/FireBallSkill.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Actor/FireBallSkill.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Actor/FireFallingSkill.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Actor/FireFallingSkill.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Actor/SkillActor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Actor/SkillActor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/BaseEnemy.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Characters/BaseEnemy.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/BaseCombatComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/BaseCombatComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/WeaponComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/WeaponComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Weapons/SwordWeapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Weapons/SwordWeapon.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Components/BaseCombatComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Components/BaseCombatComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Objects/InstanceState/Human_AttackState.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Objects/InstanceState/Human_AttackState.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/BaseWeapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/BaseWeapon.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/StaffWeapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/StaffWeapon.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/SwordWeapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/SwordWeapon.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,27 +68,7 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="cidr-memory-view://7" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/HumanAndCat/UHT/StaffWeapon.gen.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="cidr-memory-view://0" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/NPC.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/NPCShop.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/Animation/MidBossAnim.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -92,8 +82,7 @@
     <setting file="file://$PROJECT_DIR$/Source/HumanAndCat/Public/Components/InventoryActorComponent.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/HumanAndCat/Public/DataAsset/Item.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/HumanAndCat/Public/DataAsset/ItemData.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../UE_5.4/Engine/Source/Runtime/Core/Public/Containers/Array.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../UE_5.4/Engine/Source/Runtime/CoreUObject/Public/UObject/Object.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Runtime/Windows/AudioMixerXAudio2/Private/AudioMixerPlatformXAudio2.h" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -107,9 +96,9 @@
   "keyToString": {
     ".NET Launch Settings Profile.EpicGames.AspNet.executor": "Run",
     "C++ Project.HumanAndCat.executor": "Run",
-    "C++ 프로젝트.HumanAndCat.executor": "Debug",
+    "C++ 프로젝트.HumanAndCat.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "LCU.ver.0.10",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -609,6 +598,7 @@
       <workItem from="1728132682774" duration="79000" />
       <workItem from="1728136564456" duration="2213000" />
       <workItem from="1728189049682" duration="17817000" />
+      <workItem from="1728261342340" duration="16904000" />
     </task>
     <servers />
   </component>

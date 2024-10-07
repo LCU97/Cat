@@ -68,6 +68,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Combat")
 	bool bInCombat = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Combat")
+	bool bIsTarget = false;
+	
 	// 실제 타겟팅 액터
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Target")
 	AActor* TargetActor = nullptr;

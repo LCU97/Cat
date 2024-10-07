@@ -70,4 +70,13 @@ public:
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	bool bAttackable;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	TArray<class ABaseEnemy* > EnemyActors;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float AttackStat;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	FName AttackSocket;
 };
