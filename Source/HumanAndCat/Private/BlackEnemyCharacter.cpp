@@ -3,6 +3,7 @@
 
 #include "BlackEnemyCharacter.h"
 #include "BlackEnemyAIController.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
 ABlackEnemyCharacter::ABlackEnemyCharacter()
@@ -64,12 +65,14 @@ void ABlackEnemyCharacter::WhenItHit()
         }
 
         // 애니메이션 몽타주를 런타임에서 로드
-        UAnimMontage* HitMontage = LoadObject<UAnimMontage>(nullptr, TEXT("/Game/SJS/EnemyAnimations/Anim_Dame_2_Montage.Anim_Dame_2_Montage"));
+        UAnimMontage* HitMontage = LoadObject<UAnimMontage>(nullptr, TEXT("/Script/Engine.AnimMontage'/Game/SJS/EnemyAnimations/Anim_Dame_2_Montage.Anim_Dame_2_Montage'"));
 
         if (HitMontage && AnimInstance)
         {
             AnimInstance->Montage_Play(HitMontage);
         }
+
+        GetCharacterMovement()->MaxWalkSpeed = 0;
 
         HitTime = true;
         GetWorld()->GetTimerManager().SetTimer(
@@ -84,7 +87,7 @@ void ABlackEnemyCharacter::WhenItHit()
     if (EnemyStat.Hp <= 0)
     {
         // 죽는 애니메이션 몽타주를 런타임에서 로드
-        UAnimMontage* DieMontage = LoadObject<UAnimMontage>(nullptr, TEXT("/Game/SJS/EnemyAnimations/Anim_Death_Montage.Anim_Death_Montage"));
+        UAnimMontage* DieMontage = LoadObject<UAnimMontage>(nullptr, TEXT("/Script/Engine.AnimMontage'/Game/SJS/EnemyAnimations/Anim_Death_Montage.Anim_Death_Montage'"));
 
         if (AnimInstance && AnimInstance->Montage_IsPlaying(nullptr))
         {
@@ -95,6 +98,8 @@ void ABlackEnemyCharacter::WhenItHit()
         {
             AnimInstance->Montage_Play(DieMontage);
         }
+
+        GetCharacterMovement()->MaxWalkSpeed = 0;
 
         // 2초 뒤에 캐릭터를 파괴하는 타이머 설정
         GetWorld()->GetTimerManager().SetTimer(
@@ -121,5 +126,6 @@ void ABlackEnemyCharacter::OnDeathMontageFinished()
 
 void ABlackEnemyCharacter::OnHit()
 {
-    HitTime = true;
+    HitTime = false;
+    GetCharacterMovement()->MaxWalkSpeed = 600;
 }
