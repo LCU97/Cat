@@ -22,4 +22,9 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+public:
+	virtual void SkillAttack(TSubclassOf<ASkillActor> SkillActor) override;
+	virtual void SkillAttack2(TSubclassOf<ASkillActor> SkillActor) override;
+	
 };

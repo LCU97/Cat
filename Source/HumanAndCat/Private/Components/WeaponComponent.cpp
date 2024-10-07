@@ -108,13 +108,14 @@ void UWeaponComponent::UpdateAbilities()
 void UWeaponComponent::RegisterStateAndAbility(ABaseWeapon* CheckingWeaponType)
 {
 	if(!CheckingWeaponType) return;
-
+	
 	if(WeaponTypes.IsEmpty()) return;
 
 	for(auto WeaponType : WeaponTypes)
 	{
 		if(WeaponType.Key == CheckingWeaponType->WeaponTag)
 		{
+			CheckingWeaponType->SetWeaponManager(this);
 			if(IsValid(CurrentWeapon))
 			{				
 				CurrentWeaponTag = FGameplayTag();
@@ -183,7 +184,16 @@ void UWeaponComponent::UnregisterStateAndAility()
 		return;
 	}
 	CurrentWeapon->Destroy(); 
-	RegisterStateAndAbility(BasicWeaponInstanced);	
+	ABaseWeapon* BasicFistWeapon = GetWorld()->SpawnActor<ABaseWeapon>(BasicWeapon);
+
+	if(BasicFistWeapon)
+	{
+		BasicFistWeapon->SetWeaponManager(this);
+
+		RegisterStateAndAbility(BasicFistWeapon);
+		
+		BasicWeaponInstanced = BasicFistWeapon;
+	}	
 }
 
 void UWeaponComponent::Equip()

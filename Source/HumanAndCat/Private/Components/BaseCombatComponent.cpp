@@ -45,13 +45,18 @@ void UBaseCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	if(IsValid(TargetActor))
 	{
 		FindInRandgeTargets();
-
+		bIsTarget = false;
 		bool Localbool = FocusingTargets.Contains(TargetActor);
 
 		if(!Localbool)
 		{
 			DisableLockOn();
 		}
+	}
+	else if(!bIsTarget && !IsValid(TargetActor))
+	{
+		bIsTarget = true;
+		DisableLockOn();
 	}
 }
 
