@@ -38,7 +38,7 @@ void UMidBossFSM::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	FString logMsg = UEnum::GetValueAsString(mState);
-	GEngine->AddOnScreenDebugMessage(0, 1, FColor::Cyan, logMsg);
+	//GEngine->AddOnScreenDebugMessage(0, 1, FColor::Cyan, logMsg);
 	
 	switch(mState)
 	{

@@ -76,9 +76,9 @@ void ABaseEnemy::MonsterAttackTrace(FName MonsterSoket, float _EndPoint, float S
 	FCollisionShape SphereCollisionShape = FCollisionShape::MakeSphere(Size);
 
 	
-    DrawDebugLine(GetWorld(), _StartLocation, _EndLocation, FColor::Red, false, 2.f, 0, 1);
-    DrawDebugSphere(GetWorld(), _StartLocation, Size, 12, FColor::Green, false, 2.0f); // 시작점
-	DrawDebugSphere(GetWorld(), _EndLocation, Size, 12, FColor::Red, false, 2.0f);    // 끝점
+   //DrawDebugLine(GetWorld(), _StartLocation, _EndLocation, FColor::Red, false, 2.f, 0, 1);
+   //DrawDebugSphere(GetWorld(), _StartLocation, Size, 12, FColor::Green, false, 2.0f); // 시작점
+//DrawDebugSphere(GetWorld(), _EndLocation, Size, 12, FColor::Red, false, 2.0f);    // 끝점
 
 	// SweepSingleByChannel을 사용하여 구체 기반 충돌 감지
 	if (!bHasAttackedPlayer && GetWorld()->SweepSingleByChannel(_HitOut, _StartLocation, _EndLocation, FQuat::Identity, ECC_GameTraceChannel2, SphereCollisionShape, _TraceParams))
@@ -101,7 +101,7 @@ void ABaseEnemy::MonsterAttackTrace(FName MonsterSoket, float _EndPoint, float S
 				UGameplayStatics::ApplyDamage(_HitOut.GetActor(), EnemyA, GetController(), this, DamageType);
 
 				// 2초 후에 공격 상태 초기화DrawDebugSphere(GetWorld(), _StartLocation, Size, 12, FColor::Green, false, 2.0f); // 시작점
-				DrawDebugSphere(GetWorld(), _EndLocation, Size, 12, FColor::Red, false, 2.0f);    // 끝점
+				//DrawDebugSphere(GetWorld(), _EndLocation, Size, 12, FColor::Red, false, 2.0f);    // 끝점
 				GetWorldTimerManager().SetTimer(TimerHandle_ResetAttack, this, &ABaseEnemy::ResetAttack, 2.f, false);
 			}
 		}
