@@ -55,7 +55,7 @@ void UInventoryActorComponent::AddItemToInventory(FName ItemRowName, int32 quant
 		}
 		else
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Item %s is not stackable!"), *ItemRowName.ToString());
+			UE_LOG(LogTemp, Warning, TEXT("Item %s is not stackable!"), *ItemRowName.ToString()); 
 		}
 	}
 	else		// if it does not have an item
