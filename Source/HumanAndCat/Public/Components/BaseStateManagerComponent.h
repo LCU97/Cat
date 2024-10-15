@@ -64,12 +64,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void ClearStatesComponent();
-
-	UFUNCTION(BlueprintCallable)
-	void SetPreActivateState(UBaseStateObject* State) { PreActivateState = State; }
-
-	UFUNCTION(BlueprintCallable,BlueprintPure)
-	UBaseStateObject* GetPreActivateState() { return PreActivateState; }
 	
 public:
 	// 현재 캐릭터 상황에 따른 활성화되어있는 상태를 담는 배열
@@ -82,9 +76,4 @@ public:
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UBaseStateObject* CurrentActivateState;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	UBaseStateObject* PreActivateState;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool bIsSpecialAttack = false;
 };

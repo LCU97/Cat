@@ -27,7 +27,7 @@ void UHuman_UnEquipAbility::StartAbility_Implementation()
 
 	if(PCharacter)
 	{
-		PCharacter->GetCharacterMovement()->MaxWalkSpeed = 600.f;
+		PCharacter->GetCharacterMovement()->MaxWalkSpeed = 800.f;
 	}
 
 	UBaseCombatComponent* CombatComponent = PerformingActor->FindComponentByClass<UBaseCombatComponent>();
@@ -39,8 +39,6 @@ void UHuman_UnEquipAbility::StartAbility_Implementation()
 			CombatComponent->OnInCombatChanged.Broadcast(false);
 		}
 	}
-
-	
 }
 
 void UHuman_UnEquipAbility::EndAbility_Implementation()

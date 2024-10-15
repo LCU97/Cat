@@ -130,13 +130,13 @@ float UBaseCombatComponent::CalculateAngleFromCamera(AActor* Actor)
 {
 	FRotator DeltaRot;
 
-	if(TargetActor && OwnerCamera)
+	if(Actor && OwnerCamera)
 	{
 		AActor* PActor =  GetOwner();
 		UCameraManagerComponent* GameCamera = PActor->GetComponentByClass<UCameraManagerComponent>();
 		if(GameCamera)
 		{
-			FRotator RequireRot  = UKismetMathLibrary::FindLookAtRotation(GameCamera->InGameCamera->GetComponentLocation(), TargetActor->GetActorLocation());
+			FRotator RequireRot  = UKismetMathLibrary::FindLookAtRotation(GameCamera->InGameCamera->GetComponentLocation(), Actor->GetActorLocation());
 
 			ACharacter* PCharacter = Cast<ACharacter>(PActor);
 			DeltaRot = UKismetMathLibrary::NormalizedDeltaRotator(RequireRot, PCharacter->GetControlRotation());
@@ -188,7 +188,7 @@ void UBaseCombatComponent::LockOnTarget()
 	ACharacter* PCharacter = Cast<ACharacter>(PActor);
 	if(!PCharacter) return;
 	PCharacter->GetCharacterMovement()->bOrientRotationToMovement = false;
-	PCharacter->GetCharacterMovement()->MaxWalkSpeed = 300.f;
+	PCharacter->GetCharacterMovement()->MaxWalkSpeed = 450.f;
 	OnInFocusing.Broadcast(true);
 	USpringArmComponent* Arm = PCharacter->GetComponentByClass<USpringArmComponent>();
 	if(Arm)

@@ -25,21 +25,11 @@ void UHuman_AttackchargingState::StartState_Implementation()
 	TSubclassOf<UBaseAbilityObject> ChargingAbility = UHuman_AttackChargingAbility::StaticClass();
 	CurrentAbility = ChargingAbility;
 	AbilityManager->PerformAbilityOfClass(CurrentAbility);
-	StateManager->bIsSpecialAttack = true;
 }
 
 void UHuman_AttackchargingState::EndState_Implementation()
 {
 	Super::EndState_Implementation();
-	//UBaseStateObject* LocalIdle = StateManager->GetStateOfGameplayTag(StateTags::State_Idle);
-	//if(LocalIdle)
-	//{
-	//	if(!StateManager->TryChangeStateOfClass(LocalIdle->GetClass()))
-	//	{
-	//		UBaseStateObject* LocalRun = StateManager->GetStateOfGameplayTag(StateTags::State_Run);
-	//		StateManager->TryChangeStateOfClass(LocalRun->GetClass());
-	//	}
-	//}
 }
 
 void UHuman_AttackchargingState::TickState_Implementation(float DeltaTime)

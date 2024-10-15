@@ -25,18 +25,6 @@ UHuman_AttackState::UHuman_AttackState()
 
 bool UHuman_AttackState::CanPerformState_Implementation()
 {
-	/*if(StateManager->GetPreActivateState()->StateGameplayTag == StateTags::State_AttackCharge)
-	{
-		// 차징 어택 어빌리티를 실행합니다.
-		TSubclassOf<UBaseAbilityObject> SpecialAttackAbility = UHuman_SpecialAttackAbility::StaticClass();
-		AttackAbilities.AddUnique(SpecialAttackAbility);
-	}
-	else
-	{
-		// 노말 어빌리티를 실행합니다.
-		TSubclassOf<UBaseAbilityObject> NormalAttackAbility = UHuman_NormalAttackAbility::StaticClass();
-		AttackAbilities.AddUnique(NormalAttackAbility);
-	}*/
 	if(WantToAbility == AbilityTags::Ability_Attack_NormalAttack)
 	{
 		if(!AttackAbilities.IsEmpty())
@@ -55,7 +43,6 @@ bool UHuman_AttackState::CanPerformState_Implementation()
 			AttackAbilities.Empty();
 		}
 		AttackAbilities.AddUnique(SpecialAttackAbility);
-		StateManager->bIsSpecialAttack = false;
 	}
 	else if(WantToAbility == AbilityTags::Ability_Attack_UltimateAttack)
 	{
@@ -65,31 +52,8 @@ bool UHuman_AttackState::CanPerformState_Implementation()
 			AttackAbilities.Empty();
 		}
 		AttackAbilities.AddUnique(UltimateAttackAbility);
-		StateManager->bIsSpecialAttack = false;
 	}
 
-	
-	/*if(StateManager->bIsSpecialAttack)
-	{
-		// 차징 어택 어빌리티를 실행합니다.
-		TSubclassOf<UBaseAbilityObject> SpecialAttackAbility = UHuman_SpecialAttackAbility::StaticClass();
-		if(!AttackAbilities.IsEmpty())
-		{
-			AttackAbilities.Empty();
-		}
-		AttackAbilities.AddUnique(SpecialAttackAbility);
-		StateManager->bIsSpecialAttack = false;
-	}
-	else
-	{
-		if(!AttackAbilities.IsEmpty())
-		{
-			AttackAbilities.Empty();
-		}
-		// 노말 어빌리티를 실행합니다.
-		TSubclassOf<UBaseAbilityObject> NormalAttackAbility = UHuman_NormalAttackAbility::StaticClass();
-		AttackAbilities.AddUnique(NormalAttackAbility);
-	}*/
 	
 	return Super::CanPerformState_Implementation() && CheckAbilityExecute(AttackAbilities);
 }

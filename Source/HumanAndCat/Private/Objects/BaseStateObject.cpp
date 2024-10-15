@@ -136,7 +136,6 @@ void UBaseStateObject::RotateToTarget(float Alpha)
 
 bool UBaseStateObject::CanPerformState_Implementation()
 {
-	// 블루프린트에서 재정의
 	IGameplayTagAssetInterface* CastGameplayTagAssetInterface = Cast<IGameplayTagAssetInterface>(PerformingActor);
 	if (!CastGameplayTagAssetInterface) return false;
 

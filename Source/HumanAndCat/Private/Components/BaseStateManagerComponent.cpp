@@ -78,7 +78,6 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 				{
 					if(CurrentActivateState)
 					{
-						SetPreActivateState(CurrentActivateState);
 						CurrentActivateState->EndState();
 					}
 
@@ -93,7 +92,6 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 			{
 				if(CurrentActivateState)
 				{
-					SetPreActivateState(CurrentActivateState);
 					CurrentActivateState->EndState();
 				}
 				CurrentActivateState = LocalState;
@@ -120,7 +118,6 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 				{
 					if(CurrentActivateState)
 					{
-						SetPreActivateState(CurrentActivateState);
 						CurrentActivateState->EndState();
 					}
 
@@ -134,7 +131,6 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 			{
 				if(CurrentActivateState)
 				{
-					SetPreActivateState(CurrentActivateState);
 					CurrentActivateState->EndState();
 				}
 				CurrentActivateState = LocalState;
