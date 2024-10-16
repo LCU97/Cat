@@ -17,23 +17,22 @@ UAttackStateCommand::UAttackStateCommand()
 	
 }
 
-void UAttackStateCommand::ActionExecute_Implementation(const FInputPayLoad& InputPayLoad)
+void UAttackStateCommand::ActionExecute_Implementation(const UInputBufferingObject* BufferObject)
 {
-	UBaseStateObject* CurrentState = Cast<UBaseStateObject>(InputPayLoad.StateObject);
-	UBaseAbilityObject* CurrentAbility = Cast<UBaseAbilityObject>(InputPayLoad.AbilityObject);
+	UBaseStateObject* CurrentState = Cast<UBaseStateObject>(BufferObject->StateObject);
+	UBaseAbilityObject* CurrentAbility = Cast<UBaseAbilityObject>(BufferObject->AbilityObject);
 
 	if(!CurrentAbility || !CurrentState)
 		return;
 
 
-	ProcessInput(InputPayLoad, CurrentState,CurrentAbility);
-	
+	ProcessInput(BufferObject, CurrentState,CurrentAbility);
 }
 
-void UAttackStateCommand::ProcessInput(const FInputPayLoad& InputPayLoad, UBaseStateObject* CurrentState,
+void UAttackStateCommand::ProcessInput(const UInputBufferingObject* BufferObject, UBaseStateObject* CurrentState,
 	UBaseAbilityObject* CurrentAbility)
 {
-	FGameplayTag InputTag = InputPayLoad.Buffer->InputTag;
+	FGameplayTag InputTag = BufferObject->InputTag;
 	FGameplayTag CurrentAbilityTag = CurrentAbility->AbilityGameplayTag;
 
 	if(InputTag == InputTags::Input_NorMalAttack)
@@ -59,7 +58,7 @@ void UAttackStateCommand::ProcessInput(const FInputPayLoad& InputPayLoad, UBaseS
 }
 
 void UAttackStateCommand::HandleAttack(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,
-	UBaseAbilityObject* CurrentAbility)
+                                       UBaseAbilityObject* CurrentAbility)
 {
 	if(AbilityTag == AbilityTags::Ability_Attack_NormalAttack)
 	{

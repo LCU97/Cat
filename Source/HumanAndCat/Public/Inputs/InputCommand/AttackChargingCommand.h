@@ -20,9 +20,9 @@ class HUMANANDCAT_API UAttackChargingCommand : public UBaseCommand
 public:
 	UAttackChargingCommand();
 
-	virtual void ActionExecute_Implementation(const FInputPayLoad& InputPayLoad) override;
+	virtual void ActionExecute_Implementation(const UInputBufferingObject* BufferObject) override;
 
-	void ProcessInput(const FInputPayLoad& InputPayLoad, UBaseStateObject* CurrentState, UBaseAbilityObject* CurrentAbility);
+	void ProcessInput(const UInputBufferingObject* BufferObject, UBaseStateObject* CurrentState, UBaseAbilityObject* CurrentAbility);
 	void HandleMovement(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,UBaseAbilityObject* CurrentAbility);
 	void HandleDodge(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,UBaseAbilityObject* CurrentAbility);
 	void HandleSpecialAttack(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,UBaseAbilityObject* CurrentAbility);

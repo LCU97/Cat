@@ -83,7 +83,10 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 
 					
 					CurrentActivateState = LocalState;
-					
+					if(GEngine)
+					{
+						GEngine->AddOnScreenDebugMessage(0, 2.f, FColor::Green,FString::Printf(TEXT("%s"), *CurrentActivateState->StateGameplayTag.ToString()));
+					}
 					CurrentActivateState->StartState();
 					return true;
 				}

@@ -3,6 +3,8 @@
 
 #include "Inputs/InputComponent/InputManagerComponent.h"
 
+#include "Components/BaseAbilityManagerComponent.h"
+#include "Components/BaseStateManagerComponent.h"
 #include "Inputs/Handlers/InputHandler.h"
 #include "Inputs/InputBuffer/InputBufferingObject.h"
 
@@ -25,6 +27,10 @@ void UInputManagerComponent::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
+	OwnerController = Cast<AController>(GetOwner());
+	OwnerActor = OwnerController->GetPawn();
+	StateManagerComponent = OwnerController->GetComponentByClass<UBaseStateManagerComponent>();
+	AbilityManagerComponent = OwnerActor->GetComponentByClass<UBaseAbilityManagerComponent>();
 	
 }
 
@@ -49,7 +55,6 @@ void UInputManagerComponent::BufferCreateClose()
 
 	if(IsValid(InputHandler))
 	{
-		// 핸들 실행하고 정리 및 가비지 컬렉터에 알려주기 
 		InputHandler->ExecuteCommand();
 		InputHandler->ClearBuffering();
 		InputHandler->MarkAsGarbage();
@@ -68,10 +73,14 @@ void UInputManagerComponent::CreateBufferingObject(UInputAction* Input, FGamepla
 	{
 		return;
 	}
-
 	UInputBufferingObject* NewBuffer = NewObject<UInputBufferingObject>(GetOwner(), UInputBufferingObject::StaticClass());
 	NewBuffer->InputAction = Input;
 	NewBuffer->InputTag = Tag;
+	NewBuffer->OuterActor = OwnerActor;
+	NewBuffer->OuterController = OwnerController;
+	NewBuffer->InputManager = this;
+	NewBuffer->StateObject = StateManagerComponent->GetCurrentActivateState();
+	NewBuffer->AbilityObject = AbilityManagerComponent->GetCurrentAbility();
 
 	if(InputHandler->AddBufferingObject(NewBuffer))
 	{
@@ -79,6 +88,10 @@ void UInputManagerComponent::CreateBufferingObject(UInputAction* Input, FGamepla
 		{
 			BufferCreateClose();
 		}
+	}
+	else
+	{
+		NewBuffer->MarkAsGarbage();
 	}
 }
 

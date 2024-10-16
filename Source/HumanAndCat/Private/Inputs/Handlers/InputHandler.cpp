@@ -71,7 +71,7 @@ UInputBufferingObject* UInputHandler::SelectBufferingObjectByPriority()
 		}
 		else
 		{
-			break; // 이미 정렬되있으니 나가도 괜찮앙
+			break; // 이미 정렬되있으니 나가도 괜찮
 		}
 	}
 	if(PriorityBufferingObjects.Num()>1)
@@ -87,7 +87,7 @@ void UInputHandler::SetupCommand(FInputPayLoad& InputPayLoad)
 {
 	UBaseStateObject* CurrentState = Cast<UBaseStateObject>(InputPayLoad.StateObject);
 	if(!CurrentState)
-		return;;
+		return;
 
 	FGameplayTag& CurrentStateTag = CurrentState->StateGameplayTag;
 
@@ -100,34 +100,23 @@ void UInputHandler::SetupCommand(FInputPayLoad& InputPayLoad)
 	}
 }
 
-TUniquePtr<FInputPayLoad> UInputHandler::MakeInputPayload(AActor* OuterActor)
+void UInputHandler::SetupCommand(UInputBufferingObject* BufferObject)
 {
-	TUniquePtr<FInputPayLoad> NewInputPayLoad = MakeUnique<FInputPayLoad>();
+	if(!BufferObject->StateObject) return;
 
-	APawn* OuterPawn = Cast<APawn>(OuterActor);
-	AController* OuterController = OuterPawn->GetController();
+	FGameplayTag& CurrentStateTag = BufferObject->StateObject->StateGameplayTag;
+
 	
-	if(!OuterController)
+	if(StateCommandMap.Contains(CurrentStateTag))
 	{
-		return nullptr;
+		if(UBaseCommand* Command = StateCommandMap[CurrentStateTag])
+		{
+			BindCommand(Command);
+		}
 	}
-
-	NewInputPayLoad->OuterActor = OuterActor;
-	NewInputPayLoad->OuterController = OuterController;
-
-	NewInputPayLoad->InputManager = OuterController->GetComponentByClass<UInputManagerComponent>();
-	NewInputPayLoad->Buffer = SelectBufferingObject;
-
-	UBaseStateManagerComponent* StateManager = GetStateManager(NewInputPayLoad->OuterController);
-
-	UBaseAbilityManagerComponent* AbilityManager = GetAbilityManager(NewInputPayLoad->OuterActor);
-
-	NewInputPayLoad->StateObject = StateManager->GetCurrentActivateState();
-
-	NewInputPayLoad->AbilityObject = AbilityManager->GetCurrentAbility();
 	
-	return NewInputPayLoad;
 }
+
 
 UBaseStateManagerComponent* UInputHandler::GetStateManager(AController* Con)
 {
@@ -174,17 +163,15 @@ void UInputHandler::ExecuteCommand()
 	SelectBufferingObject = SelectInputBufferingObject();
 	if(!SelectBufferingObject) return;
 
-	TUniquePtr<FInputPayLoad> NewInputPayload = MakeInputPayload(OuterActor);
-
-	SetupCommand(*NewInputPayload);
-
-	if(!NewInputPayload) return;
+	SetupCommand(SelectBufferingObject);
+	
+	if(!SelectBufferingObject) return;
 
 	for(TScriptInterface<IInterface_InputCommand> InputCommand : InputCommands)
 	{
 		if(InputCommand.GetInterface() != nullptr)
 		{
-			InputCommand->Execute_ActionExecute( InputCommand.GetObject(),*NewInputPayload);
+			InputCommand->Execute_ActionExecute(InputCommand.GetObject(), SelectBufferingObject);
 		}
 	}
 	

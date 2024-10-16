@@ -15,21 +15,21 @@ UAttackChargingCommand::UAttackChargingCommand()
 {
 }
 
-void UAttackChargingCommand::ActionExecute_Implementation(const FInputPayLoad& InputPayLoad)
+void UAttackChargingCommand::ActionExecute_Implementation(const UInputBufferingObject* BufferObject)
 {
-	UBaseStateObject* CurrentState = Cast<UBaseStateObject>(InputPayLoad.StateObject);
-	UBaseAbilityObject* CurrentAbility = Cast<UBaseAbilityObject>(InputPayLoad.AbilityObject);
+	UBaseStateObject* CurrentState = Cast<UBaseStateObject>(BufferObject->StateObject);
+	UBaseAbilityObject* CurrentAbility = Cast<UBaseAbilityObject>(BufferObject->AbilityObject);
 
 	if(!CurrentState || !CurrentAbility) return;
 
-	ProcessInput(InputPayLoad, CurrentState, CurrentAbility);
+	ProcessInput(BufferObject, CurrentState, CurrentAbility);
 	
 }
 
-void UAttackChargingCommand::ProcessInput(const FInputPayLoad& InputPayLoad, UBaseStateObject* CurrentState,
+void UAttackChargingCommand::ProcessInput(const UInputBufferingObject* BufferObject, UBaseStateObject* CurrentState,
 	UBaseAbilityObject* CurrentAbility)
 {
-	FGameplayTag CurrentInputTag = InputPayLoad.Buffer->InputTag;
+	FGameplayTag CurrentInputTag = BufferObject->InputTag;
 	FGameplayTag CurrentAbilityTag = CurrentAbility->AbilityGameplayTag;
 	
 
@@ -45,7 +45,6 @@ void UAttackChargingCommand::ProcessInput(const FInputPayLoad& InputPayLoad, UBa
 	{
 		HandleDodge(CurrentState, CurrentAbilityTag, CurrentAbility);
 	}
-	
 }
 
 void UAttackChargingCommand::HandleMovement(UBaseStateObject* CurrentState, const FGameplayTag& AbilityTag,

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Inputs/Interface_InputCommand.h"
+#include "Inputs/InputBuffer/InputBufferingObject.h"
 #include "UObject/Object.h"
 #include "BaseCommand.generated.h"
 
@@ -18,5 +19,5 @@ class HUMANANDCAT_API UBaseCommand : public UObject, public IInterface_InputComm
 public:
 	UBaseCommand();
 
-	virtual void ActionExecute_Implementation(const FInputPayLoad& InputPayLoad) override;
+	virtual void ActionExecute_Implementation(const UInputBufferingObject* BufferingObject) override;
 };

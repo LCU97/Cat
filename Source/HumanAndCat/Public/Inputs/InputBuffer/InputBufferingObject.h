@@ -7,7 +7,11 @@
 #include "GameplayTagContainer.h"
 #include "InputBufferingObject.generated.h"
 
+class UBaseAbilityObject;
+class UInputManagerComponent;
+class UBaseStateObject;
 class UInputAction;
+
 /**
  * 
  */
@@ -27,4 +31,19 @@ public:
 
 	UPROPERTY(BlueprintReadWrite)
 	int32 Priority;
+
+	UPROPERTY(BlueprintReadWrite)
+	TObjectPtr<AActor> OuterActor;
+	
+	UPROPERTY(BlueprintReadWrite)
+	TObjectPtr<AController> OuterController;
+
+	UPROPERTY(BlueprintReadWrite)
+	TObjectPtr<UInputManagerComponent> InputManager;
+
+	UPROPERTY(BlueprintReadWrite)
+	TObjectPtr<UBaseStateObject> StateObject;
+
+	UPROPERTY(BlueprintReadWrite)
+	TObjectPtr<UBaseAbilityObject> AbilityObject;
 };

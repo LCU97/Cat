@@ -5,9 +5,10 @@
 
 UBaseCommand::UBaseCommand()
 {
+	
 }
 
-void UBaseCommand::ActionExecute_Implementation(const FInputPayLoad& InputPayLoad)
+void UBaseCommand::ActionExecute_Implementation(const UInputBufferingObject* BufferingObject)
 {
-	IInterface_InputCommand::ActionExecute_Implementation(InputPayLoad);
+	IInterface_InputCommand::ActionExecute_Implementation(BufferingObject);
 }

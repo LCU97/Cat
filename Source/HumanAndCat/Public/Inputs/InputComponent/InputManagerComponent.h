@@ -7,7 +7,8 @@
 #include "GameplayTagContainer.h"
 #include "InputManagerComponent.generated.h"
 
-
+class UBaseStateManagerComponent;
+class UBaseAbilityManagerComponent;
 class UInputHandler;
 class UInputAction;
 
@@ -56,5 +57,18 @@ public:
 
 	UPROPERTY()
 	UInputHandler* InputHandler;
+
+	UPROPERTY()
+	AActor* OwnerActor;
+
+	UPROPERTY()
+	AController* OwnerController;
+
+	UPROPERTY()
+	UBaseStateManagerComponent* StateManagerComponent;
+
+	UPROPERTY()
+	UBaseAbilityManagerComponent* AbilityManagerComponent;
+
 	
 };
