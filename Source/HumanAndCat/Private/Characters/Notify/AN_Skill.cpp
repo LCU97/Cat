@@ -36,6 +36,6 @@ void UAN_Skill::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Anim
 				break;
 			}
 		default:
-			break;;
+			break;
 	}
 }

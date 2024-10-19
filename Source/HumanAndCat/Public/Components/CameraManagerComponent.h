@@ -72,49 +72,38 @@ public:
 	void InitCameraMovingLerp();
 	//타겟팅 end
 
-public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera|InGameCamera")
+	UFUNCTION()
+	UBaseCameraComponent* GetInGameCamera() {return InGameCamera;};
+	
+private:	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera|InGameCamera", meta = (AllowPrivateAccess = "true"))
 	UBaseCameraComponent* InGameCamera;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite,Category = "Camera|UltimateCamera")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,Category = "Camera|UltimateCamera", meta = (AllowPrivateAccess = "true"))
 	UBaseCameraComponent* UltimateCamera;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
+	UPROPERTY(EditAnywhere, Category = "Camera")
 	UBaseCameraComponent* CurrentCamera;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	UPROPERTY()
 	bool bIsInBox =true;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	UPROPERTY(EditAnywhere, Category = "Combat")
 	class UBaseCombatComponent* CombatComponent;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		
+	UPROPERTY(EditAnywhere, Category = "Combat")
 	class USpringArmComponent* ArmComponent;
+
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAccess = "true"))
 	bool bIsTarget = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	UPROPERTY(EditAnywhere,  Category = "Combat")
 	bool bLerping = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	UPROPERTY(EditAnywhere,  Category = "Combat")
 	bool SetInitTime =false;
 		
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
-	//float FwdBakTimeDuration = 1.f;
-	//
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
-	//float FwdBakCurrentTime = 0.f;
-//
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
-	//float FwdBakMoveStart = -1.f;
-//
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
-	//bool bFwdBakLerping = false;
-	//
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite,Category = "Combat")
-	//class UCurveFloat* FwdBakTimeCurve;
-
 	// 궁극기 카메라 관련
 	UPROPERTY()
 	float UltiLerpDuration= -1;
@@ -123,6 +112,8 @@ public:
 	float UltiMovintStartTime;
 	// 궁극기 카메라 관련 End
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY()
 	APlayerController* PCon;
+	
+	float StandardDis =500.f;
 };

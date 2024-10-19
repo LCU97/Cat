@@ -140,22 +140,6 @@ FVector UCameraManagerComponent::CalNewPositionUltiCamera(FVector P0, FVector P1
 	return point;
 }
 
-//void UCameraManagerComponent::FwdBakMoveCheck()
-//{
-//	FVector ActorLocation = FVector(GetOwner()->GetActorLocation().X, GetOwner()->GetActorLocation().Y, GetOwner()->GetActorLocation().Z + 60.f);
-//	
-//	float Dis = FVector::Dist(ActorLocation, CurrentCamera->GetComponentLocation());
-//	
-//	
-//	if(Dis >= 350.f || Dis <= 250.f)
-//	{
-//		if(FwdBakMoveStart <= 0.f)
-//		{
-//			bFwdBakLerping = true;
-//			FwdBakMoveStart = GetWorld()->GetTimeSeconds();
-//		}
-//	}
-//}
 
 void UCameraManagerComponent::InGameLockOn()
 {
@@ -163,14 +147,13 @@ void UCameraManagerComponent::InGameLockOn()
 	if(!CombatComponent) return;
 	if(!CombatComponent->TargetActor) bIsTarget = false;
 	
-	FVector TargetLocation = CombatComponent->TargetActor->GetActorLocation();
-	
+	FVector TargetLocation = CombatComponent->TargetActor->GetActorLocation();	
 	FRotator Rot = UKismetMathLibrary::FindLookAtRotation(GetOwner()->GetActorLocation(), TargetLocation);
 	
 	float Dis = FVector::Distance( TargetLocation,GetOwner()->GetActorLocation());
-
 	float Alpha;
-	if(Dis > 500.f)
+	
+	if(Dis > StandardDis)
 	{
 		Alpha = 0.2f;
 	}
@@ -178,34 +161,17 @@ void UCameraManagerComponent::InGameLockOn()
 	{
 		Alpha = 0.4f;
 	}
-
 	ACharacter* PCharacter = Cast<ACharacter>(GetOwner());
 	if(!PCharacter) return;
-	
-	//AController* PCon = PCharacter->GetController();
-	//if(!PCon) return;
 	
 	FRotator PRot = PCon->GetControlRotation();
 	FRotator CalRot = UKismetMathLibrary::RLerp(Rot,PRot , Alpha, true);
 
-	float Pit = UKismetMathLibrary::Clamp(CalRot.Pitch, -15.f, 30.f);
-
-	//FRotator FinalRot = FRotator(Pit, CalRot.Yaw, PRot.Roll);
 	FRotator FinalRot = FRotator(PRot.Pitch, CalRot.Yaw, PRot.Roll);
 								// Pit, CalRot.Yaw, PRot.Roll
 	PCon->SetControlRotation(FinalRot);
-
-
 	// 타겟팅 시작 후 뷰 스페이스와 관련된 카메라 무빙
 	TargetingCameraMoving(PCharacter);
-
-	// 앞뒤 관련 카메라 무빙 여부 체킹
-	//FwdBakMoveCheck();
-	//
-	//// 타겟팅 시작하면서 카메롸 캐릭터 거리에 따른 카메라 무빙
-	////FwdBakLerp(StartLerpCharacterPos, ArmComponent);
-	//FVector ActorLocation = FVector(GetOwner()->GetActorLocation().X, GetOwner()->GetActorLocation().Y, GetOwner()->GetActorLocation().Z + 60.f);
-	//FwdBakLerp(ActorLocation, ArmComponent);
 }
 
 void UCameraManagerComponent::InGameLockDown()
@@ -215,37 +181,11 @@ void UCameraManagerComponent::InGameLockDown()
 	if(!CombatComponent->TargetActor) return;
 }
 
-//oid UCameraManagerComponent::FwdBakLerp(FVector ActorLocation, USpringArmComponent* Arm)
-//
-//	if(FwdBakMoveStart < 0 ) return;
-//	if(bLerping) return;
-//	
-//	float Ratio = GetWorld()->GetTimeSeconds() - FwdBakMoveStart;
-
-//	if(Ratio <= 1.f)
-//	{
-//		float Alpha = Ratio/1.f;
-//		
-//		float EaseAlpha = FMath::InterpEaseOut(0.0f, 1.0f, Alpha, 1.0f);
-//		float Delta = GetWorld()->GetDeltaSeconds();
-//		
-//		//FVector NewLocation = FMath::VInterpTo(Arm->GetComponentLocation(), ActorLocation, Delta * 3.f, EaseAlpha);
-//		FVector NewLocation = FMath::Lerp(Arm->GetComponentLocation(), ActorLocation, Alpha);
-//		Arm->SetWorldLocation(NewLocation);
-//	}
-//	else
-//	{
-//		bFwdBakLerping = true;
-//		FwdBakMoveStart = -1.f;
-//	}
-//
 
 void UCameraManagerComponent::TargetingCameraMoving(ACharacter* PCharacter)
 {
 	if(!PCharacter) return;
-	//APlayerController* PCon = Cast<APlayerController>(PCharacter->GetController());
-	//if(!PCon) return;
-	
+
 	FVector2D ScreenSize;
 	int32 x;
 	int32 y;
@@ -255,10 +195,8 @@ void UCameraManagerComponent::TargetingCameraMoving(ACharacter* PCharacter)
 	ScreenSize.Y = (float)y;
 
 	// 스크린 좌표를 이용한 카메라 움직임
-	FVector ActorLocation = FVector(PCharacter->GetActorLocation().X, PCharacter->GetActorLocation().Y, PCharacter->GetActorLocation().Z + 60.f);
-	
-	FVector2D ScreenPosition;
-	
+	FVector ActorLocation = FVector(PCharacter->GetActorLocation().X, PCharacter->GetActorLocation().Y, PCharacter->GetActorLocation().Z + 60.f);	
+	FVector2D ScreenPosition;	
 	FVector2D ScreenCenter(ScreenSize.X/2.f, ScreenSize.Y/2.f);
 	
 	bool bIsOnScreen = PCon->ProjectWorldLocationToScreen(ActorLocation, ScreenPosition);
@@ -270,9 +208,6 @@ void UCameraManagerComponent::TargetingCameraMoving(ACharacter* PCharacter)
 	//PCon->DeprojectScreenPositionToWorld()
 	if(bIsOnScreen)
 	{
-		
-		
-		
 		bIsInBox =
 			((ScreenPosition.X >= ScreenCenter.X - HalfWidth && ScreenPosition.X <= ScreenCenter.X + HalfWidth) &&
 			(ScreenPosition.Y >= ScreenCenter.Y - HalfHeight && ScreenPosition.Y <= ScreenCenter.Y + HalfHeight));
@@ -280,13 +215,12 @@ void UCameraManagerComponent::TargetingCameraMoving(ACharacter* PCharacter)
 		// 스크린 좌표의 특정 영역 안에 들어왔어요.
 		if(bIsInBox)
 		{			
-			//USpringArmComponent* Arm = PCharacter->GetComponentByClass<USpringArmComponent>();
-			//Arm->SetRelativeLocation(FVector(0.f, 0.f, 60.f));
+			
 		}
 		// 영역 밖입니다. 
 		else
 		{
-			//bFwdBakLerping = false;
+			
 			bLerping = true;
 			if(!SetInitTime)
 			{
@@ -300,16 +234,11 @@ void UCameraManagerComponent::TargetingCameraMoving(ACharacter* PCharacter)
 	USpringArmComponent* Arm = PCharacter->GetComponentByClass<USpringArmComponent>();
 	if(bLerping)
 	{
-		//if(bFwdBakLerping) return;
+		
 		if(Arm)
 		{
 			FVector CurrentLocation = Arm->GetComponentLocation();
 			
-			//float Distance = FVector2D::Distance(ScreenPosition, ScreenCenter);
-			//UE_LOG(LogTemp, Display, TEXT("Distance : %f"), Distance);
-			//float Alpha = FMath::Clamp(Distance / 350.0f, 0.0f, 1.0f);
-			//Alpha = FMath::Pow(Alpha, 2);
-
 			float Distance = FVector::Dist(CurrentLocation, ActorLocation);
 			float Alpha = FMath::Clamp(Distance / 140.0f, 0.0f, 1.0f);
 			
@@ -320,8 +249,6 @@ void UCameraManagerComponent::TargetingCameraMoving(ACharacter* PCharacter)
 			Arm->SetWorldLocation(NewLocation);
 		}
 	}
-
-	
 }
 
 void UCameraManagerComponent::InitCameraMovingLerp()

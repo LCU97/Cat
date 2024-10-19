@@ -116,15 +116,8 @@ void UBaseStateObject::RotateToTarget(float Alpha)
 	const AActor* TargetActor = CombatManager->TargetActor;
 	if(!IsValid(TargetActor)) return;
 
-	FVector OwnerLocation = OwnerCharacter->GetActorLocation();
-	FVector TargetLocation = TargetActor->GetActorLocation();
-
-	FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(OwnerLocation, TargetLocation);	
 	FRotator OwnerRotation = OwnerCharacter->GetControlRotation();
-
-	FRotator Rot = UKismetMathLibrary::RLerp(OwnerRotation, LookAtRotation, Alpha, true);
-	FRotator FinalRot = FRotator(0.f, OwnerRotation.Yaw, 0.f);
-	
+	FRotator FinalRot = FRotator(0.f, OwnerRotation.Yaw, 0.f);	
 	OwnerCharacter->SetActorRotation(FinalRot, ETeleportType::TeleportPhysics);
 }
 

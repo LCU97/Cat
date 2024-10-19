@@ -15,19 +15,6 @@ UCLASS()
 class HUMANANDCAT_API ABaseWeapon : public AActor
 {
 	GENERATED_BODY()
-
-public:
-	// Sets default values for this actor's properties
-	ABaseWeapon();
-
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
 public:
 	// Get Set
 
@@ -79,4 +66,17 @@ public:
 	
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	FName AttackSocket;
+
+public:
+	// Sets default values for this actor's properties
+	ABaseWeapon();
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+public:
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
 };

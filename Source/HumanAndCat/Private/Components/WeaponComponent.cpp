@@ -72,7 +72,8 @@ void UWeaponComponent::InitWeaponComponent()
 
 void UWeaponComponent::UpdateStates()
 {
-	UBaseStateManagerComponent* StateManagerComponent = OwnerCharacter->GetController()->GetComponentByClass<UBaseStateManagerComponent>();
+	UBaseStateManagerComponent* StateManagerComponent =
+		OwnerCharacter->GetController()->GetComponentByClass<UBaseStateManagerComponent>();
 	if(StateManagerComponent)
 	{
 		StateManagerComponent->ClearStatesComponent();
@@ -92,7 +93,8 @@ void UWeaponComponent::UpdateStates()
 
 void UWeaponComponent::UpdateAbilities()
 {
-	UBaseAbilityManagerComponent* AbilityManagerComponent = OwnerCharacter->GetComponentByClass<UBaseAbilityManagerComponent>();
+	UBaseAbilityManagerComponent* AbilityManagerComponent =
+		OwnerCharacter->GetComponentByClass<UBaseAbilityManagerComponent>();
 	if(AbilityManagerComponent)
 	{
 		AbilityManagerComponent->ClearAbilityManager();
@@ -105,7 +107,8 @@ void UWeaponComponent::UpdateAbilities()
 	}
 }
 
-void UWeaponComponent::RegisterStateAndAbility(ABaseWeapon* CheckingWeaponType)
+void UWeaponComponent::
+RegisterStateAndAbility(ABaseWeapon* CheckingWeaponType)
 {
 	if(!CheckingWeaponType) return;
 	
@@ -129,22 +132,12 @@ void UWeaponComponent::RegisterStateAndAbility(ABaseWeapon* CheckingWeaponType)
 			CurrentWeaponType = WeaponType.Value;
 			CurrentWeaponName = CurrentWeaponType->WeaponName;
 			CurrentWeaponLength = CheckingWeaponType->TraceLength;
-
 			
-
 			// 상태 업데이트 및 Idle 상태로 시작
 			UpdateStates();
 
 			UpdateAbilities();
 
-			// 애니메이션에게 무기가 바뀌었음을 알려주기
-			//if(OnWeaponNameChanged.IsBound())
-			//{
-			//	OnWeaponNameChanged.Broadcast(CurrentWeaponName);
-			//}
-
-
-			// 임시 방편
 			AActor* ActorOwner = GetOwner();
 			if(ActorOwner)
 			{
@@ -161,8 +154,7 @@ void UWeaponComponent::RegisterStateAndAbility(ABaseWeapon* CheckingWeaponType)
 						}
 					}
 				}
-			}
-			// 처음에는 장착 안한 상태
+			}			
 			if(bEquip)
 			{
 				Equip();

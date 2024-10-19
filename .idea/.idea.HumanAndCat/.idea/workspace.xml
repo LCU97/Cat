@@ -13,25 +13,17 @@
   <component name="ChangeListManager">
     <list default="true" id="33d8500d-1c93-4f90-be68-fe8210d74008" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HumanAndCat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/DreamscapeSeries/DreamscapeTower/Maps/DemoMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/DreamscapeSeries/DreamscapeTower/Maps/DemoMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Montages/Sword_NormalAttack1_Montage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/Animation/Human/Sword/Montages/Sword_NormalAttack1_Montage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/Blueprints/Character/Human/BP_HumanController.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/LCU/LCUMaps/TESTMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/LCU/LCUMaps/TESTMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/BaseStateManagerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/BaseStateManagerComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Inputs/Handlers/InputHandler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Inputs/Handlers/InputHandler.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Inputs/InputCommand/AttackChargingCommand.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Inputs/InputCommand/AttackChargingCommand.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Inputs/InputCommand/AttackStateCommand.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Inputs/InputCommand/AttackStateCommand.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Inputs/InputCommand/BaseCommand.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Inputs/InputCommand/BaseCommand.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Inputs/InputComponent/InputManagerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Inputs/InputComponent/InputManagerComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/Notify/AN_Skill.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/Notify/AN_Skill.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/BaseCombatComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/BaseCombatComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/CameraManagerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/CameraManagerComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/WeaponComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Components/WeaponComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Objects/BaseStateObject.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Objects/BaseStateObject.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Inputs/Handlers/InputHandler.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Inputs/Handlers/InputHandler.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Inputs/InputBuffer/InputBufferingObject.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Inputs/InputBuffer/InputBufferingObject.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Inputs/InputCommand/AttackChargingCommand.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Inputs/InputCommand/AttackChargingCommand.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Inputs/InputCommand/AttackStateCommand.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Inputs/InputCommand/AttackStateCommand.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Inputs/InputCommand/BaseCommand.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Inputs/InputCommand/BaseCommand.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Inputs/InputComponent/InputManagerComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Inputs/InputComponent/InputManagerComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Inputs/Interface_InputCommand.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Inputs/Interface_InputCommand.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Private/Weapons/StaffWeapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Private/Weapons/StaffWeapon.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Actor/SkillActor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Actor/SkillActor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Components/BaseCombatComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Components/BaseCombatComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Components/CameraManagerComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Components/CameraManagerComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Components/WeaponComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Components/WeaponComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/BaseWeapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/HumanAndCat/Public/Weapons/BaseWeapon.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,13 +37,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="cidr-memory-view://0" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/NPC.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/HumanAndCat/Private/Actor/NPCShop.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/HumanAndCat/Private/Characters/Animation/MidBossAnim.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -66,6 +51,7 @@
     <setting file="file://$PROJECT_DIR$/Source/HumanAndCat/Public/DataAsset/Item.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/HumanAndCat/Public/DataAsset/ItemData.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Editor/MaterialEditor/Private/MaterialEditor.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Editor/UnrealEd/Classes/Settings/LevelEditorPlaySettings.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Programs/AutomationTool/Android/AndroidPlatform.Automation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Programs/Shared/EpicGames.UBA/IServer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://D:/Epic Games/UE_5.4/Engine/Source/Runtime/CoreUObject/Private/UObject/ScriptCore.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -85,21 +71,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.EpicGames.AspNet.executor": "Run",
-    "C++ Project.HumanAndCat.executor": "Run",
-    "C++ 프로젝트.HumanAndCat.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "LCU.ver.0.13",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.EpicGames.AspNet.executor&quot;: &quot;Run&quot;,
+    &quot;C++ Project.HumanAndCat.executor&quot;: &quot;Run&quot;,
+    &quot;C++ 프로젝트.HumanAndCat.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;LCU.ver.0.13&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="C++ 프로젝트.HumanAndCat">
     <configuration name="HumanAndCat" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -600,6 +586,7 @@
       <workItem from="1728955700535" duration="1246000" />
       <workItem from="1728967515702" duration="13055000" />
       <workItem from="1729036952892" duration="25322000" />
+      <workItem from="1729123899913" duration="18198000" />
     </task>
     <servers />
   </component>

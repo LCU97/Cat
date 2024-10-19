@@ -75,13 +75,12 @@ void UBaseCombatComponent::FindInRandgeTargets()
 {
 	TArray<AActor*> FoundActors;
 	TArray<AActor*> IgnoreActors;
-
 	IgnoreActors.Add(GetOwner());
 
-	UKismetSystemLibrary::SphereOverlapActors(GetOwner(), GetOwner()->GetActorLocation(), TargetingRadius,TargetsType, TargetClass, IgnoreActors,FoundActors);
+	UKismetSystemLibrary::SphereOverlapActors(GetOwner(), GetOwner()->GetActorLocation(),
+		TargetingRadius,TargetsType, TargetClass, IgnoreActors,FoundActors);
 
 	TArray<AActor*> EnableActors;
-
 	for(AActor*& Enemy : FoundActors)
 	{
 		if ( CanBeTargeted(Enemy))
@@ -104,8 +103,7 @@ void UBaseCombatComponent::SelectTarget()
 			{
 				LocalEnableTargets.Add(Target, UKismetMathLibrary::Abs(CalculateAngleFromCamera(Target)));
 			}
-		}
-		
+		}		
 		if(LocalEnableTargets.Num()>0)
 		{
 			TArray<AActor*> LocalActors;
@@ -136,13 +134,12 @@ float UBaseCombatComponent::CalculateAngleFromCamera(AActor* Actor)
 		UCameraManagerComponent* GameCamera = PActor->GetComponentByClass<UCameraManagerComponent>();
 		if(GameCamera)
 		{
-			FRotator RequireRot  = UKismetMathLibrary::FindLookAtRotation(GameCamera->InGameCamera->GetComponentLocation(), Actor->GetActorLocation());
+			FRotator RequireRot  = UKismetMathLibrary::FindLookAtRotation(GameCamera->GetInGameCamera()->GetComponentLocation(), Actor->GetActorLocation());
 
 			ACharacter* PCharacter = Cast<ACharacter>(PActor);
 			DeltaRot = UKismetMathLibrary::NormalizedDeltaRotator(RequireRot, PCharacter->GetControlRotation());
 		}
-	}
-	
+	}	
 	return UKismetMathLibrary::Abs(UKismetMathLibrary::Abs(DeltaRot.Yaw) + UKismetMathLibrary::Abs(DeltaRot.Pitch));
 }
 
@@ -198,13 +195,9 @@ void UBaseCombatComponent::LockOnTarget()
 		if(Mode)
 		{
 			Arm->AttachToComponent(Mode->GetRootComponent(), FAttachmentTransformRules::KeepWorldTransform);
-			//FVector Location = PCharacter->GetActorLocation();
-			//Location.Z += 60.f;
-			//Arm->SetWorldLocation(Location);
 		}
 		Arm->bEnableCameraLag = false;
 	}
-
 }
 
 bool UBaseCombatComponent::CanBeTargeted(AActor* Target)

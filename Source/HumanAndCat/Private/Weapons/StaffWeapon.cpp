@@ -61,15 +61,11 @@ void AStaffWeapon::SkillAttack(TSubclassOf<ASkillActor> SkillActor)
 	Super::SkillAttack(SkillActor);
 
 	ACharacter* PCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(),0);
-
 	if(!PCharacter) return;
 	
 	FTransform SpawnTransform;
-
 	FRotator StartRotator = PCharacter->GetControlRotation();
-
 	FRotator SpawnRotator = FRotator(0, StartRotator.Yaw, 0);
-
 	FVector ForwardVec = PCharacter->GetActorForwardVector();
 
 	FVector SpawnLocation = PCharacter->GetActorLocation() + (ForwardVec * 1000.f);
@@ -77,7 +73,6 @@ void AStaffWeapon::SkillAttack(TSubclassOf<ASkillActor> SkillActor)
 
 	SpawnTransform.SetLocation(SpawnLocation);
 	SpawnTransform.SetRotation(SpawnRotator.Quaternion());
-
 	if(SkillActor)
 	{
 		ASkillActor* SpawnedSkill = GetWorld()->SpawnActor<ASkillActor>(SkillActor, SpawnTransform);

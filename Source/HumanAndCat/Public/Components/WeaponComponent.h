@@ -59,7 +59,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetCurrentWeaponTag(FGameplayTag Tags) {CurrentWeaponTag = Tags;}
-	public:
+
 	// WeaponComponent Func
 	UFUNCTION(BlueprintCallable)
 	void RegisterStateAndAbility(ABaseWeapon* CheckingWeaponType);

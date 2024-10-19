@@ -62,14 +62,18 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Set")
 	void SetInCombat(bool NewCombet) { bInCombat = NewCombet; }
 
-public:
+private:
+	
 
 	// 공격 상태 확인 변수
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Combat")
+	UPROPERTY(EditAnywhere, Category="Combat")
 	bool bInCombat = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Combat")
+	UPROPERTY(EditAnywhere, Category="Combat")
 	bool bIsTarget = false;
+
+	
+public:
 	
 	// 실제 타겟팅 액터
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Target")
