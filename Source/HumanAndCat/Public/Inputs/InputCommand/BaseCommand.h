@@ -19,5 +19,6 @@ class HUMANANDCAT_API UBaseCommand : public UObject, public IInterface_InputComm
 public:
 	UBaseCommand();
 
-	virtual void ActionExecute_Implementation(const UInputBufferingObject* BufferingObject) override;
+	// 커맨드 패턴을 활용하기 위한 Excute 함수 입니다.
+	virtual void ActionExecute_Implementation(UInputBufferingObject* BufferingObject) override;
 };

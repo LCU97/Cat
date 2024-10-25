@@ -26,10 +26,12 @@ protected:
 	UInputManagerComponent* GetOwnerInputManagerComponent(USkeletalMeshComponent* MeshComp) const;
 
 protected:
+	// 설정된 핸들러 입니다.
 	UPROPERTY(Instanced, BlueprintReadOnly, EditAnywhere, Category="ANS Buffer Input")
 	UInputHandler* InputCommandHandler;
 
 private:
+	// 새로 복제 받을 핸들러 입니다.
 	UPROPERTY()
 	UInputHandler* NewInputCommandHandler;
 	

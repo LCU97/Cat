@@ -34,20 +34,23 @@ void UBaseStateManagerComponent::TickComponent(float DeltaTime, ELevelTick TickT
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	// 현재 활성화 중인 State 에서 Frame 별로 적용되야할 함수를 불러옵니다.
 	if(CurrentActivateState)
 	{
 		CurrentActivateState->TickState((DeltaTime));
 	}
 }
 
+// State 를 변경합니다. 이때, Condition 은 고려하지 않습니다. (false)
 void UBaseStateManagerComponent::ChangeStateOfClass(TSubclassOf<UBaseStateObject> State)
 {
 	TryChangeStateOfClass(State, false);
 }
 
+// GamePlayTag 를 활용해 State 변경 시도합니다.
 bool UBaseStateManagerComponent::TryChangeStateOfTag(FGameplayTag StateGameplayTag, bool Condition, FGameplayTag AbilityTag)
 {
+	// Tag 를 이용해 원하는 State 를 찾고 해당 State 로 변경 시도 합니다.
 	if(UBaseStateObject* ChangeState = GetStateOfGameplayTag(StateGameplayTag))
 	{
 		return TryChangeStateOfClass(ChangeState->GetClass(), Condition, AbilityTag);
@@ -59,11 +62,14 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 {
 	if(State)
 	{
+		// 활성화되어 있는 State 들 중에 원하는 State 가 있다면 가져옵니다.
 		UBaseStateObject* LocalState = nullptr;
 		GetStateOfClass(State, LocalState);
 
 		if(LocalState)
 		{
+			// 해당 State 가 UInterface_IndividualStatteFunc 를 상속 받았다면
+			// 매개변수 AbilityTag 를 이용해 사용할 Ability 를 미리 State 에게 알려줍니다.
 			if(LocalState->Implements<UInterface_IndividualStatteFunc>())
 			{
 				IInterface_IndividualStatteFunc* IndividualStatteFunc = Cast<IInterface_IndividualStatteFunc>(LocalState);
@@ -72,27 +78,26 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 					IndividualStatteFunc->SetWantAbilityTag(AbilityTag);
 				}
 			}
+			// Condition 이 true 라면 상태 변환이 가능한지 체크 합니다.
 			if(Condition)
 			{
 				if(LocalState->CanPerformState())
 				{
+					// 상태 변환이 가능하므로 현재 상태를 End 합니다.
 					if(CurrentActivateState)
 					{
 						CurrentActivateState->EndState();
 					}
-
-					
+					// 상태를 변경합니다.
 					CurrentActivateState = LocalState;
-					if(GEngine)
-					{
-						GEngine->AddOnScreenDebugMessage(0, 2.f, FColor::Green,FString::Printf(TEXT("%s"), *CurrentActivateState->StateGameplayTag.ToString()));
-					}
+					// 변경된 상태를 Start 합니다.
 					CurrentActivateState->StartState();
 					return true;
 				}
 			}
 			else
 			{
+				// Condition 이 false 면 상태 변환이 가능한지 체크하지 않고 바로 변환합니다.
 				if(CurrentActivateState)
 				{
 					CurrentActivateState->EndState();
@@ -106,6 +111,7 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 		}
 		else
 		{
+			// 원하는 State 가 없다면 생성합니다.
 			ConstructStateOfClass(State, LocalState);
 			if(LocalState->Implements<UInterface_IndividualStatteFunc>())
 			{
@@ -148,6 +154,7 @@ bool UBaseStateManagerComponent::TryChangeStateOfClass(TSubclassOf<UBaseStateObj
 
 bool UBaseStateManagerComponent::TryChangeStatesOfClass(TArray<TSubclassOf<UBaseStateObject>> States, bool Condition)
 {
+	// 여러 상태들 중 변경 가능한 상태로 변경 합니다.
 	bool LocalBool = false;
 	for(int32 i = 0; i < States.Num(); i++)
 	{
@@ -175,6 +182,7 @@ void UBaseStateManagerComponent::SetCurrentActivateState(UBaseStateObject* NewCu
 
 bool UBaseStateManagerComponent::GetCanPerformStateOfClass(TSubclassOf<UBaseStateObject> WantToState)
 {
+	// 매개변수의 State로 변경 가능한지 여부만 파악합니다.
 	if(WantToState)
 	{
 		UBaseStateObject* LocalState = nullptr;
@@ -196,6 +204,7 @@ bool UBaseStateManagerComponent::GetCanPerformStateOfClass(TSubclassOf<UBaseStat
 
 void UBaseStateManagerComponent::GetStateOfClass(TSubclassOf<UBaseStateObject> SearchState, UBaseStateObject*& FoundState)
 {
+	// 원하는 매개변수 State 가 활성화되어있다면 반환하고 없다면 null 을 반환합니다.
 	for(int32 i = 0; i < ActivateStates.Num(); ++i)
 	{
 		if(ActivateStates[i])
@@ -212,6 +221,7 @@ void UBaseStateManagerComponent::GetStateOfClass(TSubclassOf<UBaseStateObject> S
 
 UBaseStateObject* UBaseStateManagerComponent::GetStateOfGameplayTag(FGameplayTag StateGameplayTag)
 {
+	// GameplayTag 를 활용해 원하는 State 가 존재하는지 확인하고 반환합니다.
 	for(int32 i =0; i<ActivateStates.Num(); ++i)
 	{
 		if(ActivateStates[i])
@@ -231,12 +241,15 @@ void UBaseStateManagerComponent::ConstructStateOfClass(TSubclassOf<UBaseStateObj
 	if(CreateState)
 	{
 		UBaseStateObject* LocalState = nullptr;
+		// 원하는 State 를 생성합니다.
 		LocalState = NewObject<UBaseStateObject>(GetOwner(), CreateState);
 
+		// 활성화 State 를 관리하는 배열에 넣어주고 생성된 State 를 초기화합니다.
 		ActivateStates.AddUnique(LocalState);
 		LocalState->SetRegisterPerformActor(PerformingActor);
 
 		LocalState->ConstructState();
+		// 최종 생성된 State 를 반환해줍니다.
 		CreatedState = LocalState;
 	}
 }

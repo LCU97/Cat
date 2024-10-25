@@ -15,34 +15,3 @@ enum class EInputPropertyType : uint8
 	Last,
 	Priority
 };
-
-USTRUCT(BlueprintType)
-struct FInputPayLoad
-{
-	GENERATED_BODY()
-
-public:
-	FInputPayLoad() {}
-
-	UPROPERTY(BlueprintReadWrite)
-	TObjectPtr<AActor> OuterActor;
-	
-	UPROPERTY(BlueprintReadWrite)
-	TObjectPtr<AController> OuterController;
-
-	UPROPERTY(BlueprintReadWrite)
-	TObjectPtr<UInputManagerComponent> InputManager;
-
-	UPROPERTY(BlueprintReadWrite)
-	TObjectPtr<UInputBufferingObject> Buffer;
-
-	UPROPERTY(BlueprintReadWrite)
-	TObjectPtr<UObject> StateObject;
-
-	UPROPERTY(BlueprintReadWrite)
-	TObjectPtr<UObject> AbilityObject;
-};
-/*struct InputProperties
-{
-	
-};*/

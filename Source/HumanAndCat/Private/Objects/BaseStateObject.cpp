@@ -17,8 +17,9 @@ UBaseStateObject::UBaseStateObject()
 {
 }
 
+// State 가 생성 된 후 초기화 함수 입니다.
 void UBaseStateObject::ConstructState_Implementation()
-{
+{	
 	if(const ACharacter* Owner = Cast<ACharacter>(PerformingActor))
 	{
 		const AController* Controller = Owner->GetController();
@@ -85,7 +86,7 @@ bool UBaseStateObject::RestartState_Implementation(bool Checking)
 			return false;
 		}
 	}
-
+	// 스타트를 다시 시작한다.
 	StartState();
 
 	return true;
@@ -101,6 +102,7 @@ void UBaseStateObject::SetAbilityObject(TSubclassOf<UBaseAbilityObject> AbilityO
 	CurrentAbility = AbilityObject;
 }
 
+// 현재 사용 중인 State 가 자신과 맞는지 확인합니다.
 bool UBaseStateObject::GetIsStateCurrentlyActive()
 {
 	if(!StateManager) return false;
@@ -108,12 +110,13 @@ bool UBaseStateObject::GetIsStateCurrentlyActive()
 	return StateManager->GetCurrentActivateState() == this;
 }
 
+// 타겟팅 시작 시에 캐릭터가 타겟 액터를 바라보게 합니다.
 void UBaseStateObject::RotateToTarget(float Alpha)
 {
-	UBaseCombatComponent* CombatManager = StateManager->PerformingActor->GetComponentByClass<UBaseCombatComponent>();
+	UBaseCombatComponent* CombatManager = StateManager->GetPerformingActor()->GetComponentByClass<UBaseCombatComponent>();
 	if(!CombatManager) return;
 
-	const AActor* TargetActor = CombatManager->TargetActor;
+	const AActor* TargetActor = CombatManager->GetTargetActor();
 	if(!IsValid(TargetActor)) return;
 
 	FRotator OwnerRotation = OwnerCharacter->GetControlRotation();
@@ -121,6 +124,7 @@ void UBaseStateObject::RotateToTarget(float Alpha)
 	OwnerCharacter->SetActorRotation(FinalRot, ETeleportType::TeleportPhysics);
 }
 
+// 현재 상태로 변환 가능한지 확인합니다.
 bool UBaseStateObject::CanPerformState_Implementation()
 {
 	IGameplayTagAssetInterface* CastGameplayTagAssetInterface = Cast<IGameplayTagAssetInterface>(PerformingActor);
@@ -128,7 +132,8 @@ bool UBaseStateObject::CanPerformState_Implementation()
 
 	FGameplayTagContainer PerformTagContainer;
 	CastGameplayTagAssetInterface->GetOwnedGameplayTags(PerformTagContainer);
-	
+
+	// 캐릭터가 가지고 있는 GameplayTag 중에 BloackedState 의 요소가 포함되어 있다면 상태 변환이 일어나지 않습니다. 
 	if (UBlueprintGameplayTagLibrary::HasAnyTags(PerformTagContainer, BlockedState,true))
 	{		
 		return false;
@@ -137,6 +142,7 @@ bool UBaseStateObject::CanPerformState_Implementation()
 	return true;
 }
 
+// 어빌리티 실행이 가능한지 체크합니다.
 bool UBaseStateObject::CheckAbilityExecute_Implementation(const TArray<TSubclassOf<UBaseAbilityObject>>& AbilityObjects)
 {
 	UBaseAbilityManagerComponent* AbilityManagerComponent = PerformingActor->GetComponentByClass<UBaseAbilityManagerComponent>();

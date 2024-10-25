@@ -15,10 +15,10 @@ UAttackChargingCommand::UAttackChargingCommand()
 {
 }
 
-void UAttackChargingCommand::ActionExecute_Implementation(const UInputBufferingObject* BufferObject)
+void UAttackChargingCommand::ActionExecute_Implementation(UInputBufferingObject* BufferObject)
 {
-	UBaseStateObject* CurrentState = Cast<UBaseStateObject>(BufferObject->StateObject);
-	UBaseAbilityObject* CurrentAbility = Cast<UBaseAbilityObject>(BufferObject->AbilityObject);
+	UBaseStateObject* CurrentState = Cast<UBaseStateObject>(BufferObject->GetStateObject());
+	UBaseAbilityObject* CurrentAbility = Cast<UBaseAbilityObject>(BufferObject->GetAbilityObject());
 
 	if(!CurrentState || !CurrentAbility) return;
 
@@ -78,17 +78,17 @@ void UAttackChargingCommand::HandleSpecialAttack(UBaseStateObject* CurrentState,
 {	
 	if(AbilityTag == AbilityTags::Ability_AttackCharge)
 	{
-		UBaseStateObject* LocalAttack = CurrentState->StateManager->GetStateOfGameplayTag(StateTags::State_Attack);
+		UBaseStateObject* LocalAttack = CurrentState->GetStateManager()->GetStateOfGameplayTag(StateTags::State_Attack);
 		if(LocalAttack)
 		{
-			if(!CurrentState->StateManager->TryChangeStateOfClass(LocalAttack->GetClass(), true, AbilityTags::Ability_Attack_SpecialAttack))
+			if(!CurrentState->GetStateManager()->TryChangeStateOfClass(LocalAttack->GetClass(), true, AbilityTags::Ability_Attack_SpecialAttack))
 			{
-				UBaseStateObject* LocalIdle = CurrentState->StateManager->GetStateOfGameplayTag(StateTags::State_Idle);
+				UBaseStateObject* LocalIdle = CurrentState->GetStateManager()->GetStateOfGameplayTag(StateTags::State_Idle);
 				if(LocalIdle)
 				{
-					if(!CurrentState->StateManager->TryChangeStateOfClass(LocalIdle->GetClass()))
+					if(!CurrentState->GetStateManager()->TryChangeStateOfClass(LocalIdle->GetClass()))
 					{
-						UBaseStateObject* LocalRun = CurrentState->StateManager->GetStateOfGameplayTag(StateTags::State_Run);
+						UBaseStateObject* LocalRun = CurrentState->GetStateManager()->GetStateOfGameplayTag(StateTags::State_Run);
 					}
 				}
 			}

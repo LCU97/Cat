@@ -28,9 +28,10 @@ public:
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 
 public:
+	// 컴포넌트를 초기화
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void InitializeStateManagerComponent(AActor* PerformActor);
-
+	
 	UFUNCTION(BlueprintCallable)
 	void ChangeStateOfClass(TSubclassOf<UBaseStateObject> State);
 
@@ -43,6 +44,13 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool TryChangeStatesOfClass(TArray<TSubclassOf<UBaseStateObject>> States, bool Condition);
 	
+	UFUNCTION(BlueprintCallable)
+	void ConstructStateOfClass(TSubclassOf<UBaseStateObject> CreateState, UBaseStateObject*& CreatedState);
+
+	UFUNCTION(BlueprintCallable)
+	void ClearStatesComponent();
+
+	// Get, Set
 	UFUNCTION(BlueprintCallable)
 	void SetCurrentActivateState(UBaseStateObject* NewCurrentState);
 
@@ -59,21 +67,20 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, BlueprintPure)
 	UBaseStateObject* GetStateOfGameplayTag(FGameplayTag StateGameplayTag);
 
-	UFUNCTION(BlueprintCallable)
-	void ConstructStateOfClass(TSubclassOf<UBaseStateObject> CreateState, UBaseStateObject*& CreatedState);
-
-	UFUNCTION(BlueprintCallable)
-	void ClearStatesComponent();
+	UFUNCTION(BlueprintCallable, BlueprintPure, BlueprintPure)
+	AActor* GetPerformingActor() { return PerformingActor;}
 	
-public:
+private:
 	// 현재 캐릭터 상황에 따른 활성화되어있는 상태를 담는 배열
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UPROPERTY( VisibleAnywhere)
 	TArray<UBaseStateObject*> ActivateStates;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	// 시작 시 Onswer 를 저장
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta = (AllowPrivateAccess=true))
 	AActor* PerformingActor;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	// 현재 사용 중인 StateObejct
+	UPROPERTY( VisibleAnywhere)
 	UBaseStateObject* CurrentActivateState;
 
 };

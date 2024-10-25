@@ -14,6 +14,7 @@ UBaseAbilityObject::UBaseAbilityObject()
 {
 }
 
+// Ability 객체가 생성되고 나서 초기화 함수입니다.
 void UBaseAbilityObject::ConstructAbility_Implementation()
 {
 	AbilityManager = PerformingActor->GetComponentByClass<UBaseAbilityManagerComponent>();
@@ -29,6 +30,7 @@ void UBaseAbilityObject::ConstructAbility_Implementation()
 	}
 }
 
+// 실제 어빌리티를 실행합니다. 상속 가능
 void UBaseAbilityObject::StartAbility_Implementation()
 {
 	if(AbilityManager)
@@ -61,10 +63,10 @@ void UBaseAbilityObject::CancelAbility_Implementation()
 
 void UBaseAbilityObject::ApplyAbilityCoolDown()
 {
+	// 해당 어빌리티의 재사용이 쿨타임을 적용합니다. 
 	bAbilityOnCoolDown = false;
 	FTimerHandle TimerHandle;
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::CoolDownReset, CooldownTime, false);
-
 }
 
 void UBaseAbilityObject::CoolDownReset()
@@ -81,6 +83,7 @@ float UBaseAbilityObject::PlayAbilityMontage(UAnimMontage* MontageAbility, float
 	UAnimInstance* AnimInstance = Character->GetMesh()->GetAnimInstance();
 	if(!AnimInstance) return 0.0f;
 
+	// 어빌리티가 가지는 몽타주를 실행합니다.
 	float MontageLenth = AnimInstance->Montage_Play(MontageAbility, InplayRate, ReturnMontageType, StartMontageTime,  bStopAllMontage);
 	
 	SetActivateAbilityMontage(MontageAbility);
@@ -114,8 +117,11 @@ void UBaseAbilityObject::GetPerformingActor(AActor*& Actor)
 
 TArray<UAnimMontage*> UBaseAbilityObject::GetAnimMontages(TSubclassOf<UBaseAbilityObject> SearchAbility)
 {
+	// 몽타주를 담는 배열
 	TArray<UAnimMontage*> LocalAnmontages;
 
+	// WeaponComponent 의 DataAsset 을 가져와 사용 할 수 있는 몽타주 중에 SearchAbility 가
+	// 있으면 가져옵니다.
 	UWeaponComponent* WeaponComponent = PerformingActor->FindComponentByClass<UWeaponComponent>();
 	if(WeaponComponent)
 	{
@@ -134,7 +140,6 @@ TArray<UAnimMontage*> UBaseAbilityObject::GetAnimMontages(TSubclassOf<UBaseAbili
 			}
 		}
 	}
-
 	return LocalAnmontages;
 }
 
@@ -145,6 +150,7 @@ UAnimMontage* UBaseAbilityObject::GetCurrentAbilityMontage()
 
 bool UBaseAbilityObject::GetIsActivateAbility()
 {
+	// 현재 사용중인 어빌리티가 자신과 맞는지 체크합니다.
 	if(UBaseAbilityObject* CurrentAbility = AbilityManager->GetCurrentAbility())
 	{
 		return  this == CurrentAbility;

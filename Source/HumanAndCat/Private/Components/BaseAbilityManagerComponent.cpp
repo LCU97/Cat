@@ -2,30 +2,18 @@
 
 
 #include "HumanAndCat/Public/Components/BaseAbilityManagerComponent.h"
-
 #include "HumanAndCat/Public/Objects/BaseAbilityObject.h"
 
-
-// Sets default values for this component's properties
 UBaseAbilityManagerComponent::UBaseAbilityManagerComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
 }
-
 
 // Called when the game starts
 void UBaseAbilityManagerComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// ...
-	
 }
-
 
 // Called every frame
 void UBaseAbilityManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType,
@@ -47,6 +35,8 @@ void UBaseAbilityManagerComponent::InitializeAbilityManager_Implementation()
 
 void UBaseAbilityManagerComponent::PerformAbilityOfClass(TSubclassOf<UBaseAbilityObject> AbilityObj)
 {
+	// 어빌리티 실행 시도 합니다.
+	// 매개변수 Condition 이 false로 들어가기 때문에 어빌리티 변경 가능한지 시도하지 않고 무조건 실행하려고 시도 합니다. 
 	TryPerformAbilityOfClass(AbilityObj, false);
 }
 
@@ -56,22 +46,26 @@ bool UBaseAbilityManagerComponent::TryPerformAbilityOfClass(TSubclassOf<UBaseAbi
 
 	UBaseAbilityObject* NewAbilityObject = nullptr;
 
+	// 어빌리티가 존재하는지 확인하고 가져옵니다.
 	GetAbilityOfClass(AbilityObj, NewAbilityObject);
 
 	if(NewAbilityObject == nullptr)
 	{
+		// 없다면 생성합니다.
 		ContructAbilityOfClass(AbilityObj, NewAbilityObject);
 	}
 
 	if(NewAbilityObject)
 	{
+		// Condition 이 true 라면 어빌리티 실행 가능한지 확인합니다.
 		if(Condition)
 		{
 			if(!NewAbilityObject->CanActivateAbility())
-			{
+			{				
 				return false;
 			}
 		}
+		// 새로운 어빌리티를 실행합니다.
 		NewAbilityObject->StartAbility();
 	}
 	return false;
@@ -80,6 +74,7 @@ bool UBaseAbilityManagerComponent::TryPerformAbilityOfClass(TSubclassOf<UBaseAbi
 bool UBaseAbilityManagerComponent::TryPerformAbilitiesOfClass(TArray<TSubclassOf<UBaseAbilityObject>> AbilityObj,
 	bool Condition)
 {
+	// 배열로 들어온 어빌리티 클래스들 중 실행 가능한 Ability 를 실행합니다.
 	for(int32 i = 0; i< AbilityObj.Num(); ++i)
 	{
 		if(AbilityObj[i])
@@ -101,6 +96,8 @@ void UBaseAbilityManagerComponent::SetCurrentActivateAbility(UBaseAbilityObject*
 bool UBaseAbilityManagerComponent::GetAbilityOfClass(TSubclassOf<UBaseAbilityObject> WantToAbility,
 	UBaseAbilityObject*& FoundAbility)
 {
+	// 현재 활성화 되어 있는 Ability 들 중에 매개변수 WantToAbility 가 존재하면
+	// 반환합니다.
 	for(int32 i = 0; i < AbilityList.Num(); ++i)
 	{
 		if(AbilityList[i])
@@ -118,6 +115,8 @@ bool UBaseAbilityManagerComponent::GetAbilityOfClass(TSubclassOf<UBaseAbilityObj
 
 bool UBaseAbilityManagerComponent::GetCanPerformAbilityOfClass(TSubclassOf<UBaseAbilityObject> WantToAbility)
 {
+	// 매개변수 WantToAbility 가 존재하는지 확인하고 실행 가능한지만 체크합니다.
+	// WantToAbility 를 실행하지는 않습니다.
 	if(WantToAbility)
 	{
 		UBaseAbilityObject* NewAbility = nullptr;
@@ -140,6 +139,7 @@ FGameplayTag UBaseAbilityManagerComponent::GetCurrentAbilityTag()
 
 UBaseAbilityObject* UBaseAbilityManagerComponent::GetAbilityOfGameplayTag(FGameplayTag AbilityTag)
 {
+	// GameplayTag 를 활용해서 활성화된 어빌리티 중 AbilityTag 를 가지는 어빌리티를 반환합니다.
 	UBaseAbilityObject* LocalAbility = nullptr;
 	for(int32 i = 0; i < AbilityList.Num(); ++i)
 	{
@@ -163,6 +163,7 @@ UBaseAbilityObject* UBaseAbilityManagerComponent::GetCurrentAbility()
 void UBaseAbilityManagerComponent::ContructAbilityOfClass(TSubclassOf<UBaseAbilityObject> WantToAbility,
                                                           UBaseAbilityObject*& ConstructAbility)
 {
+	// 어빌리티를 생성하고 초기화합니다.
 	ConstructAbility = nullptr;
 	if(WantToAbility)
 	{

@@ -42,7 +42,7 @@ void UHuman_NormalAttackAbility::EndAbility_Implementation()
 {
 	Super::EndAbility_Implementation();
 	AttackComboIndex = 0;
-	StateManager->CurrentActivateState->WantToAbility = FGameplayTag();
+	StateManager->GetCurrentActivateState()->WantToAbility = FGameplayTag();
 	if(!StateManager->TryChangeStateOfTag(StateTags::State_Idle))
 	{
 		StateManager->TryChangeStateOfTag(StateTags::State_Run);

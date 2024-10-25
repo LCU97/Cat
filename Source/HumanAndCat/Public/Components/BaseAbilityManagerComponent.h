@@ -45,6 +45,14 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool TryPerformAbilitiesOfClass(TArray<TSubclassOf<UBaseAbilityObject>> AbilityObj, bool Condition = true);
 
+	// 어빌리티 생성
+	UFUNCTION(BlueprintCallable)
+	void ContructAbilityOfClass(TSubclassOf<UBaseAbilityObject> WantToAbility, UBaseAbilityObject*& ConstructAbility);
+
+	UFUNCTION(BlueprintCallable)
+	void ClearAbilityManager();
+	
+	// Get, Set -----------------------------------------------------------------------
 	UFUNCTION(BlueprintCallable)
 	void SetCurrentActivateAbility(UBaseAbilityObject* NewAbility);
 
@@ -65,19 +73,11 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	UBaseAbilityObject* GetCurrentAbility();
 	
-	// 어빌리티 생성
-	UFUNCTION(BlueprintCallable)
-	void ContructAbilityOfClass(TSubclassOf<UBaseAbilityObject> WantToAbility, UBaseAbilityObject*& ConstructAbility);
-
-	UFUNCTION(BlueprintCallable)
-	void ClearAbilityManager();
-	
-	// 변수
-	public:
+private:
 	UPROPERTY(visibleAnywhere)
 	UBaseAbilityObject* CurrentAbility;
 
-	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
+	UPROPERTY(VisibleAnywhere)
 	TArray<UBaseAbilityObject*> AbilityList;
 	
 };

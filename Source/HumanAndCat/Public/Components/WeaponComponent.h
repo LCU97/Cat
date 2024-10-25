@@ -72,40 +72,48 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void UnEquip();
-	
-	// Var
-public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeaponType")
-	TMap<FGameplayTag, UWeaponProperties*> WeaponTypes;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeaponType")
-	ABaseWeapon* CurrentWeapon;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeaponType")
-	UWeaponProperties* CurrentWeaponType;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeaponType")
-	FGameplayTag CurrentWeaponTag;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeaponType")
-	EWeaponName CurrentWeaponName;
-	
-	UPROPERTY(EditAnywhere,	BlueprintReadWrite, Category = "WeaponType")
-	TSubclassOf<ABaseWeapon> BasicWeapon;
-
-	UPROPERTY(EditAnywhere,	BlueprintReadWrite, Category = "WeaponType")
-	ABaseWeapon* BasicWeaponInstanced;
-	
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	ACharacter* OwnerCharacter;
-
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	float CurrentWeaponLength;
-
+public:	
 	// 무기 바뀐거 애님인스턴스에게 알려주기
 	UPROPERTY(BlueprintAssignable)
 	FOnWeaponNameChanged OnWeaponNameChanged;
 
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	// Var
+private:
+	// 현재 무기 의 tag 에 따른 DataAsset 입니다.
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeaponType", meta = (AllowPrivateAccess = "true"))
+	TMap<FGameplayTag, UWeaponProperties*> WeaponTypes;
+	
+	// 현재 무기와 관련한 멤버 입니다.Start
+	UPROPERTY(EditAnywhere, Category = "WeaponType")
+	ABaseWeapon* CurrentWeapon;
+
+	UPROPERTY(EditAnywhere, Category = "WeaponType")
+	UWeaponProperties* CurrentWeaponType;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeaponType", meta = (AllowPrivateAccess = "true"))
+	FGameplayTag CurrentWeaponTag;
+
+	UPROPERTY(EditAnywhere, Category = "WeaponType")
+	EWeaponName CurrentWeaponName;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	float CurrentWeaponLength;
+
+	// 현재 무기와 관련한 멤버 End~!!!
+
+	// 처음 시작 시 기초 무기와 관련한 멤버! Start
+	UPROPERTY(EditAnywhere,	BlueprintReadWrite, Category = "WeaponType", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<ABaseWeapon> BasicWeapon;
+
+	UPROPERTY(EditAnywhere,	Category = "WeaponType")
+	ABaseWeapon* BasicWeaponInstanced;
+	// 처음 시작 시 기초 무기와 관련한 멤버! End!!
+
+	// Onwer 를 형변환!
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	ACharacter* OwnerCharacter;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	bool bEquip;
 };

@@ -8,7 +8,7 @@ UBaseCommand::UBaseCommand()
 	
 }
 
-void UBaseCommand::ActionExecute_Implementation(const UInputBufferingObject* BufferingObject)
+void UBaseCommand::ActionExecute_Implementation(UInputBufferingObject* BufferingObject)
 {
 	IInterface_InputCommand::ActionExecute_Implementation(BufferingObject);
 }

@@ -52,18 +52,22 @@ public:
 	UFUNCTION(BlueprintCallable)
 	APawn* GetPlayerPawn();
 	
-public:
+private:
+	// 입력 버퍼 생성을 위한 bool 값입니다.
 	bool bIsBufferOpesn;
 
+	// NotifyState 에서 복제된 핸들러입니다.
 	UPROPERTY()
 	UInputHandler* InputHandler;
 
+	// Onwer 입니다.
 	UPROPERTY()
 	AActor* OwnerActor;
 
+	// Owner 의 컨트롤러입니다.
 	UPROPERTY()
 	AController* OwnerController;
-
+	
 	UPROPERTY()
 	UBaseStateManagerComponent* StateManagerComponent;
 

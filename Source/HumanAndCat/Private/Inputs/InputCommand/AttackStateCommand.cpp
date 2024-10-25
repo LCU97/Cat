@@ -17,10 +17,10 @@ UAttackStateCommand::UAttackStateCommand()
 	
 }
 
-void UAttackStateCommand::ActionExecute_Implementation(const UInputBufferingObject* BufferObject)
+void UAttackStateCommand::ActionExecute_Implementation(UInputBufferingObject* BufferObject)
 {
-	UBaseStateObject* CurrentState = Cast<UBaseStateObject>(BufferObject->StateObject);
-	UBaseAbilityObject* CurrentAbility = Cast<UBaseAbilityObject>(BufferObject->AbilityObject);
+	UBaseStateObject* CurrentState = Cast<UBaseStateObject>(BufferObject->GetStateObject());
+	UBaseAbilityObject* CurrentAbility = Cast<UBaseAbilityObject>(BufferObject->GetAbilityObject());
 
 	if(!CurrentAbility || !CurrentState)
 		return;
@@ -76,7 +76,8 @@ void UAttackStateCommand::HandleUltimateAttack(UBaseStateObject* CurrentState, c
 {
 	if(AbilityTag == AbilityTags::Ability_Attack_NormalAttack)
 	{
-		CurrentAbility->AbilityManager->CurrentAbility = CurrentAbility->AbilityManager->GetAbilityOfGameplayTag(AbilityTags::Ability_Attack_UltimateAttack);
+		UBaseAbilityObject* AbilityObject = CurrentAbility->GetAbilityManagerComponent()->GetAbilityOfGameplayTag(AbilityTags::Ability_Attack_UltimateAttack);
+		CurrentAbility->GetAbilityManagerComponent()->SetCurrentActivateAbility(AbilityObject);
 		CurrentAbility->StartAbility();
 	}
 	else
@@ -118,7 +119,7 @@ void UAttackStateCommand::HandleAttackCharging(UBaseStateObject* CurrentState, c
 {
 	if(AbilityTag == AbilityTags::Ability_Attack_NormalAttack)
 	{
-		UBaseStateObject* LocalCharge = CurrentState->StateManager->GetStateOfGameplayTag(StateTags::State_AttackCharge);
+		UBaseStateObject* LocalCharge = CurrentState->GetStateManager()->GetStateOfGameplayTag(StateTags::State_AttackCharge);
 		if(LocalCharge)
 		{
 			CurrentAbility->CancelAbility();
@@ -140,20 +141,20 @@ void UAttackStateCommand::HandleAttackCharging(UBaseStateObject* CurrentState, c
 					IndividualStatteFunc->SetWantAbilityTag(FGameplayTag());
 				}
 			}
-			CurrentState->StateManager->ChangeStateOfClass(LocalCharge->GetClass());
+			CurrentState->GetStateManager()->ChangeStateOfClass(LocalCharge->GetClass());
 		}
 	}
 	else
 	{
-		UBaseStateObject* LocalIdle = CurrentState->StateManager->GetStateOfGameplayTag(StateTags::State_Idle);
+		UBaseStateObject* LocalIdle = CurrentState->GetStateManager()->GetStateOfGameplayTag(StateTags::State_Idle);
 		if(LocalIdle)
 		{
-			if(!CurrentState->StateManager->TryChangeStateOfClass(LocalIdle->GetClass()))
+			if(!CurrentState->GetStateManager()->TryChangeStateOfClass(LocalIdle->GetClass()))
 			{
-				UBaseStateObject* LocalRun = CurrentState->StateManager->GetStateOfGameplayTag(StateTags::State_Run);
+				UBaseStateObject* LocalRun = CurrentState->GetStateManager()->GetStateOfGameplayTag(StateTags::State_Run);
 				if(LocalRun)
 				{
-					CurrentState->StateManager->TryChangeStateOfClass(LocalRun->GetClass());
+					CurrentState->GetStateManager()->TryChangeStateOfClass(LocalRun->GetClass());
 				}
 			}
 		}

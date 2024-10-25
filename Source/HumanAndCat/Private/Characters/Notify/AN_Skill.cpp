@@ -11,28 +11,25 @@ void UAN_Skill::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Anim
                        const FAnimNotifyEventReference& EventReference)
 {
 	Super::Notify(MeshComp, Animation, EventReference);
+
+	UWeaponComponent* WeaponComponent =
+					Cast<UWeaponComponent>(MeshComp->GetOwner()->GetComponentByClass(UWeaponComponent::StaticClass()));
+	if(!WeaponComponent) return;
+	
+	ABaseWeapon* Weapon;	
+	WeaponComponent->GetCurrentWeapon(Weapon);	
+	if(!Weapon) return;
+	
 	switch (SkillIdx)
 	{
 		case 0:
-			{
-				UWeaponComponent* WeaponComponent =
-					Cast<UWeaponComponent>(MeshComp->GetOwner()->GetComponentByClass(UWeaponComponent::StaticClass()));
-
-				if(WeaponComponent)
-				{
-					WeaponComponent->CurrentWeapon->SkillAttack(UsedSkill);
-				}
+			{				
+				Weapon->SkillAttack(UsedSkill);
 				break;
 			}
 		case 1:
 			{
-				UWeaponComponent* WeaponComponent =
-					Cast<UWeaponComponent>(MeshComp->GetOwner()->GetComponentByClass(UWeaponComponent::StaticClass()));
-
-				if(WeaponComponent)
-				{
-					WeaponComponent->CurrentWeapon->SkillAttack2(UsedSkill);
-				}
+				Weapon->SkillAttack2(UsedSkill);
 				break;
 			}
 		default:

@@ -89,32 +89,36 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Ability|Set")
 	void SetActivateAbilityMontage(UAnimMontage* NewMontage);
 
-	public:
-	// 멤버
+public:
+	// 해당 어빌리티를 특정해줄 Tag 입니다.
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ability Var")
+	FGameplayTag AbilityGameplayTag;
+	
+protected:
+	// 실제 해당 어빌리티에서 실행 할 Montage 입니다.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ability Var")
 	UAnimMontage* AbilityMontage;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ability Var")
-	FGameplayTag AbilityGameplayTag;
-
+	// 쿨타임 관련 멤버입니다.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ability Var")
 	bool bHasCooldown;
-
 	
 	UPROPERTY(editAnywhere, BlueprintReadWrite, Category="Ability Var")
 	float CooldownTime;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ability Var")
-	UBaseAbilityManagerComponent* AbilityManager;
+	bool bAbilityOnCoolDown = true;
 
+	FString CooldownResetFuncName = FString(TEXT("CooldownReset"));	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ability Var")
+
+	// 매니저를 캐싱해둡니다.
+	UBaseAbilityManagerComponent* AbilityManager;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ability Var")
 	UBaseStateManagerComponent* StateManager;
 	
 	UPROPERTY()
 	AActor* PerformingActor;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ability Var")
-	bool bAbilityOnCoolDown = true;
-
-	FString CooldownResetFuncName = FString(TEXT("CooldownReset"));	
 };

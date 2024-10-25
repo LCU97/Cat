@@ -7,6 +7,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "CameraManagerComponent.generated.h"
 
+// 1. 타겟팅 시 카메라의 움직임을 직접 제어합니다.
+// 2. 궁극기 용 카메라를 가지고 궁극기 스킬 사용 시 카메라를 스위칭 합니다.
 
 class UBaseCameraComponent;
 
@@ -16,21 +18,18 @@ class HUMANANDCAT_API UCameraManagerComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this component's properties
 	UCameraManagerComponent();
 
 protected:
-	// Called when the game starts
 	virtual void BeginPlay() override;
 
 public:
-	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION(BlueprintCallable)
 	void InitCameraManager(UBaseCameraComponent* InGame, UBaseCameraComponent* Ultimate);
-	//void FwdBakMoveCheck();
+	
 
 public:
 	UFUNCTION(BlueprintCallable)
@@ -41,16 +40,11 @@ public:
 	
 	// 궁극기 카메라 관련 기능
 	UFUNCTION()
-	void UltiMovingLerp();
-
-	// 베지어 곡선을 이용한 위치 값 계산 함수
-	UFUNCTION()
-	FVector CalNewPositionUltiCamera(FVector P0, FVector P1, FVector P2, FVector P3, float t);
-	
+	void UltiMoving();	
 
 	// 궁극기 카메라 관련 기능 end
 	
-// 카메라 시점 타겟팅
+	// 카메라 시점 타겟팅
 	UFUNCTION(BlueprintCallable)
 	void  InGameLockOn();
 
@@ -70,40 +64,52 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void InitCameraMovingLerp();
-	//타겟팅 end
+	// 타겟팅 end
 
 	UFUNCTION()
 	UBaseCameraComponent* GetInGameCamera() {return InGameCamera;};
 	
-private:	
+private:
+	// 타겟팅 관련 카메라 멤버
+	
+	// 평상시 카메라
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera|InGameCamera", meta = (AllowPrivateAccess = "true"))
 	UBaseCameraComponent* InGameCamera;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite,Category = "Camera|UltimateCamera", meta = (AllowPrivateAccess = "true"))
-	UBaseCameraComponent* UltimateCamera;
-
+	// 현재 사용 중인 카메라
 	UPROPERTY(EditAnywhere, Category = "Camera")
 	UBaseCameraComponent* CurrentCamera;
 
+	// 뷰 좌표계의 특정 영역에 대한 캐릭터의 위치가 InOut 을 확인하는 변수
 	UPROPERTY()
 	bool bIsInBox =true;
-	
+
+	// 자주 사용하는 컴포넌트들을 캐싱합니다.
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	class UBaseCombatComponent* CombatComponent;
 		
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	class USpringArmComponent* ArmComponent;
 
-	
+	// 타겟팅 중인지 확인하는 변수
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAccess = "true"))
 	bool bIsTarget = false;
 
+	// 카메라가 보간하여 움직이고 있는지 확인하는 변수
 	UPROPERTY(EditAnywhere,  Category = "Combat")
 	bool bLerping = false;
 
+	// 보간을 취소하기 위해 제어되는 변수
 	UPROPERTY(EditAnywhere,  Category = "Combat")
 	bool SetInitTime =false;
-		
+
+	// ----------------------------------------------------------------------------------------------------------
+	// 궁극기 카메라 관련 멤버
+	
+	// 궁극기용 카메라
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,Category = "Camera|UltimateCamera", meta = (AllowPrivateAccess = "true"))
+	UBaseCameraComponent* UltimateCamera;
+	
 	// 궁극기 카메라 관련
 	UPROPERTY()
 	float UltiLerpDuration= -1;

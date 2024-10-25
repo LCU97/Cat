@@ -39,7 +39,7 @@ UCLASS()
 class HUMANANDCAT_API UWeaponProperties : public UPrimaryDataAsset
 {
 	GENERATED_BODY()
-
+ // 무기에 따른 상태와 어빌리티 입력 값 등을 설정하는 DA 입니다.
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "States")
 	TArray<TSubclassOf<UBaseStateObject>> States;

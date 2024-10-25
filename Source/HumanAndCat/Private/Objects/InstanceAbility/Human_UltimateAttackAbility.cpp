@@ -33,7 +33,7 @@ void UHuman_UltimateAttackAbility::EndAbility_Implementation()
 {
 	Super::EndAbility_Implementation();
 
-	StateManager->CurrentActivateState->WantToAbility = FGameplayTag();
+	StateManager->GetCurrentActivateState()->WantToAbility = FGameplayTag();
 	
 	if(!StateManager->TryChangeStateOfTag(StateTags::State_Idle))
 	{

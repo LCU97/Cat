@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 
 #include "HumanAndCat/Public/Components/WeaponComponent.h"
 
@@ -13,41 +11,30 @@
 #include "Weapons/FistWeapon.h"
 #include "HumanAndCat/Public/Utilities/HumanAndCatTags.h"
 
-
-// Sets default values for this component's properties
 UWeaponComponent::UWeaponComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
 }
 
-
-// Called when the game starts
 void UWeaponComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
 	AActor* Own = GetOwner();
 	OwnerCharacter = Cast<ACharacter>(Own);
 	if(!OwnerCharacter) return;
 }
 
-
-// Called every frame
 void UWeaponComponent::TickComponent(float DeltaTime, ELevelTick TickType,
                                      FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
 }
 
 void UWeaponComponent::InitWeaponComponent()
 {
+	// 시작 시 초기화 입니다.
 	if (IsValid(CurrentWeapon))
 	{
 		return;	
@@ -57,13 +44,14 @@ void UWeaponComponent::InitWeaponComponent()
 	CurrentWeaponName = EWeaponName::None;
 	
 	if(!BasicWeapon) return;;
-	
+
+	// 기본 무기를 스폰합니다,.
 	ABaseWeapon* BasicFistWeapon = GetWorld()->SpawnActor<ABaseWeapon>(BasicWeapon);
 
 	if(BasicFistWeapon)
 	{
 		BasicFistWeapon->SetWeaponManager(this);
-
+		// 기본 무기에 따른 상태와 어빌리티를 등록하고 현재 무기의 정보를 업데이트 합니다.
 		RegisterStateAndAbility(BasicFistWeapon);
 		
 		BasicWeaponInstanced = BasicFistWeapon;
@@ -77,6 +65,7 @@ void UWeaponComponent::UpdateStates()
 	if(StateManagerComponent)
 	{
 		StateManagerComponent->ClearStatesComponent();
+		// DA 에 있는 해당 무기의 State 들을 생성하고 IDle 상태로 변환합니다.
 		for(int32 i = 0; i < CurrentWeaponType->States.Num(); i++)
 		{
 			UBaseStateObject* LocalState = nullptr;
@@ -97,6 +86,7 @@ void UWeaponComponent::UpdateAbilities()
 		OwnerCharacter->GetComponentByClass<UBaseAbilityManagerComponent>();
 	if(AbilityManagerComponent)
 	{
+		// DA 에 있는 해당 무기의 Ability 들을 생성하고 초기화합니다/.
 		AbilityManagerComponent->ClearAbilityManager();
 		for(int32 i = 0; i<CurrentWeaponType->Abilities.Num(); i++)
 		{
@@ -107,8 +97,7 @@ void UWeaponComponent::UpdateAbilities()
 	}
 }
 
-void UWeaponComponent::
-RegisterStateAndAbility(ABaseWeapon* CheckingWeaponType)
+void UWeaponComponent::RegisterStateAndAbility(ABaseWeapon* CheckingWeaponType)
 {
 	if(!CheckingWeaponType) return;
 	
@@ -116,6 +105,7 @@ RegisterStateAndAbility(ABaseWeapon* CheckingWeaponType)
 
 	for(auto WeaponType : WeaponTypes)
 	{
+		// TMap 의 Tag 와 현재 무기를 비교해서 현재 무기에 따른 DA 를 가져와 State Ability 를 초기화합니다. 
 		if(WeaponType.Key == CheckingWeaponType->WeaponTag)
 		{
 			CheckingWeaponType->SetWeaponManager(this);
@@ -127,6 +117,7 @@ RegisterStateAndAbility(ABaseWeapon* CheckingWeaponType)
 				CurrentWeapon->Destroy();
 				CurrentWeaponLength = 0.f;
 			}
+			// 바뀔 현재 무기 타입을 재설정합니다.
 			CurrentWeapon = CheckingWeaponType;
 			CurrentWeaponTag = CheckingWeaponType->WeaponTag;
 			CurrentWeaponType = WeaponType.Value;
@@ -154,7 +145,8 @@ RegisterStateAndAbility(ABaseWeapon* CheckingWeaponType)
 						}
 					}
 				}
-			}			
+			}
+			// 현재 무기가 손에 들고 있는지 기본 모드인지에 따라 Equip, UnEquip 을 실행합니다.
 			if(bEquip)
 			{
 				Equip();
@@ -178,6 +170,7 @@ void UWeaponComponent::UnregisterStateAndAility()
 	CurrentWeapon->Destroy(); 
 	ABaseWeapon* BasicFistWeapon = GetWorld()->SpawnActor<ABaseWeapon>(BasicWeapon);
 
+	// 다시 기본무기로 변경합니다.
 	if(BasicFistWeapon)
 	{
 		BasicFistWeapon->SetWeaponManager(this);
@@ -194,6 +187,7 @@ void UWeaponComponent::Equip()
 
 	if(!EquipSocket.IsNone())
 	{
+		// 무기가 가지는 소켓 네임을 가져와 부착합니다.
 		USkeletalMeshComponent* CharacterMesh = GetOwner()->FindComponentByClass<USkeletalMeshComponent>();
 		if (CharacterMesh)
 		{
@@ -212,6 +206,7 @@ void UWeaponComponent::UnEquip()
 		USkeletalMeshComponent* CharacterMesh = GetOwner()->FindComponentByClass<USkeletalMeshComponent>();
 		if (CharacterMesh)
 		{
+			// 무기가 가지는 소켓 네임을 가져와 부착합니다.
 			CurrentWeapon->AttachToComponent(CharacterMesh, FAttachmentTransformRules::SnapToTargetIncludingScale, UnEquipSocket);
 			bEquip = false;
 		}

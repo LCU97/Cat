@@ -46,7 +46,6 @@ public:
 
 	// 사용할 커맨드 셋업
 	UFUNCTION(BlueprintCallable)
-	void SetupCommand(FInputPayLoad& InputPayLoad);
 	void SetupCommand(UInputBufferingObject* BufferObject);
 	
 	// 실제 바인딩되어진 커맨드를 실행
