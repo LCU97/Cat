@@ -130,13 +130,11 @@ void UCameraManagerComponent::InGameLockOn()
 	if(!CombatComponent->GetTargetActor()) bIsTarget = false;
 	
 	FVector TargetLocation = CombatComponent->GetTargetActor()->GetActorLocation();	
-	FRotator Rot = UKismetMathLibrary::FindLookAtRotation(GetOwner()->GetActorLocation(), TargetLocation);
-	
+	FRotator Rot = UKismetMathLibrary::FindLookAtRotation(GetOwner()->GetActorLocation(), TargetLocation);	
 	float Dis = FVector::Distance( TargetLocation,GetOwner()->GetActorLocation());
 	float Alpha;
 	
-	 // 캐릭터와 타겟액터의 거리에 따라 회전 보간 값을 변경합니다.
-	
+	 // 캐릭터와 타겟액터의 거리에 따라 회전 보간 값을 변경합니다.	
 	if(Dis > StandardDis)
 	{
 		Alpha = 0.2f;
@@ -152,9 +150,7 @@ void UCameraManagerComponent::InGameLockOn()
 	
 	// 캐릭터가 타겟액터를 바라보는 회전값과 컨트롤러의 회전 값을 보간합니다.
 	FRotator CalRot = UKismetMathLibrary::RLerp(Rot,PRot , Alpha, true);
-
-	FRotator FinalRot = FRotator(PRot.Pitch, CalRot.Yaw, PRot.Roll);
-								// Pit, CalRot.Yaw, PRot.Roll
+	FRotator FinalRot = FRotator(PRot.Pitch, CalRot.Yaw, PRot.Roll);	
 	// 컨트롤러가 타겟액터를 바라보도록 만듭니다.
 	PCon->SetControlRotation(FinalRot);
 	// 타겟팅 시작 후 뷰 스페이스와 관련된 카메라 무빙
@@ -189,12 +185,9 @@ void UCameraManagerComponent::TargetingCameraMoving(ACharacter* PCharacter)
 
 	// 캐릭터 WolrdSpace 좌표를 ViewSpace 좌표로 변환합니다.
 	bool bIsOnScreen = PCon->ProjectWorldLocationToScreen(ActorLocation, ScreenPosition);
-
 	float HalfWidth = 300.f;
 	float HalfHeight = 50.f;
-
 	
-	//PCon->DeprojectScreenPositionToWorld()
 	if(bIsOnScreen)
 	{
 		// 뷰포트의 중앙 위치를 기준으로 특정 범위 내에 캐릭터가 존재하는지 확인합니다.

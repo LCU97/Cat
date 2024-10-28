@@ -161,10 +161,9 @@ void UInputHandler::ExecuteCommand()
 	if(!SelectBufferingObject) return;
 
 	// 커맨드 셋팅으로 사용할 InputCommands 를 추가합니다.
-	SetupCommand(SelectBufferingObject);
-	
+	SetupCommand(SelectBufferingObject);	
 	if(!SelectBufferingObject) return;
-
+	
 	// 추가된 모든 커맨드를 실행합니다.
 	for(TScriptInterface<IInterface_InputCommand> InputCommand : InputCommands)
 	{
@@ -172,6 +171,5 @@ void UInputHandler::ExecuteCommand()
 		{
 			InputCommand->Execute_ActionExecute(InputCommand.GetObject(), SelectBufferingObject);
 		}
-	}
-	
+	}	
 }

@@ -44,11 +44,11 @@ private:
 	// 들어온 입력 값
 	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 	TObjectPtr<UInputAction> InputAction = nullptr;
-
+	
 	// 이 버퍼의 우선순위
 	UPROPERTY()
 	int32 Priority;
-
+	
 	// 이 버퍼를 사용할 액터
 	UPROPERTY()
 	TObjectPtr<AActor> OuterActor;
@@ -67,8 +67,7 @@ private:
 
 	// Outer 가 사용중인 현재 Ability
 	UPROPERTY()
-	TObjectPtr<UBaseAbilityObject> AbilityObject;
-	
+	TObjectPtr<UBaseAbilityObject> AbilityObject;	
 public:
 	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 	FGameplayTag InputTag;

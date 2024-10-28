@@ -7,6 +7,11 @@
 #include "GameplayTagContainer.h"
 #include "InputManagerComponent.generated.h"
 
+// 1. InputBufferObject 를 생성합니다.
+// 2. InputBuffer 생성 가능/불가능을 관리합니다.
+// 3. 최종 Command 의 Excute 의 시발점이 되는 함수를 가지고 있습니다.
+// 4. 헤더에서는 중요 멤버에 주석, cpp 에서는 주요 함수에 주석을 달았습니다.
+
 class UBaseStateManagerComponent;
 class UBaseAbilityManagerComponent;
 class UInputHandler;

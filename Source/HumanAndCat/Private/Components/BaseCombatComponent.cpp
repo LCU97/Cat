@@ -88,8 +88,7 @@ void UBaseCombatComponent::SelectTarget()
 		{
 			// 해당 Target 후보와 캐릭터를 기준으로 거리 계산을 하고 저장합니다.
 			LocalEnableTargets.Add(Target, UKismetMathLibrary::Abs(CalculateAngleFromCamera(Target)));
-		}
-		
+		}		
 		if(LocalEnableTargets.Num()>0)
 		{
 			TArray<AActor*> LocalActors;
@@ -109,8 +108,7 @@ void UBaseCombatComponent::SelectTarget()
 	else
 	{
 		DisableLockOn();
-	}
-	
+	}	
 }
 
 float UBaseCombatComponent::CalculateAngleFromCamera(AActor* Actor)

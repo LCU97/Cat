@@ -8,6 +8,10 @@
 #include "HumanAndCat/Public//DataAsset/WeaponProperties.h"
 #include "WeaponComponent.generated.h"
 
+// 1. 무기 별로 가질 수 있는 State 와 Ability 의 정보를 담는 DataAsset 을 가지고 있습니다.
+// 2. 무기 장착 시 State 와 Ability 를 초기화합니다
+// 3. 무기의 장착/비장착의 함수 역할을 합니다.
+// 4. 헤더에는 주요 멤버 주석, cpp 에는 주요 함수에 주석을 달았습니다.
 
 class ABaseWeapon;
 

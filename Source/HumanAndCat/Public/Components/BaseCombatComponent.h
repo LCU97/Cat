@@ -10,6 +10,7 @@ class UCameraComponent;
 
 // 1. 전투 상태에 들어갔는지 확인 가능하며 Delegate 를 활용해 전투 상태 시 다른 클래스의 함수를 BroadCast 하는 역할.
 // 2. 타겟팅 기능을 포함.
+// 3. 헤더에서는 주요 멤버 주석, cpp 에서는 주요 함수 주석을 달았습니다.
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInCombatChanged, bool, CombatBool);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInFocusing, bool, FocusBool);

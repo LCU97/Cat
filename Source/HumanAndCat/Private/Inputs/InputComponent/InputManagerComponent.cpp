@@ -52,7 +52,6 @@ void UInputManagerComponent::BufferCreateOpen()
 void UInputManagerComponent::BufferCreateClose()
 {
 	bIsBufferOpesn = false;
-
 	// 입력 버퍼 생성을 차단하고 Command 를 Excute 합니다.
 	// 핸들러에 저장되어있던 Buffer 를 전부 지우고 핸들러 자체도 GC 에게 마킹해줍니다.
 	if(IsValid(InputHandler))

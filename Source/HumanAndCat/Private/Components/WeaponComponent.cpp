@@ -71,7 +71,7 @@ void UWeaponComponent::UpdateStates()
 			UBaseStateObject* LocalState = nullptr;
 			StateManagerComponent->ConstructStateOfClass(CurrentWeaponType->States[i],LocalState);
 		}
-
+		// 초기화되면 Idle 로 강제 변환
 		UBaseStateObject* LocalIdleState = StateManagerComponent->GetStateOfGameplayTag(StateTags::State_Idle);
 		if(LocalIdleState)
 		{
