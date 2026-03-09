@@ -29,8 +29,6 @@
 
 <br>
 
-
-
 ## 📖 프로젝트 목표
 확장성과 유지보수성를 고려한 캐릭터 시스템 프레임워크 구축. 조작감이 뛰어난 액션 게임의 기반 설계
 
@@ -85,7 +83,7 @@
 
 <br>
 
-핵심 코드 <br>
+### 핵심 코드 <br>
 ### 1. <br>
 InputBuffer 및 InputHandler 생성 관리. `DuplicateObject` 로 에디터에서 커스텀 되어 있는 InputHandler 복제 <br>
 [<코드 확인>](https://github.com/LCU97/Cat/blob/af7f21bcaf3acc807eb1b1c9f41567732fd567f5/Source/HumanAndCat/Private/Inputs/ANS_BufferInput.cpp#L12) <br>
@@ -112,12 +110,15 @@ InputBuffer 및 InputHandler 생성 관리. `DuplicateObject` 로 에디터에�
 
 ## ⚔ FSM && Weapon
 
+입력 시스템은 클래스 다이어그램을 약간 아키텍처 형식으로 만들어서 넣어줘야할듯
 
+fsm 쪽은 코드 설명과 링크만 넣어도 될듯
 
 <br>
 
 ## 🎯 Targeting
 
+코드 설명 및 어떤식으로 구현한건지를 꼭 설명할것
 
 <br>
 
