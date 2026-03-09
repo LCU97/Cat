@@ -87,7 +87,15 @@
 <br>
 
 핵심 코드
-1. InputBuffer 및 InputHandler 생성 관리 [코드 보러 가기](https://github.com/LCU97/Cat/blob/af7f21bcaf3acc807eb1b1c9f41567732fd567f5/Source/HumanAndCat/Private/Inputs/ANS_BufferInput.cpp#L12)
+1. InputBuffer 및 InputHandler 생성 관리. `DuplicateObject` 로 에디터에서 커스텀 되어 있는 InputHandler 복제 <br>
+[<코드 확인>](https://github.com/LCU97/Cat/blob/af7f21bcaf3acc807eb1b1c9f41567732fd567f5/Source/HumanAndCat/Private/Inputs/ANS_BufferInput.cpp#L12) <br>
+
+`MakeBuffer` 매크로로 `InputComponent` 에서 `InputBufferObject` 생성 및 `InputHandler` 와 공유 [<코드 확인>](https://github.com/LCU97/Cat/blob/74f4049f9e714a675f13adf7c79a5690b7ae8078/Source/HumanAndCat/Private/Inputs/InputComponent/InputManagerComponent.cpp#L71)
+<img width="1611" height="419" alt="image" src="https://github.com/user-attachments/assets/f3c11ea5-65ef-40e2-a58c-4b5574f194c8" />
+
+<br>
+
+2. `InputHandler` 에서 'EditInlineNew' 와 'Instanced' 지정자
 
 <br>
 
