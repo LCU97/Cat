@@ -42,7 +42,7 @@
 
 <br>
 
-- 상태와 능력을 분리한 구조를 설계하여 캐릭터 코드의 책임을 나누고 기능 확장이 쉬운 구조 구현
+- 상태와 능력을 객체화하고 Component 로 관리하도록 설계하여 캐릭터 코드의 책임을 나누고 기능 확장이 쉬운 구조 구현
 - Command Pattern 기반 입력 시스템을 구현하여 입력 처리와 Character 행동 로직을 분리
 - Data Asset을 활용해 무기 능력과 상태 값을 디자이너가 직접 조정할 수 있도록 제작
 
@@ -68,7 +68,6 @@
 </table>
 
 
-
 ---
 
 <br>
@@ -86,8 +85,9 @@
 
 <br>
 
-핵심 코드
-1. InputBuffer 및 InputHandler 생성 관리. `DuplicateObject` 로 에디터에서 커스텀 되어 있는 InputHandler 복제 <br>
+핵심 코드 <br>
+### 1. <br>
+InputBuffer 및 InputHandler 생성 관리. `DuplicateObject` 로 에디터에서 커스텀 되어 있는 InputHandler 복제 <br>
 [<코드 확인>](https://github.com/LCU97/Cat/blob/af7f21bcaf3acc807eb1b1c9f41567732fd567f5/Source/HumanAndCat/Private/Inputs/ANS_BufferInput.cpp#L12) <br>
 
 `MakeBuffer` 매크로로 `InputComponent` 에서 `InputBufferObject` 생성 및 `InputHandler` 와 공유 [<코드 확인>](https://github.com/LCU97/Cat/blob/74f4049f9e714a675f13adf7c79a5690b7ae8078/Source/HumanAndCat/Private/Inputs/InputComponent/InputManagerComponent.cpp#L71)
@@ -95,7 +95,18 @@
 
 <br>
 
-2. `InputHandler` 에서 'EditInlineNew' 와 'Instanced' 지정자
+### 2. <br>
+`InputHandler` 를 사용하는데에 'EditInlineNew' 와 'Instanced' 지정자를 적용하여 에디터에서 별도의 InputHanlder 생성없이 인스턴스를 만들고 복사 생성. [<코드 확인>](https://github.com/LCU97/Cat/blob/1b4d7c6e9cd0bb5d9f85fc9da4816e56dc94436d/Source/HumanAndCat/Public/Inputs/Handlers/InputHandler.h#L26)
+<img width="941" height="701" alt="image" src="https://github.com/user-attachments/assets/fe2dcb07-fd34-40d9-b22a-546405c3c8f1" /> <br>
+
+`InputHandler` 에서 `InputBuffer` 를 프로퍼티에 맞게 관리 및 처리 `InputCommand` 를 생성하여 Excute. <br>
+[<코드 확인>](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Private/Inputs/Handlers/InputHandler.cpp) <br>
+
+<br>
+
+### 3. <br>
+`BaseCommad` 의 공통 가상 메서드 `ActionExecute`를 `override` 하여 각 Command 가 독립적인 액션 동작 실행 <br>
+[<코드 확인>](https://github.com/LCU97/Cat/blob/1b4d7c6e9cd0bb5d9f85fc9da4816e56dc94436d/Source/HumanAndCat/Private/Inputs/InputCommand/AttackStateCommand.cpp#L20) <br>
 
 <br>
 
