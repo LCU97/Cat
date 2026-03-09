@@ -29,25 +29,25 @@
 
 <br>
 
-<br>
-
-<br>
-
-<br>
-
-<br>
-
-<br>
-
-<br>
 
 
 ## 📖 프로젝트 목표
-확장성과 유지보수를 고려한 시스템 프레임워크 구축. 조작감이 뛰어난 액션 게임의 기반 개발.
+확장성과 유지보수성를 고려한 캐릭터 시스템 프레임워크 구축. 조작감이 뛰어난 액션 게임의 기반 설계
 
 ---
 
+<br>
+
 ## 🎉 성과
+
+<br>
+
+- 상태와 능력을 분리한 구조를 설계하여 캐릭터 코드의 책임을 나누고 기능 확장이 쉬운 구조 구현
+- Command Pattern 기반 입력 시스템을 구현하여 입력 처리와 Character 행동 로직을 분리
+- Data Asset을 활용해 무기 능력과 상태 값을 디자이너가 직접 조정할 수 있도록 제작
+
+
+<br>
  
 <table align="center">
 <tr>
@@ -75,13 +75,19 @@
 
 ## 🧠 주요 시스템 구현 및 아키텍처
 
-<br>
-
-___
 
 ## 📄 InputSystem
 
+설계 목표 : 
 
+- Command 패턴을 적용해 입력과 실제 동작을 분리. Invoker 가 실제 동작에 관여하지 않도록하여 커맨드의 Excute 시 실제 동작이 독립적으로 실행되도록 설계.
+- 매번 InputHandler 의 객체를 생성하지 않고도 프로퍼티 창에서 커스텀 클래스를 생성.
+- InputBuffer 를 통해 애니메이션 도중 들어온 입력을 기억했다가 다음 동작을 매끄럽게 연결하여 부드러운 조작감 확보.
+
+<br>
+
+핵심 코드
+1. InputBuffer 및 InputHandler 생성 관리 [코드 보러 가기](https://github.com/LCU97/Cat/blob/af7f21bcaf3acc807eb1b1c9f41567732fd567f5/Source/HumanAndCat/Private/Inputs/ANS_BufferInput.cpp#L12)
 
 <br>
 
