@@ -22,7 +22,7 @@
    - InputSystem
    - FSM && Weapon
    - Targeting
-
+4. [블로그 개발 기록](#개발-기록)
 ---
 
 <br>
@@ -164,3 +164,6 @@ InputBuffer 및 InputHandler 생성 관리. `DuplicateObject` 로 에디터에�
 
 ---
 
+## 개발 기록
+
+- [Character 개발 정리](https://saparation.tistory.com/category/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/H.W.H)
