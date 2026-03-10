@@ -147,8 +147,10 @@ InputBuffer 및 InputHandler 생성 관리. `DuplicateObject` 로 에디터에�
 
 ## 🎯 Targeting
 
-코드 설명 및 어떤식으로 구현한건지를 꼭 설명할것
--
+설계 목표 :
+- LockOn 기능으로 적을 타겟팅하여 
+
+
 
 <br>
 
