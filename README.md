@@ -126,16 +126,23 @@ InputBuffer 및 InputHandler 생성 관리. `DuplicateObject` 로 에디터에�
 ### 핵심 코드 <br>
 
 ### 1.StateObject && StateComponent <br>
-- [BaseStateObject](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Public/Objects/BaseStateObject.h)를 기반으로 상태 클래스를 구현 <br>
-- [StateManagerComponent](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Public/Components/BaseStateManagerComponent.h) 에서 공통 메서드를 호출하면 각 상태 클래스에서 `virtual` 메서드를 `override`하여 상태별 로직을 실행
+- [BaseStateObject](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Private/Objects/BaseStateObject.cpp)를 기반으로 상태 클래스를 구현 <br>
+- [StateManagerComponent](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Private/Components/BaseStateManagerComponent.cpp) 에서 공통 메서드를 호출하면 각 상태 클래스에서 `virtual` 메서드를 `override`하여 상태별 로직을 실행
 
 <br>
 
 ### 2. AbilityObject && AbilityComponent <br>
-- [BaseAbilityObject](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Public/Objects/BaseAbilityObject.h) 를 기반으로 능력 클래스를 구현 <br>
-- [BaseStateObject](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Public/Objects/BaseStateObject.h) 에서 [AbilityManagerComponent](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Public/Components/BaseAbilityManagerComponent.h) 으로부터 특정 Ability 사용 체크 및 Ability 공통 메서드 실행 <br>
+- [BaseAbilityObject](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Private/Objects/BaseAbilityObject.cpp) 를 기반으로 능력 클래스를 구현 <br>
+- [BaseStateObject](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Public/Objects/BaseStateObject.h) 에서 [AbilityManagerComponent](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Private/Components/BaseAbilityManagerComponent.cpp) 으로부터 특정 Ability 사용 체크 및 Ability 공통 메서드 실행 <br>
 
+### 3. WeaponComponent <br>
 
+<img width="1157" height="357" alt="image" src="https://github.com/user-attachments/assets/ae79fea6-b354-497a-afb6-cb1beab825da" />
+
+<br>
+
+- [WeaponComponent](https://github.com/LCU97/Cat/blob/8a6c2eae072bd9ccf93ed22a6141b0fd2bd809e6/Source/HumanAndCat/Private/Components/WeaponComponent.cpp#L163) 에서 무기를 장착하면 `StateManagerComponent` 와 `AbilityManagerComponent` 에 무기별로 사용 가능한 State 와 Ability 를 재등록
+- [UWeaponProperties](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Public/DataAsset/WeaponProperties.h) 데이터 에셋으로 무기 별로 사용 할 상태와 어빌리티를 에디터에서 설정
 <br>
 
 ## 🎯 Targeting
