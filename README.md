@@ -22,8 +22,6 @@
    - InputSystem
    - FSM && Weapon
    - Targeting
-4. [⚙️ 기술 스택](#-기술-스택)
-
 
 ---
 
@@ -43,6 +41,7 @@
 - 상태와 능력을 객체화하고 Component 로 관리하도록 설계하여 캐릭터 코드의 책임을 나누고 기능 확장이 쉬운 구조 구현
 - Command Pattern 기반 입력 시스템을 구현하여 입력 처리와 Character 행동 로직을 분리
 - Data Asset을 활용해 무기 능력과 상태 값을 디자이너가 직접 조정할 수 있도록 제작
+- 타겟팅 시 부드러운 카메라 움직임 구현
 
 
 <br>
@@ -145,17 +144,23 @@ InputBuffer 및 InputHandler 생성 관리. `DuplicateObject` 로 에디터에�
 - [UWeaponProperties](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Public/DataAsset/WeaponProperties.h) 데이터 에셋으로 무기 별로 사용 할 상태와 어빌리티를 에디터에서 설정
 <br>
 
-## 🎯 Targeting
+## 🎯 <span style="color:#ff6b6b">Targeting</span>
 
 설계 목표 :
-- LockOn 기능으로 적을 타겟팅하여 
+- 타겟 탐색과 전투 상태 관리는 CombatComponent 에서 처리하고 
+  카메라 제어는 CameraManagerComponent 에서 담당하도록 설계하여 시스템의 책임을 분리
 
 
+<img src="https://github.com/user-attachments/assets/51c64be8-c924-40b3-b46c-7c8040c10636" width="450">
 
+
+### 핵심 코드 <br>
+
+### 1. Combat && Camera <br>
+- [CombatComponent](https://github.com/LCU97/Cat/blob/0503f99ac1b10e763ed2d620454a0cf896da3cd7/Source/HumanAndCat/Private/Components/BaseCombatComponent.cpp#L169)에서 타겟 탐색 및 타겟팅 기능 구현
+- LockOn 시 부드러운 카메라 움직임 : [CameraManagerComponent](https://github.com/LCU97/Cat/blob/0503f99ac1b10e763ed2d620454a0cf896da3cd7/Source/HumanAndCat/Private/Components/CameraManagerComponent.cpp#L168) 
+  
 <br>
 
 ---
 
-## ⚙️ 기술 스택
-
----
