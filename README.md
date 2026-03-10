@@ -83,8 +83,12 @@
 
 <br>
 
+<img width="1085" height="859" alt="InputSystem drawio (1)" src="https://github.com/user-attachments/assets/a4982b0c-1fe8-4d4d-a792-2418256db6a6" />
+
+<br>
+
 ### 핵심 코드 <br>
-### 1. <br>
+### 1. AnimNotifyState && InputComponent <br>
 InputBuffer 및 InputHandler 생성 관리. `DuplicateObject` 로 에디터에서 커스텀 되어 있는 InputHandler 복제 <br>
 [<코드 확인>](https://github.com/LCU97/Cat/blob/af7f21bcaf3acc807eb1b1c9f41567732fd567f5/Source/HumanAndCat/Private/Inputs/ANS_BufferInput.cpp#L12) <br>
 
@@ -93,7 +97,7 @@ InputBuffer 및 InputHandler 생성 관리. `DuplicateObject` 로 에디터에�
 
 <br>
 
-### 2. <br>
+### 2. InputHandler <br>
 `InputHandler` 를 사용하는데에 'EditInlineNew' 와 'Instanced' 지정자를 적용하여 에디터에서 별도의 InputHanlder 생성없이 인스턴스를 만들고 복사 생성. [<코드 확인>](https://github.com/LCU97/Cat/blob/1b4d7c6e9cd0bb5d9f85fc9da4816e56dc94436d/Source/HumanAndCat/Public/Inputs/Handlers/InputHandler.h#L26)
 <img width="941" height="701" alt="image" src="https://github.com/user-attachments/assets/fe2dcb07-fd34-40d9-b22a-546405c3c8f1" /> <br>
 
@@ -102,7 +106,7 @@ InputBuffer 및 InputHandler 생성 관리. `DuplicateObject` 로 에디터에�
 
 <br>
 
-### 3. <br>
+### 3. InputCommand <br>
 `BaseCommad` 의 공통 가상 메서드 `ActionExecute`를 `override` 하여 각 Command 가 독립적인 액션 동작 실행 <br>
 [<코드 확인>](https://github.com/LCU97/Cat/blob/1b4d7c6e9cd0bb5d9f85fc9da4816e56dc94436d/Source/HumanAndCat/Private/Inputs/InputCommand/AttackStateCommand.cpp#L20) <br>
 
@@ -110,15 +114,34 @@ InputBuffer 및 InputHandler 생성 관리. `DuplicateObject` 로 에디터에�
 
 ## ⚔ FSM && Weapon
 
-입력 시스템은 클래스 다이어그램을 약간 아키텍처 형식으로 만들어서 넣어줘야할듯
+설계 목표 :
 
-fsm 쪽은 코드 설명과 링크만 넣어도 될듯
+- 캐릭터가 사용하는 State와 Ability 를 Enum 으로 사용 시 캐릭터의 책임과 코드 복잡도가 높아져 유지보수 및 기능 추가가 어려워짐
+  이를 해결하기 위해 State 패턴을 사용하여 상태를 객체화하여 확장성을 확보
+- State 객체를 StateManagerComponent 가 관리하도록 설계하여 캐릭터 클래스가 상태 로직에 직접 의존하지 않도록 구조를 분리
+- 실제 행동 로직을 Ability 로 State 와 분리하여 상태 수 증가 방지 및 상태는 여러 무기에서 실제 행동(Ability)은 여러 상태에서 설정 가능하도록 설계
+  
+<br>
+
+### 핵심 코드 <br>
+
+### 1.StateObject && StateComponent <br>
+- [BaseStateObject](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Public/Objects/BaseStateObject.h)를 기반으로 상태 클래스를 구현 <br>
+- [StateManagerComponent](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Public/Components/BaseStateManagerComponent.h) 에서 공통 메서드를 호출하면 각 상태 클래스에서 `virtual` 메서드를 `override`하여 상태별 로직을 실행
+
+<br>
+
+### 2. AbilityObject && AbilityComponent <br>
+- [BaseAbilityObject](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Public/Objects/BaseAbilityObject.h) 를 기반으로 능력 클래스를 구현 <br>
+- [BaseStateObject](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Public/Objects/BaseStateObject.h) 에서 [AbilityManagerComponent](https://github.com/LCU97/Cat/blob/main/Source/HumanAndCat/Public/Components/BaseAbilityManagerComponent.h) 으로부터 특정 Ability 사용 체크 및 Ability 공통 메서드 실행 <br>
+
 
 <br>
 
 ## 🎯 Targeting
 
 코드 설명 및 어떤식으로 구현한건지를 꼭 설명할것
+-
 
 <br>
 
